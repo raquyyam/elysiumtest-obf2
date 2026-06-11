@@ -1,12 +1,3036 @@
---[[
- .____                  ________ ___.    _____                           __                
- |    |    __ _______   \_____  \\_ |___/ ____\_ __  ______ ____ _____ _/  |_  ___________ 
- |    |   |  |  \__  \   /   |   \| __ \   __\  |  \/  ___// ___\\__  \\   __\/  _ \_  __ \
- |    |___|  |  // __ \_/    |    \ \_\ \  | |  |  /\___ \\  \___ / __ \|  | (  <_> )  | \/
- |_______ \____/(____  /\_______  /___  /__| |____//____  >\___  >____  /__|  \____/|__|   
-         \/          \/         \/    \/                \/     \/     \/                   
-          \_Welcome to LuaObfuscator.com   (Alpha 0.10.9) ~  Much Love, Ferib 
+-- // ========================================================================= // --
+-- //      ███████╗██╗     ██╗   ██╗███████╗██╗██╗   ██╗███╗   ███╗             // --
+-- //      ██╔════╝██║     ╚██╗ ██╔╝██╔════╝██║██║   ██║████╗ ████║             // --
+-- //      █████╗  ██║      ╚████╔╝ ███████╗██║██║   ██║██╔████╔██║             // --
+-- //      ██╔══╝  ██║       ╚██╔╝  ╚════██║██║██║   ██║██║╚██╔╝██║             // --
+-- //      ███████╗███████╗   ██║   ███████║██║╚██████╔╝██║ ╚═╝ ██║             // --
+-- //      ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝ ╚═════╝ ╚═╝     ╚═╝             // --
+-- // ========================================================================= // --
+-- //                ELYSIUM.WIN — [FPS] One Tap | v1.0.1                       // --
+-- // ========================================================================= // --
 
-]]--
+-- // [ Section: Safe Load ] // ---------------------------------------------------
+local success, Library = pcall(function()
+    local repo = "https://raw.githubusercontent.com/deividcomsono/Obsidian/main/"
+    local lib = loadstring(game:HttpGet(repo .. "Library.lua"))()
+    local ThemeManager = loadstring(game:HttpGet(repo .. "addons/ThemeManager.lua"))()
+    local SaveManager  = loadstring(game:HttpGet(repo .. "addons/SaveManager.lua"))()
+    lib.ThemeManager = ThemeManager
+    lib.SaveManager  = SaveManager
+    return lib
+end)
 
-local v0,v1=pcall(function() local v185="https://raw.githubusercontent.com/deividcomsono/Obsidian/main/";local v186=loadstring(game:HttpGet(v185   .. "Library.lua" ))();local v187=loadstring(game:HttpGet(v185   .. "addons/ThemeManager.lua" ))();local v188=loadstring(game:HttpGet(v185   .. "addons/SaveManager.lua" ))();v186.ThemeManager=v187;v186.SaveManager=v188;return v186;end);if ( not v0 or  not v1) then local v675=0 -0 ;while true do if (v675==(0 -0)) then warn("Library failed to load");return;end end end local v2=v1.ThemeManager;local v3=v1.SaveManager;local v4=v1.Options;local v5;local v6=game:GetService("Players");local v7=v6.LocalPlayer;local v8=game:GetService("RunService");local v9=game:GetService("UserInputService");local v10=game:GetService("GuiService");local v11=game:GetService("Lighting");local v12=game:GetService("Workspace");local v13=game:GetService("VirtualUser");local v14=v12.CurrentCamera;if  not v14 then repeat task.wait();v14=v12.CurrentCamera;until v14 end local function v15() local v191=0;local v192;while true do if (v191==(0 -0)) then v192=tonumber(os.date("%H"));if ((v192>=(1775 -(1134 + 636))) and (v192<(507 -(263 + 232)))) then return "Good Morning";elseif ((v192>=12) and (v192<(39 -21))) then return "Good Afternoon";elseif ((v192>=(25 -7)) and (v192<(179 -(26 + 131)))) then return "Good Evening";else return "Good Night";end break;end end end local function v16(v193) local v194=0;while true do if (v194==(0 + 0)) then if (typeof(v193)=="string") then return Enum.KeyCode[v193] or Enum.UserInputType[v193] ;end return v193;end end end function isAimbotLockKeyDown() local v195=0;local v196;local v197;while true do if (v195==1) then v197=v16(v196);if  not v197 then return false;end v195=7 -5 ;end if ((861 -(240 + 619))==v195) then if (v197.EnumType==Enum.KeyCode) then return v9:IsKeyDown(v197);end if (v197.EnumType==Enum.UserInputType) then return v9:IsMouseButtonPressed(v197);end v195=1 + 2 ;end if (v195==(0 -0)) then v196=v4.ALock and v4.ALock.Value ;if ( not v196 or (v196=="None")) then return false;end v195=1 + 0 ;end if (v195==(1747 -(1344 + 400))) then return false;end end end function setESPEnabled(v198,v199) local v200=0;while true do if (v200==0) then v5.ESP.Enabled=v198;if (v199 and v4.MasterESPEn and v4.MasterESPEn.SetValue) then pcall(function() v4.MasterESPEn:SetValue(v198);end);end break;end end end local function v17(v201) local v202=v4.ESPKey and v4.ESPKey.Value ;if ( not v202 or (v202=="None")) then return false;end local v203=v16(v202);if (typeof(v202)=="table") then v203=v16(v202.Key or v202.Value or v202[406 -(255 + 150) ] );end if  not v203 then return false;end if (v203.EnumType==Enum.KeyCode) then return v201.KeyCode==v203 ;end if (v203.EnumType==Enum.UserInputType) then return v201.UserInputType==v203 ;end return false;end local v18=math.floor;v5={ESP={Enabled=false,Chams=false,Tracers=false,Skeleton=false,Text=false,MaxDistance=394 + 106 },Box={Enabled=false,Style="Full Box",Color=Color3.fromRGB(102 + 88 ,170,1089 -834 ),Thickness=3 -2 ,Transparency=1740 -(404 + 1335) ,WidthScale=407 -(183 + 223) ,CornerScale=0.25 -0 ,MaxDistance=332 + 168 },ChamsSettings={FillColor=Color3.fromRGB(45 + 80 ,422 -(10 + 327) ,255),OutlineColor=Color3.fromRGB(255,178 + 77 ,255),FillTransparency=0.5,OutlineTransparency=0.5},TracersSettings={Color=Color3.fromRGB(125,423 -(118 + 220) ,255),Transparency=0.85 + 0 ,Thickness=1,Origin="Center"},TextSettings={ShowDisplayName=false,NameColor=Color3.fromRGB(639 -(108 + 341) ,77 + 93 ,255),DistColor=Color3.fromRGB(190,718 -548 ,1748 -(711 + 782) ),NameSize=22 -10 ,DistSize=480 -(270 + 199) ,NameTransparency=0,DistTransparency=0 + 0 ,OffsetY=21,Font=1822 -(580 + 1239) ,Outline=true,Centered=true,ShowDistance=true},OOV={Enabled=false,Color=Color3.fromRGB(371 -246 ,82 + 3 ,255),Size=20,Transparency=1 + 0 ,Radius=20 + 25 ,PulseEnabled=false,PulseSpeed=7.5 -4 ,PulseAmount=0.5 + 0 ,Filled=true},Crosshair={Enabled=false,Style="Cross",Position="Center",Color=Color3.fromRGB(255,1422 -(645 + 522) ,2045 -(1010 + 780) ),Transparency=0,Size=10,Thickness=1 + 0 ,Gap=4,CircleRadius=12,DotRadius=3,ShowCenterDot=false,CenterDotRadius=2,Rotation=false,RotSpeed=2,Outline=false,OutlineColor=Color3.fromRGB(0 -0 ,0,0),OutlineThickness=2 -1 ,HideGameCrosshair=true,Pulse=false,PulseSpeed=1839 -(1045 + 791) ,PulseAmount=0.25 -0 ,Rainbow=false,RainbowSpeed=1 -0 ,OffsetX=0,OffsetY=0},Trail={Enabled=false,Color=Color3.fromRGB(630 -(351 + 154) ,1659 -(1281 + 293) ,521 -(28 + 238) ),Transparency=0,Lifetime=6 -3 ,Thickness=1559.1 -(1381 + 178) ,MaxPoints=94 + 6 ,ShowOnSelf=false,AlwaysOnTop=true,MaxDistance=404 + 96 ,MinDistance=0.5},Hitmarker={Enabled=false,Color=Color3.fromRGB(109 + 146 ,0 -0 ,0 + 0 ),Thickness=1.5,Size=10,Gap=475 -(381 + 89) ,Lifetime=0.2 + 0 ,HitDetectionRadius=41 + 19 },Hitsound={Enabled=false,SoundId="rbxassetid://139452805868562",Volume=2 -0 ,Pitch=1},BulletTracer={Enabled=false,Color=Color3.fromRGB(1346 -(1074 + 82) ,170,558 -303 ),Thickness=1785 -(214 + 1570) ,Lifetime=1457 -(990 + 465) ,Material=Enum.Material.Neon,SpawnOffset=2,Fade=true},HitLogs={Enabled=false,Color=Color3.fromRGB(79 + 111 ,170,111 + 144 ),Lifetime=3 + 0 ,ShowPart=true,ShowHP=true}};local v19={ESPObjects={},ESP={},OOVObjects={},OOVPulseTick=0 -0 ,TrailData={},EnemyHealth={},NPCHealth={},LastAttackTime=0,ActiveEntities={},PrevHealth={},LastDamageTime={},OriginalSoundVolumes={},LastShotTarget=nil,LastShotTime=1726 -(1668 + 58) ,IsScopeVisible=false,ActiveLogs={}};local v20=false;local v21=0;local v22=1000;local v23=Color3.fromRGB(853 -(512 + 114) ,570 -351 ,526 -271 );local v24=Color3.fromRGB(789 -562 ,219,119 + 136 );local v25=false;local v26=false;local v27=3.5 + 11 ;local v28=false;local v29=2 + 0 ;local v30=false;local v31=false;local v32="Sunset";local v33=v11.ClockTime;local v34=v11.Brightness;local v35=v11.Ambient;local v36=v11.OutdoorAmbient;local v37=v11.GlobalShadows;local v38=v11.FogStart;local v39=v11.FogEnd;local v40=v11.FogColor;local v41=v11.ColorShift_Top;local v42=v11.ColorShift_Bottom;local v43=v11.ExposureCompensation;local function v44() for v676,v677 in ipairs(v11:GetChildren()) do if (v677:IsA("Atmosphere") or v677:IsA("Clouds") or v677:IsA("PostEffect") or (v677:IsA("Sky") and  not v31)) then v677:Destroy();end end end function applyCustomWorldVisuals() if (v30 or v28) then v11.GlobalShadows=false;else v11.GlobalShadows=v37;end if v28 then local v961=0 -0 ;local v962;while true do if (v961==(1996 -(109 + 1885))) then v11.ColorShift_Top=v962;v11.ColorShift_Bottom=v962;v961=3;end if ((1470 -(1269 + 200))==v961) then v11.Ambient=v962;v11.OutdoorAmbient=v962;v961=2;end if (v961==(0 -0)) then v962=(v25 and Color3.new(v24.R * (815.75 -(98 + 717)) ,v24.G * (826.75 -(802 + 24)) ,v24.B * 0.75 )) or Color3.fromRGB(180,310 -130 ,227 -47 ) ;v11.Brightness=v29;v961=1 + 0 ;end if (v961==3) then v11.ExposureCompensation=0 + 0 ;break;end end elseif v25 then v11.Brightness=v34;v11.Ambient=v24;v11.OutdoorAmbient=v24;v11.ColorShift_Top=v24;v11.ColorShift_Bottom=v24;v11.ExposureCompensation=v43;else local v1152=0;while true do if (v1152==1) then v11.OutdoorAmbient=v36;v11.ColorShift_Top=v41;v1152=1 + 1 ;end if ((0 + 0)==v1152) then v11.Brightness=v34;v11.Ambient=v35;v1152=1;end if (v1152==2) then v11.ColorShift_Bottom=v42;v11.ExposureCompensation=v43;break;end end end if v26 then v11.ClockTime=v27;else v11.ClockTime=v33;end if v20 then v11.FogStart=v21;v11.FogEnd=v22;v11.FogColor=v23;else local v968=0 -0 ;while true do if (v968==0) then v11.FogStart=v38;v11.FogEnd=v39;v968=3 -2 ;end if (1==v968) then v11.FogColor=v40;break;end end end end local v45={Sunset={Bk="rbxassetid://151165214",Dn="rbxassetid://151165197",Ft="rbxassetid://151165224",Lf="rbxassetid://151165191",Rt="rbxassetid://151165206",Up="rbxassetid://151165227"},["Sun set 2"]={Bk="rbxassetid://151165214",Dn="rbxassetid://151165197",Ft="rbxassetid://151165224",Lf="rbxassetid://151165191",Rt="rbxassetid://151165206",Up="rbxassetid://151165227"},["Deep Space"]={Bk="rbxassetid://159454299",Dn="rbxassetid://159454296",Ft="rbxassetid://159454293",Lf="rbxassetid://159454286",Rt="rbxassetid://159454300",Up="rbxassetid://159454288"},Nebula={Bk="rbxassetid://159454299",Dn="rbxassetid://159454296",Ft="rbxassetid://159454293",Lf="rbxassetid://159454286",Rt="rbxassetid://159454300",Up="rbxassetid://159454288"},["Blue Sky"]={Bk="rbxassetid://1012890",Dn="rbxassetid://1012891",Ft="rbxassetid://1012887",Lf="rbxassetid://1012889",Rt="rbxassetid://1012888",Up="rbxassetid://1014449"}};function setSkybox(v204) local v205=0 + 0 ;local v206;local v207;while true do if (v205==2) then v206.SkyboxBk=v207.Bk;v206.SkyboxDn=v207.Dn;v205=3;end if (v205==0) then v206=v11:FindFirstChildOfClass("Sky");if  not v31 then local v1303=0 + 0 ;while true do if (v1303==(0 + 0)) then if v206 then v206:Destroy();end return;end end end v205=1;end if (v205==(1 + 0)) then v207=v45[v204] or v45.Sunset ;if  not v206 then local v1304=0 + 0 ;while true do if (v1304==0) then v206=Instance.new("Sky");v206.Parent=v11;break;end end end v205=2;end if (v205==(1437 -(797 + 636))) then v206.SkyboxRt=v207.Rt;v206.SkyboxUp=v207.Up;break;end if (v205==(14 -11)) then v206.SkyboxFt=v207.Ft;v206.SkyboxLf=v207.Lf;v205=1623 -(1427 + 192) ;end end end local function v46(v208) if (v208:IsA("Highlight") and (v208.Name~="ElysiumHighlight")) then task.defer(function() if (v208 and v208.Parent) then v208:Destroy();end end);end end v12.DescendantAdded:Connect(v46);for v209,v210 in ipairs(v12:GetDescendants()) do v46(v210);end local v47=(typeof(Drawing)=="table") and (typeof(Drawing.new)=="function") ;if  not v47 then warn("Drawing API not available");end function newDrawing(v211) if  not v47 then return {Visible=false,Remove=function() end};end local v212,v213=pcall(function() return Drawing.new(v211);end);if (v212 and v213) then return v213;end return {Visible=false,Remove=function() end};end local function v48(v214,v215,v216) if v214 then v214.From=v215;v214.To=v216;v214.Visible=true;end end local function v49(v217,v218,v219,v220,v221) local v222=0 + 0 ;local v223;local v224;local v225;local v226;local v227;local v228;local v229;while true do if (v222==(0 -0)) then v223=v217[v218];v48(v223,v219,v220);if v223 then v223.Thickness=1;end v224=v217[v218 + 8 ];v222=1;end if (v222==(3 + 0)) then v229=Vector2.new( -v227.Y/v228 ,v227.X/v228 );if (v226==2) then local v1306=v229 * (0.75 + 0) ;v48(v224,v219 + v1306 ,v220 + v1306 );if v224 then v224.Thickness=327 -(192 + 134) ;end else local v1307=0;local v1308;while true do if (v1307==(1277 -(316 + 960))) then v48(v225,v219-v1308 ,v220-v1308 );if v224 then v224.Thickness=1 + 0 ;end v1307=2 + 0 ;end if (v1307==(2 + 0)) then if v225 then v225.Thickness=3 -2 ;end break;end if (v1307==0) then v1308=v229;v48(v224,v219 + v1308 ,v220 + v1308 );v1307=1;end end end break;end if (2==v222) then if (v226<=(552 -(83 + 468))) then return;end v227=v220-v219 ;v228=v227.Magnitude;if (v228<=0) then return;end v222=3;end if (v222==(1807 -(1202 + 604))) then v225=v217[v218 + (74 -58) ];if v224 then v224.Visible=false;end if v225 then v225.Visible=false;end v226=math.clamp(v221 or 1 ,1,3);v222=2 -0 ;end end end function isMouseOverCheatUI() if v9:GetFocusedTextBox() then return true;end local v230=v9:GetMouseLocation();local v231=v7:FindFirstChild("PlayerGui");if  not v231 then return false;end local v232=v231:FindFirstChild("GunOverlay");for v678,v679 in ipairs(v231:GetGuiObjectsAtPosition(v230.X,v230.Y)) do local v680=0 -0 ;local v681;while true do if ((326 -(45 + 280))==v680) then if ( not v681 or  not v681.Enabled) then continue;end if (v232 and v679:IsDescendantOf(v232)) then continue;end v680=2;end if ((0 + 0)==v680) then if  not v679.Visible then continue;end v681=v679:FindFirstAncestorWhichIsA("ScreenGui");v680=1 + 0 ;end if (v680==(1 + 1)) then if (v1.ScreenGui and v679:IsDescendantOf(v1.ScreenGui)) then return true;end break;end end end return false;end local v50=v1:CreateWindow({Title="Elysium.win",Footer="Game: [FPS] One Tap | Build: 07.06.2026 | v1.0.1 | © 2026. All Rights Reserved",ShowCustomCursor=true,NotifySide="Right"});local v51=v1:AddDraggableLabel("Installing components...");local v52=0 + 0 ;local v53=0;function getFPSColor(v233) if (v233<(11 + 49)) then return "#d16d6d";elseif (v233<(166 -76)) then return "#d1b36d";else return "#6dd18a";end end function getPingColor(v234) if (v234>100) then return "#d16d6d";elseif (v234>(1961 -(340 + 1571))) then return "#d1b36d";else return "#6dd18a";end end local v54={};v54.Home=v50:AddTab("Home","house");v54.Visuals=v50:AddTab("Visuals","eye");v54.Combat=v50:AddTab("Combat","crosshair");v54.Movement=v50:AddTab("Movement","footprints");v54.Misc=v50:AddTab("Miscellaneous","layers");v54.UISettings=v50:AddTab("Settings","settings");local function v61() local v235={};local function v236(v682) if (v682 and v682:IsA("Model")) then local v1024=v682:FindFirstChildOfClass("Humanoid");if (v1024 and (v1024.Health>(0 + 0))) then local v1311=0;while true do if (v1311==(1772 -(1733 + 39))) then v235[v682]=true;if (v19.PrevHealth[v682]==nil) then v19.PrevHealth[v682]=v1024.Health;v19.LastDamageTime[v682]=0;end break;end end end end end for v683,v684 in ipairs(v6:GetPlayers()) do if ((v684~=v7) and v684.Character) then v236(v684.Character);end end local function v237(v685) for v972,v973 in ipairs(v685:GetChildren()) do if v973:IsA("Model") then v236(v973);elseif v973:IsA("Folder") then v237(v973);end end end for v686,v687 in ipairs(v12:GetChildren()) do if v687:IsA("Model") then v236(v687);elseif v687:IsA("Folder") then v237(v687);end end v19.ActiveEntities=v235;end local v62={};local v63;local v64={Neverlose="rbxassetid://139452805868562",Primordial="rbxassetid://97511223764004",["Call Of Duty"]="rbxassetid://77082587278347",Metallic="rbxassetid://78469882347907",ENB="rbxassetid://113548957163072",Fatality="rbxassetid://75978460596545",["Trident Pierce"]="rbxassetid://136159923155431",["CS:GO"]="rbxassetid://80803263857916"};local function v65(v239) local v240=0;local v241;local v242;while true do if (v240==4) then v242:Play();game:GetService("Debris"):AddItem(v242,8 -5 );break;end if (v240==3) then v242.PlaybackSpeed=v241.Pitch;v242.Parent=v12.CurrentCamera;v240=1038 -(125 + 909) ;end if (v240==(1948 -(1096 + 852))) then v241=v5.Hitsound;if ( not v241.Enabled and  not v239) then return;end v240=1 + 0 ;end if (v240==1) then v242=Instance.new("Sound");v242.Name="Elysium_Hitsound";v240=2 -0 ;end if ((2 + 0)==v240) then v242.SoundId=v241.SoundId;v242.Volume=v241.Volume;v240=3;end end end function triggerHitmarker() local v243=512 -(409 + 103) ;local v244;local v245;local v246;local v247;local v248;local v249;local v250;while true do if (v243==(237 -(46 + 190))) then v245,v246=v14.ViewportSize.X/(97 -(51 + 44)) ,v14.ViewportSize.Y/2 ;v247,v248=v244.Gap,v244.Size;v249={};v243=1 + 1 ;end if (v243==(1321 -(1114 + 203))) then task.spawn(function() local v1153=tick();while (tick() -v1153)<v244.Lifetime  do local v1312=1 -((tick() -v1153)/v244.Lifetime) ;for v1389,v1390 in ipairs(v249) do v1390.Transparency=v1312;end v8.RenderStepped:Wait();end for v1313,v1314 in ipairs(v249) do v1314:Remove();end end);break;end if (0==v243) then v65();v244=v5.Hitmarker;if  not v244.Enabled then return;end v243=1;end if (v243==(728 -(228 + 498))) then v250=nil;function v250(v1154,v1155) local v1156=0;local v1157;while true do if (v1156==(0 + 0)) then v1157=newDrawing("Line");v1157.Visible,v1157.Color,v1157.Thickness,v1157.Transparency,v1157.ZIndex=true,v244.Color,v244.Thickness,1,56 + 44 ;v1156=664 -(174 + 489) ;end if (v1156==(2 -1)) then v1157.From,v1157.To=v1154,v1155;table.insert(v249,v1157);break;end end end v250(Vector2.new(v245-v247 ,v246-v247 ),Vector2.new((v245-v247) -v248 ,(v246-v247) -v248 ));v243=1908 -(830 + 1075) ;end if (v243==(527 -(303 + 221))) then v250(Vector2.new(v245 + v247 ,v246-v247 ),Vector2.new(v245 + v247 + v248 ,(v246-v247) -v248 ));v250(Vector2.new(v245-v247 ,v246 + v247 ),Vector2.new((v245-v247) -v248 ,v246 + v247 + v248 ));v250(Vector2.new(v245 + v247 ,v246 + v247 ),Vector2.new(v245 + v247 + v248 ,v246 + v247 + v248 ));v243=1273 -(231 + 1038) ;end end end local function v66(v251) if ( not v251 or v62[v251]) then return;end local v252=v251:FindFirstChildOfClass("Humanoid");if  not v252 then return;end local v253=v252.Health;local v254=v19.LastShotPart or "Unknown" ;v62[v251]=v252:GetPropertyChangedSignal("Health"):Connect(function() local v688=0 + 0 ;local v689;while true do if (v688==1) then if ((v689<v253) and ((tick() -v19.LastShotTime)<0.5)) then local v1392=1162 -(171 + 991) ;local v1393;while true do if (v1392==2) then v62[v251]=nil;break;end if (v1392==(4 -3)) then if v5.HitLogs.Enabled then v63(v251.Name,v254,v1393,math.max(0,v18(v689)));end if v62[v251] then v62[v251]:Disconnect();end v1392=5 -3 ;end if (v1392==(0 -0)) then v1393=v18(v253-v689 );triggerHitmarker();v1392=1 + 0 ;end end end v253=v689;break;end if (v688==(0 -0)) then if ( not v252 or  not v252.Parent) then local v1394=0 -0 ;while true do if (v1394==(0 -0)) then if v62[v251] then v62[v251]:Disconnect();end v62[v251]=nil;v1394=3 -2 ;end if (v1394==(1249 -(111 + 1137))) then return;end end end v689=v252.Health;v688=159 -(91 + 67) ;end end end);task.delay(0.6,function() if v62[v251] then v62[v251]:Disconnect();v62[v251]=nil;end end);end local function v67() local v256=0 -0 ;local v257;while true do if (v256==(0 + 0)) then v257=v19.LastShotTarget;if (v257 and v257.Parent) then v66(v257);v19.LastShotTarget=nil;end v256=1;end if (v256==1) then for v1159 in pairs(v19.ActiveEntities) do if (v1159 and v1159.Parent) then local v1395=v1159:FindFirstChildOfClass("Humanoid");if v1395 then local v1529=523 -(423 + 100) ;local v1530;local v1531;while true do if ((1 + 0)==v1529) then if ((v1530<v1531) and ((tick() -v19.LastAttackTime)<0.2)) then triggerHitmarker();end v19.PrevHealth[v1159]=v1530;break;end if (v1529==(0 -0)) then v1530=v1395.Health;v1531=v19.PrevHealth[v1159] or v1530 ;v1529=1;end end end end end break;end end end local function v68() local v258=v14:FindFirstChild("Viewmodel") or v14:FindFirstChildOfClass("Model") ;if v258 then local v974=v258:FindFirstChild("muzzle",true) or v258:FindFirstChild("Muzzle",true) or v258:FindFirstChild("Tip",true) ;if v974 then return (v974:IsA("Attachment") and v974.WorldPosition) or v974.Position ;end end return v14.CFrame.Position;end local function v69(v259,v260) local v261=v5.BulletTracer;if  not v261.Enabled then return;end local v262=v68();local v263=v259-v262 ;local v264=v263.Magnitude;if (v264<=(0 + 0)) then return;end local v265=RaycastParams.new();v265.FilterType=Enum.RaycastFilterType.Exclude;v265.FilterDescendantsInstances={v7.Character,v14,v260};local v269=v12:Raycast(v262,v263,v265);if v269 then local v975=0 -0 ;while true do if (v975==1) then v264=v263.Magnitude;break;end if (v975==0) then v259=v269.Position;v263=v259-v262 ;v975=1;end end end local v270=v263.Unit;local v271=(v262-v259).Magnitude;local v272=v261.SpawnOffset or 2 ;if (v271<=v272) then return;end local v273=v262 + (v270 * v272) ;local v274=v271-v272 ;local v275=0.2 -0 ;local v276=v275 * v261.Thickness ;local v277=Instance.new("Part");v277.Name="Elysium_Laser";v277.Color=v261.Color;v277.Material=v261.Material or Enum.Material.Neon ;v277.Anchored=true;v277.CanCollide=false;v277.CanTouch=false;v277.CastShadow=false;v277.Size=Vector3.new(v276,v276,v274);v277.CFrame=CFrame.lookAt(v273,v259) * CFrame.new(0,711 -(530 + 181) , -v274/2 ) ;v277.Parent=v12;task.spawn(function() local v690=0;local v691;local v692;while true do if (v690==(881 -(614 + 267))) then v691=v261.Lifetime;v692=tick();v690=1;end if (v690==1) then while (tick() -v692)<v691  do local v1318=(tick() -v692)/v691 ;if v261.Fade then local v1488=32 -(19 + 13) ;local v1489;while true do if (v1488==(1 -0)) then v277.Size=Vector3.new(v1489,v1489,v274);break;end if (v1488==0) then v277.Transparency=v1318;v1489=v276 * (1 -v1318) ;v1488=2 -1 ;end end else v277.Transparency=0 -0 ;end v8.RenderStepped:Wait();end v277:Destroy();break;end end end);end task.spawn(function() local v289=0;local v290;while true do if (v289==(0 + 0)) then v290=v12:WaitForChild("Effects",17 -7 );if  not v290 then return;end v289=1 -0 ;end if (v289==1) then v290.ChildAdded:Connect(function(v1161) if ((v1161.Name=="Bullet") and v5.BulletTracer.Enabled) then local v1396=(v1161.Position-v14.CFrame.Position).Magnitude;if (v1396<(1819 -(1293 + 519))) then task.wait();if ( not v1161 or  not v1161.Parent) then return;end local v1532=v1161:FindFirstChildOfClass("Beam");local v1533=(v1532 and v1532.Attachment1 and v1532.Attachment1.WorldPosition) or (v1161.Position + (v1161.CFrame.LookVector * (2040 -1040))) ;v69(v1533,v1161);if v1161:IsA("BasePart") then v1161.Transparency=2 -1 ;end for v1579,v1580 in ipairs(v1161:GetDescendants()) do if (v1580:IsA("Beam") or v1580:IsA("Trail")) then v1580.Enabled=false;end end end end end);break;end end end);local v70={["128825426756691"]=true,["128829912119543"]=true};local function v71(v291) if ( not v291:IsA("Sound") or (v291.Name=="Elysium_Hitsound")) then return;end local v292=v291.SoundId:match("%d+");if (v292 and v70[v292]) then if (v19.OriginalSoundVolumes[v291]==nil) then v19.OriginalSoundVolumes[v291]=v291.Volume;end local function v976() if v5.Hitsound.Enabled then v291.Volume=0 -0 ;else v291.Volume=v19.OriginalSoundVolumes[v291] or 0.5 ;end end v976();v291:GetPropertyChangedSignal("Volume"):Connect(v976);return;end if (v291:IsDescendantOf(v12.CurrentCamera) or v291:IsDescendantOf(v7.Character)) then return;end end function onHitsoundEnabledChanged(v293) v5.Hitsound.Enabled=v293;task.spawn(function() local v693={game:GetService("SoundService"),v12,v7:FindFirstChild("PlayerGui")};for v977,v978 in ipairs(v693) do if v978 then local v1164=0;local v1165;while true do if (v1164==(0 + 0)) then v1165=v978:GetDescendants();for v1534,v1535 in ipairs(v1165) do local v1536=0 + 0 ;while true do if (v1536==0) then if v1535:IsA("Sound") then pcall(v71,v1535);end if ((v1534%250)==0) then task.wait();end break;end end end break;end end end end end);end local function v72(v295) local v296=0 -0 ;local v297;while true do if (v296==(0 + 0)) then if  not v295 then return;end v297=nil;v296=1 + 0 ;end if (v296==2) then v295.ChildAdded:Connect(function(v1166) if v1166:IsA("Tool") then v1166.Activated:Connect(function() v297(v1166);end);end end);break;end if (v296==1) then function v297(v1167) if (v1167 and v1167:IsA("Tool") and (v1167.Parent==v295)) then v19.LastAttackTime=tick();end end for v1168,v1169 in ipairs(v295:GetChildren()) do if v1169:IsA("Tool") then v1169.Activated:Connect(function() v297(v1169);end);end end v296=2 + 0 ;end end end local function v73(v298) local v299=1096 -(709 + 387) ;while true do if (v299==0) then if ( not v298 or  not v298.Character) then return true;end if  not v298.Character:FindFirstChild("Primary") then return true;end v299=1859 -(673 + 1185) ;end if (v299==(2 -1)) then return false;end end end local function v74(v300) if ( not v300 or  not v300.Parent) then return false;end if (v300==v7) then return v5.Trail.Enabled and v5.Trail.ShowOnSelf ;end local v301=v300.Character;if ( not v301 or  not v301.Parent) then return false;end local v302=v301:FindFirstChildOfClass("Humanoid");local v303=v301:FindFirstChild("HumanoidRootPart");if ( not v303 or  not v302 or (v302.Health<=(0 -0))) then return false;end if  not v301:FindFirstChild("Primary") then return false;end local v304=(v14.CFrame.Position-v303.Position).Magnitude;return v304<=(v5.ESP.MaxDistance or (822 -322)) ;end local function v75(v305) local v306=0 + 0 ;local v307;local v308;local v309;while true do if (v306==(1 + 0)) then v309=math.clamp(math.floor((v305.B * 255) + (0.5 -0) ),0,63 + 192 );return string.format("#%02x%02x%02x",v307,v308,v309);end if (v306==(0 -0)) then v307=math.clamp(math.floor((v305.R * (500 -245)) + (1880.5 -(446 + 1434)) ),0,1538 -(1040 + 243) );v308=math.clamp(math.floor((v305.G * (761 -506)) + (1847.5 -(559 + 1288)) ),1931 -(609 + 1322) ,709 -(13 + 441) );v306=3 -2 ;end end end function v63(v310,v311,v312,v313) local v314=0;local v315;local v316;while true do if (1==v314) then v316=string.format('<font color="%s">Hit %s</font>',v75(v315.Color),v310);if v315.ShowPart then v316=v316   .. string.format(" in %s",v311) ;end v314=5 -3 ;end if ((14 -11)==v314) then v1:Notify({Title="Elysium.win",Description=v316,Time=v315.Lifetime});break;end if (v314==0) then v315=v5.HitLogs;if  not v315.Enabled then return;end v314=1;end if (v314==(1 + 1)) then v316=v316   .. string.format(" | Damage: %d",v312) ;if v315.ShowHP then v316=v316   .. string.format(" | Left: %d HP",v313) ;end v314=10 -7 ;end end end local v76={Lines={},OutlineLines={},Circles={},OutlineCircles={},Angle=0 + 0 ,PulseTick=0 + 0 };local v77=12;function newCrosshairLine(v317) local v318=0 -0 ;local v319;while true do if (v318==0) then v319=newDrawing("Line");v319.Visible=false;v318=1;end if (v318==(1 + 0)) then v319.ZIndex=v317 or (18 -8) ;return v319;end end end function newCrosshairCircle(v320) local v321=newDrawing("Circle");v321.Visible=false;v321.ZIndex=v320 or (7 + 3) ;v321.NumSides=14 + 10 ;v321.Filled=true;return v321;end for v326=1 + 0 ,v77 do v76.Lines[v326]=newCrosshairLine(9 + 1 );v76.OutlineLines[v326]=newCrosshairLine(9);end v76.Circles[1 + 0 ]=newCrosshairCircle(443 -(153 + 280) );v76.OutlineCircles[2 -1 ]=newCrosshairCircle(9 + 0 );v76.Circles[1 + 1 ]=newCrosshairCircle(6 + 4 );v76.OutlineCircles[2 + 0 ]=newCrosshairCircle(9);function hideAllCrosshairDrawings() local v329=0 + 0 ;while true do if (v329==(0 -0)) then for v1170,v1171 in ipairs(v76.Lines) do v1171.Visible=false;end for v1173,v1174 in ipairs(v76.OutlineLines) do v1174.Visible=false;end v329=1 + 0 ;end if (v329==1) then for v1176,v1177 in ipairs(v76.Circles) do v1177.Visible=false;end for v1179,v1180 in ipairs(v76.OutlineCircles) do v1180.Visible=false;end break;end end end function getCrosshairCenter(v330) if ((v330.Position=="Mouse") and (v9.MouseBehavior~=Enum.MouseBehavior.LockCenter)) then local v979=0;local v980;while true do if (v979==(667 -(89 + 578))) then v980=v9:GetMouseLocation();return v980.X,v980.Y;end end end local v331=v14.ViewportSize;return v331.X/(2 + 0) ,v331.Y/2 ;end function getCrosshairColor(v332) local v333=0 -0 ;while true do if (v333==0) then if v332.Rainbow then local v1321=1049 -(572 + 477) ;local v1322;while true do if (v1321==0) then v1322=(tick() * v332.RainbowSpeed)%1 ;return Color3.fromHSV(v1322,1 + 0 ,1 + 0 );end end end return v332.Color;end end end function getCrosshairAlpha(v334) local v335=(1 + 0) -v334.Transparency ;if v334.Pulse then v335=v335 * ((87 -(84 + 2)) -(v334.PulseAmount * (0.5 -0) * (1 + math.sin(v76.PulseTick)))) ;end return math.clamp(v335,0,1);end function getCrosshairSize(v336) local v337=v336.Size;if v336.Pulse then v337=v337 * (1 + 0 + (v336.PulseAmount * 0.5 * math.sin(v76.PulseTick))) ;end return v337;end function applyCrosshairLine(v338,v339,v340,v341,v342,v343,v344,v345) local v346=842 -(497 + 345) ;local v347;local v348;while true do if (v346==3) then v347.Color=v341;v347.Thickness=v342;v346=1 + 3 ;end if (v346==4) then v347.Transparency=v343;v347.Visible=true;break;end if (v346==(1 + 0)) then if  not v347 then return;end if (v344 and v345.Outline and v348) then v348.From=v339;v348.To=v340;v348.Color=v345.OutlineColor;v348.Thickness=v342 + (v345.OutlineThickness * (1335 -(605 + 728))) ;v348.Transparency=v343;v348.Visible=true;elseif v348 then v348.Visible=false;end v346=2 + 0 ;end if (2==v346) then v347.From=v339;v347.To=v340;v346=6 -3 ;end if (v346==(0 + 0)) then v347=v76.Lines[v338];v348=v76.OutlineLines[v338];v346=3 -2 ;end end end function applyCrosshairCircle(v349,v350,v351,v352,v353,v354,v355,v356,v357) local v358=0 + 0 ;local v359;local v360;while true do if (v358==(0 -0)) then v359=v76.Circles[v349];v360=v76.OutlineCircles[v349];if  not v359 then return;end if (v356 and v357.Outline and v360) then v360.Position=v350;v360.Radius=v351 + v357.OutlineThickness ;v360.Filled=v352;v360.Color=v357.OutlineColor;v360.Thickness=v354 + v357.OutlineThickness ;v360.Transparency=v355;v360.Visible=true;elseif v360 then v360.Visible=false;end v358=1 + 0 ;end if (v358==(490 -(457 + 32))) then v359.Position=v350;v359.Radius=v351;v359.Filled=v352;v359.Color=v353;v358=2;end if (2==v358) then v359.Thickness=v354;v359.Transparency=v355;v359.Visible=true;break;end end end function rotateOffset(v361,v362,v363) local v364=math.rad(v363);local v365=math.cos(v364);local v366=math.sin(v364);return (v361 * v365) -(v362 * v366) ,(v361 * v366) + (v362 * v365) ;end function drawCrosshairStyle(v367) local v368,v369=getCrosshairCenter(v367);local v370=getCrosshairColor(v367);local v371=getCrosshairAlpha(v367);local v372=1 + 0 ;if v367.Pulse then v372=1 + (math.sin(v76.PulseTick) * v367.PulseAmount) ;end local v373=v367.Size * v372 ;local v374=v367.Gap * v372 ;local v375=v367.Thickness;local v376=(v367.Rotation and v76.Angle) or (1402 -(832 + 570)) ;local v377=0;local function v378(v694,v695) local v696=0;while true do if (v696==0) then v377=v377 + 1 + 0 ;applyCrosshairLine(v377,v694,v695,v370,v375,v371,true,v367);break;end end end if ((v367.Style=="Cross") or (v367.Style=="Plus")) then local v981=0 + 0 ;local v982;while true do if ((3 -2)==v981) then v982(0 + 0 , -1);v982(796 -(588 + 208) ,1);v981=5 -3 ;end if (v981==(1800 -(884 + 916))) then v982=nil;function v982(v1398,v1399) local v1400=0 -0 ;local v1401;local v1402;local v1403;while true do if ((0 + 0)==v1400) then v1401,v1402=rotateOffset(v1398,v1399,v376);v1403=Vector2.new(v368 + (v1401 * v374) ,v369 + (v1402 * v374) );v1400=654 -(232 + 421) ;end if (v1400==(1890 -(1569 + 320))) then v378(v1403,v1403 + Vector2.new(v1401 * v373 ,v1402 * v373 ) );break;end end end v981=1;end if ((1 + 1)==v981) then v982( -(1 + 0),0 -0 );v982(606 -(316 + 289) ,0);break;end end elseif (v367.Style=="Corners") then local v1182={{ -(1454 -(666 + 787)), -(1 + 0)},{255 -(79 + 175) , -1},{ -1,1},{1,900 -(503 + 396) }};for v1338,v1339 in ipairs(v1182) do local v1340,v1341=rotateOffset(v1339[182 -(92 + 89) ] * v374 ,v1339[2] * v374 ,v376);local v1342=Vector2.new(v368 + v1340 ,v369 + v1341 );local v1343,v1344=rotateOffset(v1339[1] * v373 ,0,v376);v378(v1342,v1342 + Vector2.new(v1343,v1344) );local v1345,v1346=rotateOffset(0,v1339[3 -1 ] * v373 ,v376);v378(v1342,v1342 + Vector2.new(v1345,v1346) );end elseif (v367.Style=="X") then local v1404=0.707;local function v1405(v1493,v1494) local v1495=0 + 0 ;local v1496;local v1497;local v1498;while true do if (v1495==(1 + 0)) then v378(v1498,v1498 + Vector2.new(v1496 * v373 ,v1497 * v373 ) );break;end if (v1495==0) then v1496,v1497=rotateOffset(v1493,v1494,v376);v1498=Vector2.new(v368 + (v1496 * v374) ,v369 + (v1497 * v374) );v1495=1;end end end v1405( -v1404, -v1404);v1405(v1404, -v1404);v1405( -v1404,v1404);v1405(v1404,v1404);elseif (v367.Style=="Dot") then applyCrosshairCircle(1,Vector2.new(v368,v369),v373,true,v370,3 -2 ,v371,true,v367);elseif (v367.Style=="Circle") then applyCrosshairCircle(1 + 0 ,Vector2.new(v368,v369),v373,false,v370,v375,v371,true,v367);end if (v367.ShowCenterDot and (v367.Style~="Dot")) then applyCrosshairCircle(2,Vector2.new(v368,v369),v367.CenterDotRadius,true,v370,2 -1 ,v371,true,v367);end for v697=v377 + 1 + 0 ,v77 do local v698=0 + 0 ;while true do if (v698==(0 -0)) then if v76.Lines[v697] then v76.Lines[v697].Visible=false;end if v76.OutlineLines[v697] then v76.OutlineLines[v697].Visible=false;end break;end end end end function setCrosshairEnabled(v379) local v380=0 + 0 ;while true do if (v380==0) then v5.Crosshair.Enabled=v379;if  not v379 then hideAllCrosshairDrawings();end break;end end end local v82={};local v83=Color3.fromRGB(289 -99 ,1414 -(485 + 759) ,590 -335 );local v84=0;local v85=1190 -(442 + 747) ;local v86=false;local v87=nil;local v88=nil;local v89=setmetatable({},{__mode="kv"});local function v90() local v381=1135 -(832 + 303) ;local v382;local v383;local v384;while true do if (v381==2) then function v383(v1183) if  not v1183:IsA("GuiObject") then return;end if v89[v1183] then return;end local v1184=string.lower(v1183.Name);if (v1184=="scope") then v89[v1183]=true;v1183.Visible=false;end end v384={v382};v381=3;end if ((1 + 0)==v381) then if  not v382 then return;end v383=nil;v381=2;end if (v381==3) then while  #v384>0  do local v1185=table.remove(v384,1 + 0 );for v1347,v1348 in ipairs(v1185:GetChildren()) do v383(v1348);if v1348:IsA("GuiObject") then table.insert(v384,v1348);end end end if  not v87 then v87=v382.DescendantAdded:Connect(v383);end break;end if (v381==(0 + 0)) then if  not v86 then return;end v382=v7:FindFirstChild("PlayerGui");v381=1;end end end function enableDisableScope() local v385=789 -(766 + 23) ;while true do if ((4 -3)==v385) then v88=task.spawn(function() while v86 do local v1349=0;while true do if (v1349==(1 -0)) then v90();break;end if (v1349==(0 -0)) then task.wait(101 -71 );for v1581 in pairs(v89) do v89[v1581]=nil;end v1349=1074 -(1036 + 37) ;end end end end);break;end if ((0 + 0)==v385) then if v88 then task.cancel(v88);end v90();v385=1 -0 ;end end end function disableDisableScope() local v386=0;while true do if (v386==(1 + 0)) then for v1186 in pairs(v89) do v89[v1186]=nil;end break;end if (v386==(1480 -(641 + 839))) then if v87 then v87:Disconnect();v87=nil;end if v88 then task.cancel(v88);v88=nil;end v386=914 -(910 + 3) ;end end end function isScoped() if v86 then return false;end local v387=v7:FindFirstChild("PlayerGui");if  not v387 then return false;end for v699,v700 in ipairs(v387:GetDescendants()) do if (v700:IsA("GuiObject") and (string.lower(v700.Name)=="scope") and v700.Visible) then return true;end end return false;end local v91=false;local v92=nil;local v93={"bullet","impact","muzzle","shell","casing","spark","smoke","tracer","hole","decal","flash","explosion","debris","particle","beam","trail"};function nameMatchesLowEffectKeyword(v388) local v389=1389 -(135 + 1254) ;local v390;while true do if (v389==(3 -2)) then return false;end if (v389==0) then v390=string.lower(v388);for v1188,v1189 in ipairs(v93) do if v390:find(v1189,1,true) then return true;end end v389=4 -3 ;end end end function processLowEffectInstance(v391) if ( not v91 or  not v391) then return;end local v392=v7.Character;if (v392 and v391:IsDescendantOf(v392)) then return;end if (v391:IsA("ParticleEmitter") or v391:IsA("Trail") or v391:IsA("Beam")) then v391.Enabled=false;elseif (v391:IsA("Fire") or v391:IsA("Smoke") or v391:IsA("Sparkles")) then v391.Enabled=false;elseif (v391:IsA("Decal") or v391:IsA("Texture")) then local v1410=(v391.Parent and v391.Parent.Name) or "" ;if (nameMatchesLowEffectKeyword(v391.Name) or nameMatchesLowEffectKeyword(v1410)) then v391.Transparency=1 + 0 ;end end end function enableLowEffects() for v701,v702 in ipairs(v12:GetDescendants()) do processLowEffectInstance(v702);end if v92 then v92:Disconnect();end v92=v12.DescendantAdded:Connect(processLowEffectInstance);end function disableLowEffects() if v92 then v92:Disconnect();v92=nil;end end local v94=false;local v95=nil;function startAntiAfk() if v95 then return;end v95=task.spawn(function() local v703=1527 -(389 + 1138) ;while true do if (0==v703) then while v94 do task.wait(634 -(102 + 472) );if  not v94 then break;end pcall(function() local v1411=v7.Character;local v1412=v1411 and v1411:FindFirstChildOfClass("Humanoid") ;if ( not v1412 or (v1412.Health<=0)) then return;end v13:CaptureController();v13:ClickButton2(Vector2.new(0,0 + 0 ));end);end v95=nil;break;end end end);end function stopAntiAfk() local v393=0 + 0 ;while true do if (v393==(0 + 0)) then v94=false;v95=nil;break;end end end local v96=false;local v97=Color3.fromRGB(255,255,255);local v98=Enum.Material.Plastic;local v99=1545 -(320 + 1225) ;local v100={};function getSniperModels() local v394=0;local v395;local v396;local v397;local v398;while true do if (v394==3) then v398(v397);return v395;end if (v394==(2 -0)) then function v398(v1191) local v1192=0;local v1193;local v1194;while true do if (v1192==(1 + 0)) then v1194=v1193 and v1193:FindFirstChild("Model") ;if v1194 then table.insert(v395,v1194);end break;end if (v1192==0) then if  not v1191 then return;end v1193=v1191:FindFirstChild("Sniper");v1192=1465 -(157 + 1307) ;end end end v398(v396);v394=3;end if (v394==(1859 -(821 + 1038))) then v395={};v396=v7.Character;v394=2 -1 ;end if (v394==(1 + 0)) then v397=v7:FindFirstChild("Backpack");v398=nil;v394=3 -1 ;end end end function shouldCustomizeSniperPart(v399) local v400=0 + 0 ;while true do if ((2 -1)==v400) then return true;end if ((1026 -(834 + 192))==v400) then if  not v399:IsA("BasePart") then return false;end if ((v399.Name=="Left Arm") or (v399.Name=="Right Arm")) then return false;end v400=1 + 0 ;end end end function cacheSniperPart(v401) local v402=0;local v403;while true do if (v402==(0 + 0)) then if v100[v401] then return;end v403={Color=v401.Color,Material=v401.Material,Transparency=v401.Transparency};v402=1;end if (v402==(1 + 0)) then if v401:IsA("UnionOperation") then v403.UsePartColor=v401.UsePartColor;end v100[v401]=v403;break;end end end function applySniperCustomization() for v704,v705 in ipairs(getSniperModels()) do for v984,v985 in ipairs(v705:GetDescendants()) do if shouldCustomizeSniperPart(v985) then cacheSniperPart(v985);if v985:IsA("UnionOperation") then v985.UsePartColor=true;end v985.Color=v97;v985.Material=v98;v985.Transparency=v99;end end end end function restoreSniperCustomization() for v706,v707 in pairs(v100) do if (v706 and v706.Parent) then local v1063=0;while true do if (v1063==0) then v706.Color=v707.Color;v706.Material=v707.Material;v1063=1;end if (v1063==1) then v706.Transparency=v707.Transparency;if (v706:IsA("UnionOperation") and (v707.UsePartColor~=nil)) then v706.UsePartColor=v707.UsePartColor;end break;end end end end table.clear(v100);end local v101=false;local v102=24 -8 ;local v103=false;local v104=354 -(300 + 4) ;local v105=false;local v106=nil;local v107=nil;local v108=nil;local v109=false;local v110=0;local v111=false;local v112=nil;local v113=false;local v114=false;local v115=nil;local v116=false;local v117=200;local v118=true;local v119=0;local v120="Toggle";local v121=nil;local v122="Head";local v123=false;local v124="WithAimbot";local v125=false;local v126=nil;local v127=2 + 2 ;local v128=nil;local v129=false;local v130=0;local v131=0;local v132=nil;local v133=true;local v134=2.25;local v135={};local v136=false;local v137=25;local v138=nil;function enableSpinBot() local v404=0 -0 ;local v405;local v406;while true do if ((363 -(112 + 250))==v404) then v406=v405 and v405:FindFirstChild("HumanoidRootPart") ;if  not v406 then return;end v404=1 + 1 ;end if (v404==2) then if  not v138 then v138=Instance.new("BodyGyro");v138.MaxTorque=Vector3.new(0,math.huge,0);v138.P=25052 -15052 ;v138.D=100;end v138.Parent=v406;v404=3;end if (v404==(2 + 1)) then v138.CFrame=v406.CFrame * CFrame.Angles(0 + 0 ,math.rad(v137),0 + 0 ) ;break;end if (v404==(0 + 0)) then if  not v136 then return;end v405=v7.Character;v404=1 + 0 ;end end end function disableSpinBot() if v138 then v138:Destroy();v138=nil;end end function updateSpinBot() local v407=1414 -(1001 + 413) ;local v408;local v409;while true do if (v407==1) then v408=v7.Character;v409=v408 and v408:FindFirstChild("HumanoidRootPart") ;v407=2;end if ((4 -2)==v407) then if (v409 and v138) then v138.CFrame=v409.CFrame * CFrame.Angles(0,math.rad(v137),882 -(244 + 638) ) ;else enableSpinBot();end break;end if ((693 -(627 + 66))==v407) then if  not v136 then return;end if ( not isLocalAlive() or isSpectatorCamera()) then local v1356=0 -0 ;while true do if (v1356==(602 -(512 + 90))) then disableSpinBot();return;end end end v407=1907 -(1665 + 241) ;end end end local function v139() local v410={};for v708,v709 in ipairs(v6:GetPlayers()) do if ((v709~=v7) and v709.Character and isTargetAlive(v709) and  not v73(v709)) then table.insert(v410,v709.Character);end end for v710,v711 in ipairs(v12:GetChildren()) do if (v711:IsA("Model") and v711:FindFirstChild("Humanoid") and v711:FindFirstChild("HumanoidRootPart")) then if  not v6:GetPlayerFromCharacter(v711) then local v1357=717 -(373 + 344) ;local v1358;while true do if (v1357==0) then v1358=v711.Name:lower();if (v1358:find("astration") or v1358:find("bot") or v1358:find("dummy") or v1358:find("npc")) then if (v711.Humanoid.Health>(0 + 0)) then table.insert(v410,v711);end end break;end end end end end return v410;end local function v140() if v128 then v128:Disconnect();v128=nil;end v126=nil;v14.CameraType=Enum.CameraType.Custom;local v413=v7.Character;if v413 then for v1068,v1069 in ipairs(v413:GetDescendants()) do if v1069:IsA("BasePart") then v1069.CanCollide=true;end end end end local function v141(v414) local v415=0;while true do if ((0 + 0)==v415) then if v128 then v128:Disconnect();end v126=v414;v415=1;end if (v415==(2 -1)) then v14.CameraType=Enum.CameraType.Scriptable;v128=v8.Heartbeat:Connect(function() local v1198=0 -0 ;local v1199;local v1200;local v1201;local v1202;local v1203;local v1204;while true do if (v1198==(1100 -(35 + 1064))) then if ( not v1199 or (v1199.Health<=(0 + 0))) then v140();return;end v1200=v7.Character;v1198=4 -2 ;end if ((1 + 2)==v1198) then v1203=v414:FindFirstChild("Head");v1204=v1200 and v1200:FindFirstChild("Head") ;v1198=4;end if (0==v1198) then if ( not v125 or  not v414 or  not v414.Parent) then local v1583=1236 -(298 + 938) ;while true do if (v1583==0) then v140();return;end end end v1199=v414:FindFirstChildOfClass("Humanoid");v1198=1260 -(233 + 1026) ;end if (v1198==(1670 -(636 + 1030))) then if (v1201 and v1202) then for v1651,v1652 in ipairs(v1200:GetDescendants()) do if v1652:IsA("BasePart") then v1652.CanCollide=false;end end local v1584=v1202.Position-(v1202.CFrame.LookVector * v127) ;v1201.CFrame=CFrame.new(v1584,v1202.Position);local v1586=(v1204 and v1204.Position) or (v1201.Position + Vector3.new(0,2 + 0 ,0 + 0 )) ;local v1587=(v1203 and v1203.Position) or (v1202.Position + Vector3.new(0 + 0 ,1.5 + 0 ,221 -(55 + 166) )) ;v14.CFrame=CFrame.lookAt(v1586,v1587);end break;end if (v1198==2) then v1201=v1200 and v1200:FindFirstChild("HumanoidRootPart") ;v1202=v414:FindFirstChild("HumanoidRootPart");v1198=1 + 2 ;end end end);break;end end end local v142=newDrawing("Circle");v142.Thickness=1 + 0 ;v142.NumSides=64;v142.Radius=763 -563 ;v142.Filled=false;v142.Visible=false;v142.Color=Color3.fromRGB(552 -(36 + 261) ,255,445 -190 );v142.Transparency=1;local v150=true;local v151=Color3.fromRGB(1623 -(34 + 1334) ,99 + 156 ,199 + 56 );local v152=Color3.fromRGB(1538 -(1035 + 248) ,50,71 -(20 + 1) );local v153=1;local v154=0.5 + 0 ;ESP={};ESP.Box={};ESP.Trail={};local v157={};for v416,v417 in ipairs(v6:GetPlayers()) do v157[ #v157 + (320 -(134 + 185)) ]=v417;end v6.PlayerAdded:Connect(function(v419) v157[ #v157 + (1134 -(549 + 584)) ]=v419;end);ESP.Box.Create=function(v421) local v422=0;local v423;local v424;while true do if (v422==(686 -(314 + 371))) then v423=v19.ESPObjects[v421];if v423.Box then for v1420,v1421 in ipairs(v423.Box.AllLines) do pcall(function() v1421:Remove();end);end end v422=2;end if ((10 -7)==v422) then v423.Box=v424;break;end if (2==v422) then v424={AllLines={}};for v1205=969 -(478 + 490) ,24 do local v1206=newDrawing("Line");v1206.Visible=false;v1206.Thickness=1 + 0 ;v1206.ZIndex=1182 -(786 + 386) ;table.insert(v424.AllLines,v1206);end v422=9 -6 ;end if (v422==0) then if (v421==v7) then return;end if  not v19.ESPObjects[v421] then v19.ESPObjects[v421]={};end v422=1380 -(1055 + 324) ;end end end;ESP.Box.Hide=function(v425) local v426=0;local v427;while true do if (v426==(1340 -(1093 + 247))) then v427=v19.ESPObjects[v425];if (v427 and v427.Box and v427.Box.AllLines) then for v1422,v1423 in ipairs(v427.Box.AllLines) do v1423.Visible=false;end end break;end end end;ESP.Box.Remove=function(v428) local v429=0 + 0 ;local v430;while true do if (v429==(0 + 0)) then v430=v19.ESPObjects[v428];if (v430 and v430.Box) then for v1425,v1426 in ipairs(v430.Box.AllLines) do pcall(function() v1426:Remove();end);end v430.Box=nil;end break;end end end;ESP.Box.Update=function(v431) local v432=0;local v433;local v434;local v435;local v436;local v437;local v438;local v439;local v440;local v441;local v442;local v443;local v444;local v445;local v446;while true do if (v432==(0 -0)) then if ( not v5.Box.Enabled or  not v74(v431)) then ESP.Box.Hide(v431);return;end if ( not v19.ESPObjects[v431] or  not v19.ESPObjects[v431].Box) then ESP.Box.Create(v431);end v433=v19.ESPObjects[v431];if ( not v433 or  not v433.Box) then return;end v432=3 -2 ;end if (v432==4) then for v1210=1,67 -43  do if v445[v1210] then v445[v1210].Visible=false;end end v446=math.clamp(v5.Box.Thickness or 1 ,2 -1 ,2 + 1 );if (v5.Box.Style=="Full Box") then v49(v445,3 -2 ,Vector2.new(v443,v444),Vector2.new(v443 + v442 ,v444),v446);v49(v445,6 -4 ,Vector2.new(v443 + v442 ,v444),Vector2.new(v443 + v442 ,v444 + v441 ),v446);v49(v445,3 + 0 ,Vector2.new(v443 + v442 ,v444 + v441 ),Vector2.new(v443,v444 + v441 ),v446);v49(v445,4,Vector2.new(v443,v444 + v441 ),Vector2.new(v443,v444),v446);else local v1362=0;local v1363;while true do if (v1362==(0 -0)) then v1363=v442 * (688.25 -(364 + 324)) ;v49(v445,2 -1 ,Vector2.new(v443,v444),Vector2.new(v443 + v1363 ,v444),v446);v1362=2 -1 ;end if (1==v1362) then v49(v445,2,Vector2.new(v443,v444),Vector2.new(v443,v444 + v1363 ),v446);v49(v445,1 + 2 ,Vector2.new(v443 + v442 ,v444),Vector2.new((v443 + v442) -v1363 ,v444),v446);v1362=8 -6 ;end if ((2 -0)==v1362) then v49(v445,11 -7 ,Vector2.new(v443 + v442 ,v444),Vector2.new(v443 + v442 ,v444 + v1363 ),v446);v49(v445,1273 -(1249 + 19) ,Vector2.new(v443,v444 + v441 ),Vector2.new(v443 + v1363 ,v444 + v441 ),v446);v1362=3 + 0 ;end if (v1362==(11 -8)) then v49(v445,1092 -(686 + 400) ,Vector2.new(v443,v444 + v441 ),Vector2.new(v443,(v444 + v441) -v1363 ),v446);v49(v445,6 + 1 ,Vector2.new(v443 + v442 ,v444 + v441 ),Vector2.new((v443 + v442) -v1363 ,v444 + v441 ),v446);v1362=4;end if (v1362==4) then v49(v445,237 -(73 + 156) ,Vector2.new(v443 + v442 ,v444 + v441 ),Vector2.new(v443 + v442 ,(v444 + v441) -v1363 ),v446);break;end end end for v1211=1 + 0 ,24 do local v1212=v445[v1211];if (v1212 and v1212.Visible) then v1212.Color=v5.Box.Color;v1212.Thickness=1;v1212.Transparency=v5.Box.Transparency;end end break;end if (3==v432) then v441=math.abs(v439.Y-v440.Y );v442=(v441/(813 -(721 + 90))) * (v5.Box.WidthScale or (1 + 0)) ;v443,v444=v437.X-(v442/(6 -4)) ,v439.Y;v445=v433.Box.AllLines;v432=474 -(224 + 246) ;end if (v432==(2 -0)) then v437,v438=v14:WorldToViewportPoint(v435.Position);if ( not v438 or (v437.Z<2)) then local v1364=0;while true do if (v1364==(0 -0)) then ESP.Box.Hide(v431);return;end end end v439=v14:WorldToViewportPoint(v436.Position + Vector3.new(0 + 0 ,0.5 + 0 ,0 + 0 ) );v440=v14:WorldToViewportPoint(v435.Position-Vector3.new(0,5 -2 ,0 -0 ) );v432=516 -(203 + 310) ;end if (v432==1) then v434=v431.Character;v435=v434:FindFirstChild("HumanoidRootPart");v436=v434:FindFirstChild("Head") or v435 ;if  not v435 then return;end v432=2;end end end;local function v162(v447) if ( not v447 or  not v447:IsA("Trail")) then return;end local v448=v5.Trail;v447.Color=ColorSequence.new(v448.Color);v447.Transparency=NumberSequence.new(v448.Transparency);v447.Lifetime=v448.Lifetime;v447.WidthScale=NumberSequence.new(v448.Thickness);v447.Enabled=v448.Enabled;end local function v163(v456) local v457=v456.Character;if  not v457 then return;end local v458=v457:WaitForChild("HumanoidRootPart",1998 -(1238 + 755) );if  not v458 then return;end if v458:FindFirstChild("ElysiumTrail") then v162(v458.ElysiumTrail);return;end local v459=Instance.new("Attachment");v459.Name="TrailA0";v459.Position=Vector3.new(0,0.8 + 0 ,1534 -(709 + 825) );v459.Parent=v458;local v463=Instance.new("Attachment");v463.Name="TrailA1";v463.Position=Vector3.new(0 -0 , -(0.8 -0),864 -(196 + 668) );v463.Parent=v458;local v467=Instance.new("Trail");v467.Name="ElysiumTrail";v467.Attachment0=v459;v467.Attachment1=v463;v467.FaceCamera=true;v467.LightEmission=3 -2 ;v467.Parent=v458;v162(v467);end local function v164(v474) local v475=v474.Character;local v476=v475 and v475:FindFirstChild("HumanoidRootPart") ;if v476 then local v986=0;while true do if (v986==0) then if v476:FindFirstChild("ElysiumTrail") then v476.ElysiumTrail:Destroy();end if v476:FindFirstChild("TrailA0") then v476.TrailA0:Destroy();end v986=1 -0 ;end if (v986==(834 -(171 + 662))) then if v476:FindFirstChild("TrailA1") then v476.TrailA1:Destroy();end break;end end end end local v165={{"Head","Torso"},{"Torso","HumanoidRootPart"},{"HumanoidRootPart","Left Arm"},{"HumanoidRootPart","Right Arm"},{"HumanoidRootPart","Left Leg"},{"HumanoidRootPart","Right Leg"}};local v166={{"Head","UpperTorso"},{"UpperTorso","LowerTorso"},{"UpperTorso","LeftUpperArm"},{"LeftUpperArm","LeftLowerArm"},{"LeftLowerArm","LeftHand"},{"UpperTorso","RightUpperArm"},{"RightUpperArm","RightLowerArm"},{"RightLowerArm","RightHand"},{"LowerTorso","LeftUpperLeg"},{"LeftUpperLeg","LeftLowerLeg"},{"LeftLowerLeg","LeftFoot"},{"LowerTorso","RightUpperLeg"},{"RightUpperLeg","RightLowerLeg"},{"RightLowerLeg","RightFoot"}};function getBonesForCharacter(v477) local v478=951 -(783 + 168) ;local v479;while true do if (v478==(3 -2)) then return v165;end if (v478==0) then v479=v477:FindFirstChildOfClass("Humanoid");if (v479 and (v479.RigType==Enum.HumanoidRigType.R15)) then return v166;end v478=1 + 0 ;end end end function removeSkeleton(v480) local v481=0;local v482;while true do if ((311 -(309 + 2))==v481) then v482=v19.ESP[v480];if (v482 and v482.SkeletonObject) then local v1365=0 -0 ;local v1366;while true do if (v1365==(1212 -(1090 + 122))) then v1366=v482.SkeletonObject;for v1589,v1590 in pairs(v1366.lines) do pcall(function() v1590:Remove();end);end v1365=1;end if (v1365==(1 + 0)) then v482.SkeletonObject=nil;break;end end end break;end end end function applySkeleton(v483) if (v483==v7) then return;end v19.ESP[v483]=v19.ESP[v483] or {} ;if  not v74(v483) then removeSkeleton(v483);return;end local v485=v483.Character;if  not v485 then return;end removeSkeleton(v483);local v486=getBonesForCharacter(v485);local v487={};for v712=3 -2 , #v486 do local v713=0 + 0 ;local v714;while true do if (v713==(1120 -(628 + 490))) then v714.Transparency=1 -v84 ;v487[v712]=v714;break;end if (1==v713) then v714.Color=v83;v714.Thickness=v85;v713=2;end if (v713==(0 + 0)) then v714=newDrawing("Line");v714.Visible=false;v713=2 -1 ;end end end v19.ESP[v483].SkeletonObject={lines=v487,bones=v486};end function removeTextESP(v489) local v490=0 -0 ;local v491;while true do if (v490==(774 -(431 + 343))) then v491=v19.ESP[v489];if (v491 and v491.TextObjects) then local v1367=v491.TextObjects;pcall(function() if v1367.nameText then v1367.nameText:Remove();end end);v491.TextObjects=nil;end break;end end end function applyTextESP(v492) if (v492==v7) then return;end v19.ESP[v492]=v19.ESP[v492] or {} ;if  not v74(v492) then removeTextESP(v492);return;end local v494=v492.Character;if  not v494 then return;end removeTextESP(v492);local v495=v5.TextSettings;local v496=newDrawing("Text");v496.Visible=false;v496.Center=true;v496.Outline=v495.Outline;v496.Font=v495.Font;v496.Size=v495.NameSize;v496.Color=v495.NameColor;v496.Transparency=(1 -0) -v495.NameTransparency ;v19.ESP[v492].TextObjects={nameText=v496};end function removeChams(v509) local v510=0 -0 ;local v511;while true do if (v510==(0 + 0)) then v511=v19.ESP[v509];if (v511 and v511.ChamsObject) then pcall(function() v511.ChamsObject:Destroy();end);v511.ChamsObject=nil;end break;end end end function applyChams(v512) if (v512==v7) then return;end v19.ESP[v512]=v19.ESP[v512] or {} ;if  not v74(v512) then local v987=0 + 0 ;while true do if (v987==(1695 -(556 + 1139))) then removeChams(v512);return;end end end local v514=v512.Character;if  not v514 then return;end removeChams(v512);local v515=Instance.new("Highlight");v515.Name="ElysiumHighlight";v515.FillColor=v5.ChamsSettings.FillColor;v515.OutlineColor=v5.ChamsSettings.OutlineColor;v515.FillTransparency=v5.ChamsSettings.FillTransparency;v515.OutlineTransparency=v5.ChamsSettings.OutlineTransparency;v515.DepthMode=Enum.HighlightDepthMode.AlwaysOnTop;v515.Adornee=v514;v515.Parent=v514;v19.ESP[v512].ChamsObject=v515;end function removeTracer(v530) local v531=0;local v532;while true do if (v531==0) then v532=v19.ESP[v530];if (v532 and v532.TracerObject) then pcall(function() v532.TracerObject:Remove();end);v532.TracerObject=nil;end break;end end end function applyTracer(v533) local v534=0;local v535;while true do if (v534==(17 -(6 + 9))) then v535=newDrawing("Line");v535.Visible=false;v534=3;end if (v534==(0 + 0)) then if (v533==v7) then return;end v19.ESP[v533]=v19.ESP[v533] or {} ;v534=1;end if (v534==(2 + 1)) then v535.Color=v5.TracersSettings.Color;v535.Transparency=v5.TracersSettings.Transparency;v534=173 -(28 + 141) ;end if (v534==4) then v535.Thickness=v5.TracersSettings.Thickness;v19.ESP[v533].TracerObject=v535;break;end if (v534==1) then if  not v74(v533) then removeTracer(v533);return;end removeTracer(v533);v534=2;end end end function removeOOV(v536) local v537=0 + 0 ;local v538;while true do if (v537==(0 -0)) then v538=v19.OOVObjects[v536];if v538 then if v538.lines then for v1542,v1543 in ipairs(v538.lines) do pcall(function() v1543:Remove();end);end end if v538.text then pcall(function() v538.text:Remove();end);end v19.OOVObjects[v536]=nil;end break;end end end function applyOOV(v539) local v540=0 + 0 ;local v541;while true do if (v540==(1320 -(486 + 831))) then v541.text.Outline=true;v541.text.Font=5 -3 ;v540=4;end if ((3 -2)==v540) then v541={lines={},text=newDrawing("Text")};for v1218=1,3 do local v1219=0 + 0 ;local v1220;while true do if ((3 -2)==v1219) then v1220.Thickness=1264 -(668 + 595) ;v541.lines[v1218]=v1220;break;end if (v1219==(0 + 0)) then v1220=newDrawing("Line");v1220.Visible=false;v1219=1 + 0 ;end end end v540=2;end if (v540==(0 -0)) then if ((v539==v7) or  not v47) then return;end removeOOV(v539);v540=1;end if (v540==(294 -(23 + 267))) then v541.text.Size=1957 -(1129 + 815) ;v19.OOVObjects[v539]=v541;break;end if (v540==(389 -(371 + 16))) then v541.text.Visible=false;v541.text.Center=true;v540=3;end end end ESP.Trail={};ESP.Trail.Create=function(v542) local v543=v5.Trail;if ((v542==v7) and  not v543.ShowOnSelf) then return;end if v19.TrailData[v542] then ESP.Trail.Remove(v542);end v19.TrailData[v542]={points={},segments={},lastPos=nil,lastUpdate=tick(),folder=Instance.new("Folder",v12)};v19.TrailData[v542].folder.Name="ElysiumTrail_"   .. v542.Name ;end;ESP.Trail.Remove=function(v546) local v547=0;local v548;while true do if (v547==0) then v548=v19.TrailData[v546];if v548 then local v1372=1750 -(1326 + 424) ;while true do if (v1372==(0 -0)) then if v548.folder then v548.folder:Destroy();end v19.TrailData[v546]=nil;break;end end end break;end end end;ESP.Trail.Update=function(v549) local v550=0;local v551;local v552;local v553;local v554;local v555;local v556;local v557;local v558;local v559;local v560;local v561;while true do if (v550==(3 -2)) then v553=v549.Character;v554=v553 and v553:FindFirstChildOfClass("Humanoid") ;if ( not v554 or (v554.Health<=(118 -(88 + 30)))) then ESP.Trail.Remove(v549);return;end v555=v553 and v553:FindFirstChild("HumanoidRootPart") ;v550=773 -(720 + 51) ;end if (v550==2) then if  not v555 then local v1373=0 -0 ;while true do if (0==v1373) then ESP.Trail.Remove(v549);return;end end end if  not v552 then local v1374=1776 -(421 + 1355) ;local v1375;while true do if (v1374==(0 -0)) then v1375=(v14.CFrame.Position-v555.Position).Magnitude;if (v1375>(v551.MaxDistance or (246 + 254))) then local v1653=1083 -(286 + 797) ;while true do if (v1653==(0 -0)) then ESP.Trail.Remove(v549);return;end end end break;end end end v556=v19.TrailData[v549];if  not v556 then local v1376=0 -0 ;while true do if ((439 -(397 + 42))==v1376) then ESP.Trail.Create(v549);v556=v19.TrailData[v549];v1376=1;end if (v1376==1) then if  not v556 then return;end break;end end end v550=1 + 2 ;end if (v550==(804 -(24 + 776))) then if ( not v559 or ((v558-v559).Magnitude>v560)) then table.insert(v556.points,{pos=v558,time=v557});v556.lastPos=v558;end while ( #v556.points>(0 -0)) and ((v557-v556.points[1].time)>v551.Lifetime)  do table.remove(v556.points,786 -(222 + 563) );end if ( #v556.points>v551.MaxPoints) then local v1378= #v556.points-v551.MaxPoints ;for v1433=1 -0 ,v1378 do table.remove(v556.points,1 + 0 );end end v561=math.max(190 -(23 + 167) , #v556.points-(1799 -(690 + 1108)) );v550=2 + 3 ;end if (v550==(5 + 0)) then if (v561<1) then for v1434,v1435 in ipairs(v556.segments) do v1435.Visible=false;end return;end while  #v556.segments<v561  do local v1221=Instance.new("CylinderHandleAdornment");v1221.Adornee=v12.Terrain;v1221.ZIndex=858 -(40 + 808) ;v1221.Parent=v556.folder;table.insert(v556.segments,v1221);end for v1227=1 + 0 ,v561 do local v1228=v556.segments[v1227];local v1229=v556.points[v1227].pos;local v1230=v556.points[v1227 + (3 -2) ].pos;local v1231=(v1229-v1230).Magnitude;if (v1231<0.1) then v1228.Visible=false;else local v1438=0 + 0 ;local v1439;local v1440;local v1441;local v1442;local v1443;while true do if (v1438==(0 + 0)) then v1228.Height=v1231;v1439=(v557-v556.points[v1227].time)/v551.Lifetime ;v1440=(v557-v556.points[v1227 + 1 + 0 ].time)/v551.Lifetime ;v1441=(v1439 + v1440)/(573 -(47 + 524)) ;v1438=1 + 0 ;end if (2==v1438) then v1228.Transparency=v1442;v1228.CFrame=CFrame.lookAt(v1229:Lerp(v1230,0.5 -0 ),v1230);v1228.AlwaysOnTop=v551.AlwaysOnTop;v1228.Visible=true;break;end if (v1438==(1 -0)) then v1442=math.clamp((2 -1) -(v1441 * ((1727 -(1165 + 561)) -v551.Transparency)) ,0 + 0 ,3 -2 );v1443=v551.Thickness * (1 -(v1441 * (0.5 + 0))) ;v1228.Radius=v1443;v1228.Color3=v551.Color;v1438=2;end end end end for v1232=v561 + 1 , #v556.segments do v556.segments[v1232].Visible=false;end break;end if ((482 -(341 + 138))==v550) then v557=tick();v558=v555.Position;v559=v556.lastPos;v560=v551.MinDistance or (0.5 + 0) ;v550=7 -3 ;end if (v550==0) then v551=v5.Trail;if  not v551.Enabled then local v1379=326 -(89 + 237) ;while true do if (v1379==0) then ESP.Trail.Remove(v549);return;end end end v552=v549==v7 ;if (v552 and  not v551.ShowOnSelf) then ESP.Trail.Remove(v549);return;end v550=3 -2 ;end end end;function getOriginPoint() local v562=v14.ViewportSize;local v563=v5.TracersSettings.Origin;if (v563=="Bottom") then return Vector2.new(v562.X/(3 -1) ,v562.Y);elseif (v563=="Top") then return Vector2.new(v562.X/(883 -(581 + 300)) ,1220 -(855 + 365) );else return Vector2.new(v562.X/2 ,v562.Y/(4 -2) );end end function getTargetPart(v564) if  not v564 then return nil;end return v564:FindFirstChild(v122) or v564:FindFirstChild("Head") or v564:FindFirstChild("HumanoidRootPart") ;end function isTargetVisible(v565) local v566=0 + 0 ;local v567;local v568;local v569;local v570;local v571;while true do if (v566==(1237 -(1030 + 205))) then v570.IgnoreWater=true;v571=v12:Raycast(v568,v569,v570);if  not v571 then return true;end return v571.Instance:IsDescendantOf(v567);end if (v566==0) then if ( not v565 or  not v565.Parent) then return false;end v567=v565.Parent;v568=v14.CFrame.Position;v569=v565.Position-v568 ;v566=1 + 0 ;end if (v566==(1 + 0)) then if (v569.Magnitude<(286.01 -(156 + 130))) then return true;end v570=RaycastParams.new();v570.FilterType=Enum.RaycastFilterType.Exclude;v570.FilterDescendantsInstances={v7.Character,v14};v566=2 -0 ;end end end function getClosestPlayerToCursor(v572) local v573=v9:GetMouseLocation();local v574=nil;local v575=v572 or v117 ;for v715,v716 in ipairs(v6:GetPlayers()) do local v717=0 -0 ;local v718;local v719;local v720;local v721;local v722;while true do if (v717==(1 + 0)) then if ( not v718 or (v718.Health<=0)) then continue;end v719=v716.Character:FindFirstChild(v122) or v716.Character:FindFirstChild("Head") ;v717=2 + 0 ;end if (v717==(71 -(10 + 59))) then if  not v719 then continue;end v720,v721=v14:WorldToViewportPoint(v719.Position);v717=1 + 2 ;end if (v717==(14 -11)) then if ( not v721 or (v720.Z<=(1163 -(671 + 492)))) then continue;end v722=(Vector2.new(v720.X,v720.Y) -v573).Magnitude;v717=4 + 0 ;end if (v717==(1219 -(369 + 846))) then if (v722<v575) then local v1444=0;while true do if (v1444==(0 + 0)) then v575=v722;v574=v716;break;end end end break;end if (v717==(0 + 0)) then if ((v716==v7) or  not v716.Character) then continue;end v718=v716.Character:FindFirstChildOfClass("Humanoid");v717=1946 -(1036 + 909) ;end end end return v574;end function isTargetAlive(v576) if ( not v576 or  not v576.Character) then return false;end local v577=v576.Character:FindFirstChildOfClass("Humanoid");if ( not v577 or (v577.Health<=0)) then return false;end return getTargetPart(v576.Character)~=nil ;end function aimAt(v578) local v579=0;local v580;local v581;local v582;while true do if (v579==(1 + 0)) then if  not v580 then return;end v581=v580.Position;v579=2;end if (v579==(2 -0)) then v582=math.clamp((204 -(11 + 192)) -v119 ,0.01 + 0 ,176 -(135 + 40) );v14.CFrame=v14.CFrame:Lerp(CFrame.new(v14.CFrame.Position,v581),v582);break;end if (v579==0) then if ( not v578 or  not v578.Character) then return;end v580=v578.Character:FindFirstChild(v122) or v578.Character:FindFirstChild("Head") ;v579=1;end end end function isLocalAlive() local v583=0 -0 ;local v584;local v585;while true do if (v583==1) then return v585 and (v585.Health>0) ;end if (v583==(0 + 0)) then v584=v7.Character;v585=v584 and v584:FindFirstChildOfClass("Humanoid") ;v583=2 -1 ;end end end function isSpectatorCamera() if isLocalAlive() then return false;end local v586=v14.CameraSubject;if  not v586 then return true;end if v586:IsA("Humanoid") then local v988=0 -0 ;local v989;while true do if (v988==0) then v989=v6:GetPlayerFromCharacter(v586.Parent);return v989~=v7 ;end end end return true;end function canRunCombat() local v587=176 -(50 + 126) ;local v588;local v589;while true do if (v587==(0 -0)) then v588=v7.Character;v589=v588 and v588:FindFirstChildOfClass("Humanoid") ;v587=1 + 0 ;end if (v587==(1414 -(1233 + 180))) then if ( not v589 or (v589.Health<=0)) then return false;end return true;end end end function updateCombatCursor() local v590=969 -(522 + 447) ;while true do if (v590==(1421 -(107 + 1314))) then if ( not v1 or  not v4.ShowCustomCursor) then return;end v1.ShowCustomCursor=v4.ShowCustomCursor.Value;break;end end end function applyPlayerStats(v591) local v592=0 + 0 ;local v593;while true do if (v592==0) then v593=v591:WaitForChild("Humanoid",15 -10 );if v593 then v108=v593.UseJumpPower;v107=v593.JumpPower;if v101 then v593.WalkSpeed=v102;end if v103 then local v1504=0;while true do if (v1504==(0 + 0)) then v593.UseJumpPower=true;v593.JumpPower=v104;break;end end end end break;end end end function onCharacterAdded(v594,v595) if (v594~=v7) then local v990=0;while true do if (v990==1) then removeTextESP(v594);removeChams(v594);v990=3 -1 ;end if (v990==3) then removeOOV(v594);v19.ESP[v594]=nil;break;end if (v990==(0 -0)) then ESP.Box.Remove(v594);ESP.Trail.Remove(v594);v990=1911 -(716 + 1194) ;end if (v990==(1 + 1)) then removeTracer(v594);removeSkeleton(v594);v990=1 + 2 ;end end else local v991=503 -(74 + 429) ;while true do if (v991==1) then ESP.Trail.Remove(v7);v72(v595);break;end if (v991==(0 -0)) then v121=nil;v114=false;v991=1;end end end v595:WaitForChild("HumanoidRootPart",5 + 5 );if (v594==v7) then local v992=0 -0 ;while true do if (v992==(0 + 0)) then applyPlayerStats(v595);if v96 then local v1505=0 -0 ;while true do if (v1505==(0 -0)) then restoreSniperCustomization();applySniperCustomization();break;end end end break;end end end end function setupPlayer(v596) if (v596==v7) then v596.CharacterAdded:Connect(function(v1118) onCharacterAdded(v596,v1118);end);if v596.Character then applyPlayerStats(v596.Character);end return;end v596.CharacterAdded:Connect(function(v723) onCharacterAdded(v596,v723);end);if v596.Character then onCharacterAdded(v596,v596.Character);end end local v170=v7:WaitForChild("Backpack");v170.ChildAdded:Connect(function(v597) if ((v597.Name=="Sniper") and v96) then local v993=433 -(279 + 154) ;while true do if (v993==0) then task.wait();table.clear(v100);v993=779 -(454 + 324) ;end if (1==v993) then applySniperCustomization();break;end end end end);v6.PlayerRemoving:Connect(function(v598) local v599=0 + 0 ;while true do if (v599==0) then for v1235= #v157,18 -(12 + 5) , -1 do if (v157[v1235]==v598) then table.remove(v157,v1235);break;end end v135[v598]=nil;v599=1;end if ((2 + 0)==v599) then v19.ESP[v598]=nil;break;end if (v599==(2 -1)) then pcall(function() local v1236=0 + 0 ;while true do if ((1096 -(277 + 816))==v1236) then removeTextESP(v598);break;end if (v1236==(0 -0)) then ESP.Box.Remove(v598);ESP.Trail.Remove(v598);v1236=1184 -(1058 + 125) ;end if (v1236==2) then removeSkeleton(v598);removeOOV(v598);v1236=1 + 2 ;end if (v1236==(976 -(815 + 160))) then removeChams(v598);removeTracer(v598);v1236=8 -6 ;end end end);v19.ESPObjects[v598]=nil;v599=4 -2 ;end end end);function renderOOV() local v600=0 + 0 ;local v601;local v602;local v603;local v604;while true do if (v600==1) then v602=v14.ViewportSize;v603,v604=v602.X/(5 -3) ,v602.Y/(1900 -(41 + 1857)) ;v600=2;end if (v600==(1895 -(1222 + 671))) then for v1237,v1238 in ipairs(v6:GetPlayers()) do if (v1238==v7) then continue;end if ( not v19.OOVObjects[v1238] and v74(v1238)) then applyOOV(v1238);end local v1239=v19.OOVObjects[v1238];if  not v1239 then continue;end if  not v74(v1238) then for v1506,v1507 in ipairs(v1239.lines) do v1507.Visible=false;end v1239.text.Visible=false;continue;end local v1240=v1238.Character;local v1241=v1240 and v1240:FindFirstChild("HumanoidRootPart") ;if v1241 then local v1446,v1447=v14:WorldToViewportPoint(v1241.Position);if  not v1447 then local v1547=v1241.Position-v14.CFrame.Position ;local v1548=Vector3.new(v1547.X,0,v1547.Z);local v1549=Vector3.new(v14.CFrame.LookVector.X,0 -0 ,v14.CFrame.LookVector.Z);local v1550=math.atan2((v1549.X * v1548.Z) -(v1549.Z * v1548.X) ,(v1549.X * v1548.X) + (v1549.Z * v1548.Z) );local v1551=v603 + (v601.Radius * math.sin(v1550)) ;local v1552=v604-(v601.Radius * math.cos(v1550)) ;v1551=math.clamp(v1551,v601.Size + (14 -4) ,(v602.X-v601.Size) -(1192 -(229 + 953)) );v1552=math.clamp(v1552,v601.Size + (1784 -(1111 + 663)) ,(v602.Y-v601.Size) -10 );local v1553=v601.Transparency;if v601.PulseEnabled then v1553=v1553 * ((1579.6 -(874 + 705)) + ((0.4 + 0) * math.sin(tick() * (v601.PulseSpeed or (3.5 + 0)) * (3 -1) ))) ;end local v1554=Vector2.new(v1551 + (v601.Size * math.sin(v1550)) ,v1552-(v601.Size * math.cos(v1550)) );local v1555=Vector2.new(v1551 + (v601.Size * (0.5 + 0) * math.cos(v1550)) ,v1552 + (v601.Size * (679.5 -(642 + 37)) * math.sin(v1550)) );local v1556=Vector2.new(v1551-(v601.Size * (0.5 + 0) * math.cos(v1550)) ,v1552-(v601.Size * 0.5 * math.sin(v1550)) );for v1600,v1601 in ipairs(v1239.lines) do local v1602=0 + 0 ;while true do if (v1602==(2 -1)) then v1601.Visible=true;break;end if (v1602==(454 -(233 + 221))) then v1601.Color=v601.Color;v1601.Transparency=v1553;v1602=1;end end end v1239.lines[2 -1 ].From=v1554;v1239.lines[1 + 0 ].To=v1555;v1239.lines[1543 -(718 + 823) ].From=v1555;v1239.lines[2].To=v1556;v1239.lines[2 + 1 ].From=v1556;v1239.lines[808 -(266 + 539) ].To=v1554;v1239.text.Visible=false;else for v1603,v1604 in ipairs(v1239.lines) do v1604.Visible=false;end v1239.text.Visible=false;end else local v1448=0;while true do if (v1448==(0 -0)) then for v1656,v1657 in ipairs(v1239.lines) do v1657.Visible=false;end v1239.text.Visible=false;break;end end end end break;end if (v600==(1225 -(636 + 589))) then v601=v5.OOV;if ( not v601.Enabled or  not v5.ESP.Enabled) then for v1449,v1450 in pairs(v19.OOVObjects) do local v1451=0;while true do if (v1451==(0 -0)) then if v1450.lines then for v1685,v1686 in ipairs(v1450.lines) do pcall(function() v1686:Remove();end);end end if v1450.text then pcall(function() v1450.text:Remove();end);end v1451=1 -0 ;end if (v1451==(1 + 0)) then v19.OOVObjects[v1449]=nil;break;end end end return;end v600=1 + 0 ;end end end function renderTextESP() if ( not v5.ESP.Enabled or  not v5.ESP.Text) then return;end for v724,v725 in pairs(v19.ESP) do if  not v74(v724) then if (v725.TextObjects and v725.TextObjects.nameText) then v725.TextObjects.nameText.Visible=false;end continue;end local v726=v725.TextObjects;if ( not v726 or  not v726.nameText) then local v1124=1015 -(657 + 358) ;while true do if (v1124==(2 -1)) then if  not v726 then continue;end break;end if (v1124==(0 -0)) then applyTextESP(v724);v726=v19.ESP[v724] and v19.ESP[v724].TextObjects ;v1124=1188 -(1151 + 36) ;end end end local v727=v724.Character;local v728=v727 and v727:FindFirstChild("HumanoidRootPart") ;if  not v728 then v726.nameText.Visible=false;continue;end local v729=math.floor((v14.CFrame.Position-v728.Position).Magnitude);local v730=v727:FindFirstChild("Head");local v731=(v730 and (v730.Position + Vector3.new(0,0.7 + 0 ,0 + 0 ))) or (v728.Position + Vector3.new(0 -0 ,1835 -(1552 + 280) ,0)) ;local v732,v733=v14:WorldToViewportPoint(v731);if v733 then local v1126=0;local v1127;local v1128;local v1129;while true do if (v1126==(835 -(64 + 770))) then v1129=v1128;if v1127.ShowDistance then v1129=v1129   .. "  ["   .. v729   .. "m]" ;end v1126=2 + 0 ;end if (v1126==(4 -2)) then v726.nameText.Position=Vector2.new(v732.X,v732.Y-v1127.OffsetY );v726.nameText.Text=v1129;v1126=1 + 2 ;end if (v1126==(1246 -(157 + 1086))) then v726.nameText.Visible=true;break;end if (v1126==0) then v1127=v5.TextSettings;v1128=(v1127.ShowDisplayName and v724.DisplayName) or v724.Name ;v1126=1 -0 ;end end else v726.nameText.Visible=false;end end end function renderTracers() local v605=0 -0 ;while true do if (v605==(0 -0)) then if ( not v5.ESP.Enabled or  not v5.ESP.Tracers) then return;end for v1242,v1243 in pairs(v19.ESP) do local v1244=0 -0 ;local v1245;local v1246;local v1247;local v1248;local v1249;while true do if (v1244==(822 -(599 + 220))) then v1248,v1249=v14:WorldToViewportPoint(v1247.Position);if v1249 then local v1608=0 -0 ;while true do if (v1608==0) then v1245.From=getOriginPoint();v1245.To=Vector2.new(v1248.X,v1248.Y);v1608=1932 -(1813 + 118) ;end if (1==v1608) then v1245.Visible=true;break;end end else v1245.Visible=false;end break;end if (v1244==0) then if  not v74(v1242) then local v1610=0 + 0 ;while true do if (v1610==(1217 -(841 + 376))) then if v1243.TracerObject then v1243.TracerObject.Visible=false;end continue;break;end end end v1245=v1243.TracerObject;v1244=1;end if (v1244==(1 -0)) then if  not v1245 then local v1611=0 + 0 ;while true do if (v1611==0) then applyTracer(v1242);v1245=v19.ESP[v1242] and v19.ESP[v1242].TracerObject ;v1611=2 -1 ;end if (v1611==1) then if  not v1245 then continue;end break;end end end v1246=v1242.Character;v1244=861 -(464 + 395) ;end if (v1244==2) then v1247=v1246 and v1246:FindFirstChild("HumanoidRootPart") ;if  not v1247 then local v1612=0 -0 ;while true do if (v1612==(0 + 0)) then v1245.Visible=false;continue;break;end end end v1244=3;end end end break;end end end function renderSkeleton() if ( not v5.ESP.Skeleton or  not v5.ESP.Enabled) then for v1131,v1132 in pairs(v19.ESP) do if (v1132.SkeletonObject and v1132.SkeletonObject.lines) then for v1456,v1457 in ipairs(v1132.SkeletonObject.lines) do v1457.Visible=false;end end end return;end for v734,v735 in pairs(v19.ESP) do if  not v74(v734) then local v1133=0;while true do if (v1133==0) then if (v735.SkeletonObject and v735.SkeletonObject.lines) then for v1613,v1614 in ipairs(v735.SkeletonObject.lines) do v1614.Visible=false;end end continue;break;end end end local v736=v735.SkeletonObject;if ( not v736 or  not v736.lines) then applySkeleton(v734);v736=v19.ESP[v734] and v19.ESP[v734].SkeletonObject ;if  not v736 then continue;end end local v737=v734.Character;if  not v737 then local v1134=837 -(467 + 370) ;while true do if (v1134==(0 -0)) then for v1511,v1512 in ipairs(v736.lines) do v1512.Visible=false;end continue;break;end end end for v994,v995 in ipairs(v736.bones) do local v996=0 + 0 ;local v997;local v998;local v999;while true do if (v996==1) then v999=v736.lines[v994];if (v997 and v998 and v999) then local v1514,v1515=v14:WorldToViewportPoint(v997.Position);local v1516,v1517=v14:WorldToViewportPoint(v998.Position);if (v1515 and v1517) then local v1616=0 -0 ;while true do if (v1616==(1 + 0)) then v999.Visible=true;break;end if (v1616==0) then v999.From=Vector2.new(v1514.X,v1514.Y);v999.To=Vector2.new(v1516.X,v1516.Y);v1616=1;end end else v999.Visible=false;end elseif v999 then v999.Visible=false;end break;end if (0==v996) then v997=v737:FindFirstChild(v995[1]);v998=v737:FindFirstChild(v995[2]);v996=1;end end end end end function renderCrosshair() local v606=v5.Crosshair;local v607=v7.Character;local v608=v607 and v607:FindFirstChild("Primary") ;local v609=v607 and v607:FindFirstChildOfClass("Humanoid") and (v607:FindFirstChildOfClass("Humanoid").Health>(0 -0)) ;local v610=v19.IsScopeVisible;if ( not v606.Enabled or v1.Opened or  not v608 or  not v609 or v610) then local v1000=520 -(150 + 370) ;while true do if (v1000==0) then hideAllCrosshairDrawings();return;end end end v76.PulseTick=v76.PulseTick + ((1/(1342 -(74 + 1208))) * v606.PulseSpeed) ;if v606.Rotation then v76.Angle=(v76.Angle + v606.RotSpeed)%(885 -525) ;end hideAllCrosshairDrawings();drawCrosshairStyle(v606);end function renderBunnyhop() local v612=0 -0 ;local v613;local v614;while true do if (v612==(1 + 0)) then v614=v613 and v613:FindFirstChildOfClass("Humanoid") ;if v614 then local v1385=v614:GetState();local v1386=tick();if ((v1386-v110)>(390.1 -(14 + 376))) then if ((v1385==Enum.HumanoidStateType.Landed) or (v1385==Enum.HumanoidStateType.Running) or (v1385==Enum.HumanoidStateType.RunningNoPhysics)) then v614:ChangeState(Enum.HumanoidStateType.Jumping);v110=v1386;end end end break;end if (v612==(0 -0)) then if  not v109 then return;end v613=v7.Character;v612=1;end end end function updateChamsDistance() local v615=0 + 0 ;while true do if (v615==(0 + 0)) then if ( not v5.ESP.Enabled or  not v5.ESP.Chams) then for v1459,v1460 in ipairs(v6:GetPlayers()) do removeChams(v1460);end return;end for v1250,v1251 in ipairs(v6:GetPlayers()) do local v1252=0 + 0 ;local v1253;while true do if (v1252==(0 -0)) then if (v1251==v7) then continue;end if  not v74(v1251) then local v1619=0 + 0 ;while true do if (v1619==0) then removeChams(v1251);continue;break;end end end v1252=1;end if (v1252==(79 -(23 + 55))) then v1253=v1251.Character;if (v1253 and v1253:FindFirstChild("HumanoidRootPart")) then local v1620=v19.ESP[v1251];local v1621=v1620 and v1620.ChamsObject ;if v1621 then local v1672=0 -0 ;while true do if ((1 + 0)==v1672) then v1621.OutlineColor=v5.ChamsSettings.OutlineColor;v1621.OutlineTransparency=v5.ChamsSettings.OutlineTransparency;break;end if (v1672==(0 + 0)) then v1621.FillColor=v5.ChamsSettings.FillColor;v1621.FillTransparency=v5.ChamsSettings.FillTransparency;v1672=1 -0 ;end end else applyChams(v1251);end else removeChams(v1251);end break;end end end break;end end end local function v171() for v738,v739 in pairs(v19.ESP) do if v739.TracerObject then v739.TracerObject.Visible=false;end if v739.SkeletonObject then for v1254,v1255 in ipairs(v739.SkeletonObject.lines) do v1255.Visible=false;end end if (v739.TextObjects and v739.TextObjects.nameText) then v739.TextObjects.nameText.Visible=false;end end for v740,v741 in pairs(v19.ESPObjects) do if (v741.Box and v741.Box.AllLines) then for v1257,v1258 in ipairs(v741.Box.AllLines) do v1258.Visible=false;end end end for v742,v743 in pairs(v19.TrailData) do if v743.lines then for v1260,v1261 in ipairs(v743.lines) do v1261.Visible=false;end end end end local function v172() local v616=0 + 0 ;while true do if (v616==0) then for v1263,v1264 in pairs(v19.ESP) do local v1265=901 -(652 + 249) ;while true do if (v1265==1) then if v1264.ChamsObject then local v1622=0;local v1623;while true do if ((5 -3)==v1622) then v1264.ChamsObject.OutlineTransparency=v1623.OutlineTransparency;break;end if ((1869 -(708 + 1160))==v1622) then v1264.ChamsObject.OutlineColor=v1623.OutlineColor;v1264.ChamsObject.FillTransparency=v1623.FillTransparency;v1622=5 -3 ;end if (v1622==0) then v1623=v5.ChamsSettings;v1264.ChamsObject.FillColor=v1623.FillColor;v1622=1 -0 ;end end end if (v1264.TextObjects and v1264.TextObjects.nameText) then local v1624=v5.TextSettings;v1264.TextObjects.nameText.Color=v1624.NameColor;v1264.TextObjects.nameText.Size=v1624.NameSize;v1264.TextObjects.nameText.Outline=v1624.Outline;v1264.TextObjects.nameText.Font=v1624.Font;end break;end if (v1265==(27 -(10 + 17))) then if v1264.TracerObject then local v1633=0;while true do if (v1633==1) then v1264.TracerObject.Transparency=v5.TracersSettings.Transparency;break;end if (v1633==0) then v1264.TracerObject.Color=v5.TracersSettings.Color;v1264.TracerObject.Thickness=v5.TracersSettings.Thickness;v1633=1;end end end if v1264.SkeletonObject then for v1659,v1660 in ipairs(v1264.SkeletonObject.lines) do v1660.Color=v83;v1660.Thickness=v85;v1660.Transparency=(1 + 0) -v84 ;end end v1265=1733 -(1400 + 332) ;end end end for v1266,v1267 in pairs(v19.ESPObjects) do if v1267.Box then for v1519,v1520 in ipairs(v1267.Box.AllLines) do local v1521=0 -0 ;while true do if (v1521==(1909 -(242 + 1666))) then v1520.Transparency=v5.Box.Transparency;break;end if (v1521==(0 + 0)) then v1520.Color=v5.Box.Color;v1520.Thickness=1 + 0 ;v1521=1 + 0 ;end end end end end break;end end end local v173=Vector2.new;local v174=tick;local v175=940 -(850 + 90) ;local v176=0.12 -0 ;local v177=1390 -(360 + 1030) ;local v178={};local v179=false;local v180=false;local v181=false;local v182=0;v8.RenderStepped:Connect(function() v177=(v177 + 1 + 0)%(169 -109) ;local v617=v174();if (v177==(0 -0)) then if (v26 or v20 or v28) then v44();end end applyCustomWorldVisuals();local v618=(v177%(1663 -(909 + 752)))==(1223 -(109 + 1114)) ;local v619=(v177%(9 -4))==(0 + 0) ;if v1.Opened then updateCombatCursor();end if (v9:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and  not v1.Opened) then if ((v617-v175)>0.05) then v175=v617;local v1268=v14.ViewportSize;local v1269=v1268/(244 -(6 + 236)) ;local v1270=v14:ViewportPointToRay(v1269.X,v1269.Y);local v1271=RaycastParams.new();v1271.FilterType=Enum.RaycastFilterType.Exclude;v1271.FilterDescendantsInstances={v7.Character,v14};local v1275=v12:Raycast(v1270.Origin,v1270.Direction * (2358 -1358) ,v1271);if v1275 then local v1461=v1275.Instance:FindFirstAncestorOfClass("Model");if (v1461 and v19.ActiveEntities[v1461]) then v19.LastShotTarget=v1461;v19.LastShotTime=v617;v19.LastShotPart=v1275.Instance.Name;end end end end if (v5.Hitmarker.Enabled or v5.Hitsound.Enabled or v5.HitLogs.Enabled) then v67();end local v620=isAimbotLockKeyDown();if v120:find("Toggle") then if (v620 and  not v179) then v180= not v180;end else v180=v620;end v179=v620;if v113 then local v1002=0 -0 ;while true do if (v1002==(1133 -(1076 + 57))) then v142.Position=v9:GetMouseLocation();v142.Visible=v150;v1002=1;end if (v1002==(1 + 0)) then if v619 then v142.Radius=v117;v142.Color=(v114 and v152) or v151 ;end if (v180 and canRunCombat()) then local v1524=689 -(579 + 110) ;while true do if (v1524==0) then if ( not v121 or  not isTargetAlive(v121)) then v121=getClosestPlayerToCursor();end if v121 then local v1709=0 + 0 ;while true do if (v1709==(0 + 0)) then aimAt(v121);v114=true;break;end end else v114=false;end break;end end else v121=nil;v114=false;end break;end end else v142.Visible=false;end local v621=v5.ESP.Enabled;local v622=v5.ESP.MaxDistance or 500 ;local v623=v14.CFrame.Position;for v744,v745 in ipairs(v6:GetPlayers()) do local v746=0 + 0 ;local v747;local v748;local v749;local v750;local v751;local v752;while true do if ((409 -(174 + 233))==v746) then v752=v178[v745];v752.screenPos=v173(v750.X,v750.Y);if v619 then v752.dist=(v623-v749.Position).Magnitude;end if (v752.dist>v622) then ESP.Box.Hide(v745);removeTracer(v745);removeTextESP(v745);removeSkeleton(v745);continue;end v746=8 -5 ;end if (v746==(4 -1)) then if v5.Box.Enabled then ESP.Box.Update(v745);else ESP.Box.Hide(v745);end if v5.ESP.Tracers then local v1464=0 + 0 ;local v1465;while true do if (v1464==(1175 -(663 + 511))) then if v1465.TracerObject then v1465.TracerObject.From=getOriginPoint();v1465.TracerObject.To=v752.screenPos;v1465.TracerObject.Visible=true;end break;end if (v1464==0) then v1465=v19.ESP[v745];if ( not v1465 or  not v1465.TracerObject) then applyTracer(v745);v1465=v19.ESP[v745];end v1464=1 + 0 ;end end else removeTracer(v745);end if v5.ESP.Text then local v1466=v19.ESP[v745];if ( not v1466 or  not v1466.TextObjects) then local v1569=0 + 0 ;while true do if (v1569==(0 -0)) then applyTextESP(v745);v1466=v19.ESP[v745];break;end end end if v1466.TextObjects then local v1570=0 + 0 ;local v1571;local v1572;local v1573;while true do if (v1570==(2 -1)) then if v1573 then local v1713=0;while true do if (v1713==0) then if v618 then local v1733=0 -0 ;local v1734;while true do if (v1733==(1 + 0)) then v1466.TextObjects.nameText.Text=v1734;break;end if (v1733==0) then v1734=(v5.TextSettings.ShowDisplayName and v745.DisplayName) or v745.Name ;if v5.TextSettings.ShowDistance then v1734=v1734   .. " ["   .. v18(v752.dist)   .. "m]" ;end v1733=1 -0 ;end end end v1466.TextObjects.nameText.Position=v173(v1572.X,v1572.Y-v5.TextSettings.OffsetY );v1713=1 + 0 ;end if (v1713==(1 + 0)) then v1466.TextObjects.nameText.Visible=true;break;end end else v1466.TextObjects.nameText.Visible=false;end break;end if (v1570==0) then v1571=v747:FindFirstChild("Head") or v749 ;v1572,v1573=v14:WorldToViewportPoint(v1571.Position);v1570=723 -(478 + 244) ;end end end else removeTextESP(v745);end if (v5.ESP.Skeleton and (v752.dist<(697 -(440 + 77)))) then local v1467=v19.ESP[v745];if ( not v1467 or  not v1467.SkeletonObject) then local v1574=0;while true do if (v1574==(0 + 0)) then applySkeleton(v745);v1467=v19.ESP[v745];break;end end end if (v1467 and v1467.SkeletonObject) then local v1575=v1467.SkeletonObject;for v1635,v1636 in ipairs(v1575.bones) do local v1637=0;local v1638;local v1639;local v1640;while true do if (v1637==(0 -0)) then v1638,v1639=v747:FindFirstChild(v1636[1]),v747:FindFirstChild(v1636[1558 -(655 + 901) ]);v1640=v1575.lines[v1635];v1637=1 + 0 ;end if ((1 + 0)==v1637) then if (v1638 and v1639 and v1640) then local v1724=0 + 0 ;local v1725;local v1726;local v1727;local v1728;while true do if (v1724==(0 -0)) then v1725,v1726=v14:WorldToViewportPoint(v1638.Position);v1727,v1728=v14:WorldToViewportPoint(v1639.Position);v1724=1446 -(695 + 750) ;end if (v1724==1) then if (v1726 and v1728) then local v1735=0 -0 ;while true do if (v1735==0) then v1640.From=v173(v1725.X,v1725.Y);v1640.To=v173(v1727.X,v1727.Y);v1735=1;end if ((1 -0)==v1735) then v1640.Visible=true;break;end end else v1640.Visible=false;end break;end end elseif v1640 then v1640.Visible=false;end break;end end end end else removeSkeleton(v745);end break;end if (v746==(0 -0)) then if (v745==v7) then continue;end v747=v745.Character;v748=v747 and v747:FindFirstChildOfClass("Humanoid") ;v749=v747 and v747:FindFirstChild("HumanoidRootPart") ;v746=1;end if (1==v746) then if ( not v747 or  not v749 or  not v748 or (v748.Health<=(351 -(285 + 66)))) then ESP.Box.Hide(v745);removeTracer(v745);removeTextESP(v745);removeSkeleton(v745);continue;end v750,v751=v14:WorldToViewportPoint(v749.Position);if ( not v751 or  not v621) then local v1468=0 -0 ;while true do if (v1468==0) then ESP.Box.Hide(v745);removeTracer(v745);v1468=1311 -(682 + 628) ;end if (v1468==2) then continue;break;end if (v1468==(1 + 0)) then removeTextESP(v745);removeSkeleton(v745);v1468=301 -(176 + 123) ;end end end if  not v178[v745] then v178[v745]={dist=0 + 0 ,screenPos=v173(0 + 0 ,269 -(239 + 30) )};end v746=1 + 1 ;end end end if (v5.Trail.Enabled and ((v177%(2 + 0))==(0 -0))) then for v1138,v1139 in ipairs(v6:GetPlayers()) do if (v1139==v7) then if v5.Trail.ShowOnSelf then ESP.Trail.Update(v1139);else ESP.Trail.Remove(v1139);end else ESP.Trail.Update(v1139);end end end if (v5.OOV.Enabled and v621) then renderOOV();else for v1140,v1141 in ipairs(v6:GetPlayers()) do removeOOV(v1141);end end if v618 then updateChamsDistance();end renderCrosshair();if v109 then renderBunnyhop();end if (((v177%(46 -31))==0) and v96) then applySniperCustomization();end end);function notifyElysium(v624,v625) v1:Notify({Title="Elysium.win",Description=(v625 and ('<font color="#6dd18a">'   .. v624   .. "</font> enabled")) or ('<font color="#d16d6d">'   .. v624   .. "</font> disabled") ,Time=318 -(306 + 9) });end function buildHomeTab() local v626=v54.Home:AddLeftGroupbox("Welcome","home");v626:AddLabel(string.format('<font color="#6dd18a">%s, %s!</font>',v15(),v7.Name));v626:AddDivider();v626:AddLabel("Current Game: [FPS] One Tap");v626:AddLabel("Build Date: 10.06.2026");v626:AddLabel("Version: v1.0.1");local v627=v54.Home:AddLeftGroupbox("Changelog","code-xml");v627:AddLabel("[+] Fixed crosshair & OOV issues");v627:AddLabel("[*] Improved hitmarker reliability");local v628=v54.Home:AddRightGroupbox("Socials & Info","share-2");v628:AddButton("Copy Discord Link",function() if setclipboard then setclipboard("https://discord.gg/elysium");v1:Notify("Discord link copied to clipboard!");else v1:Notify("Your executor does not support setclipboard.");end end);v628:AddLabel("Developed by: Elysium Team");v628:AddLabel("Supported Executors: Wave, Solara, Celery, Synapse Z");end function buildVisualsTab() local v629=v54.Visuals:AddLeftTabbox();local v630=v629:AddTab("ESP");v630:AddToggle("MasterESPEn",{Text="Enable ESP",Default=false,Callback=function(v753) v5.ESP.Enabled=v753;end}):AddKeyPicker("ESPKey",{Default="None",Mode="Toggle",SyncToggleState=true,Text="ESP Key",Callback=function(v755) v5.ESP.Enabled=v755;end});v630:AddDivider();v630:AddToggle("ChEn",{Text="Enable Chams",Default=false,Callback=function(v757) v5.ESP.Chams=v757;end});v630:AddToggle("TxEn",{Text="Enable Text",Default=false,Callback=function(v759) v5.ESP.Text=v759;end});v630:AddToggle("TrEn",{Text="Enable Tracers",Default=false,Callback=function(v761) v5.ESP.Tracers=v761;end});v630:AddToggle("BoxEn",{Text="Enable Boxes",Default=false,Callback=function(v763) v5.Box.Enabled=v763;end});v630:AddToggle("SkEn",{Text="Enable Skeleton",Default=false,Callback=function(v765) v5.ESP.Skeleton=v765;end});v630:AddToggle("OVEn",{Text="Enable OOV",Default=false,Callback=function(v767) v5.OOV.Enabled=v767;end});local v631=v629:AddTab("ESP Settings");v631:AddLabel("Chams Settings");v631:AddLabel("Fill Color"):AddColorPicker("ChamsFill",{Default=v5.ChamsSettings.FillColor,Callback=function(v769) local v770=0 -0 ;while true do if (v770==(0 + 0)) then v5.ChamsSettings.FillColor=v769;v172();break;end end end});v631:AddLabel("Outline Color"):AddColorPicker("ChamsOutline",{Default=v5.ChamsSettings.OutlineColor,Callback=function(v771) local v772=0;while true do if (v772==(0 + 0)) then v5.ChamsSettings.OutlineColor=v771;v172();break;end end end});v631:AddSlider("FillTrans",{Text="Fill Transparency",Default=0.5 + 0 ,Min=0 -0 ,Max=1,Rounding=1376 -(1140 + 235) ,Callback=function(v773) v5.ChamsSettings.FillTransparency=v773;v172();end});v631:AddSlider("OutTrans",{Text="Outline Transparency",Default=0.5 + 0 ,Min=0,Max=1,Rounding=1 + 0 ,Callback=function(v775) v5.ChamsSettings.OutlineTransparency=v775;v172();end});v631:AddDivider();v631:AddLabel("Text Settings");v631:AddToggle("TSDN",{Text="Use Display Name",Default=false,Callback=function(v777) v5.TextSettings.ShowDisplayName=v777;end});v631:AddToggle("TSD",{Text="Show Distance",Default=true,Callback=function(v779) v5.TextSettings.ShowDistance=v779;end});v631:AddDropdown("TextFont",{Values={"UI","Plex","Monospace"},Default="Monospace",Text="Text Font",Callback=function(v781) local v782=0 + 0 ;while true do if (0==v782) then v5.TextSettings.Font=({UI=0,Plex=2,Monospace=3})[v781] or 3 ;v172();break;end end end});v631:AddSlider("TextSize",{Text="Font Size",Default=12,Min=23 -15 ,Max=14,Rounding=1,Callback=function(v783) v5.TextSettings.NameSize=v783;v172();end});v631:AddLabel("Text Color"):AddColorPicker("TextColor",{Default=v5.TextSettings.NameColor,Callback=function(v785) local v786=0 + 0 ;while true do if (v786==(0 -0)) then v5.TextSettings.NameColor=v785;v172();break;end end end});v631:AddDivider();v631:AddLabel("Tracers Settings");v631:AddDropdown("TracerOrigin",{Values={"Bottom","Center","Top"},Default="Center",Text="Origin",Callback=function(v787) v5.TracersSettings.Origin=v787;end});v631:AddLabel("Color"):AddColorPicker("TracerColor",{Default=v5.TracersSettings.Color,Callback=function(v789) local v790=0;while true do if (0==v790) then v5.TracersSettings.Color=v789;v172();break;end end end});v631:AddSlider("TracerThick",{Text="Thickness",Default=690 -(586 + 103) ,Min=1,Max=2.5,Rounding=1,Callback=function(v791) local v792=0;while true do if (0==v792) then v5.TracersSettings.Thickness=math.clamp(v791,1 + 0 ,5.5 -3 );v172();break;end end end});v631:AddSlider("TracerTrans",{Text="Transparency",Default=0.85,Min=0,Max=1,Rounding=1489 -(1309 + 179) ,Callback=function(v793) v5.TracersSettings.Transparency=v793;v172();end});v631:AddDivider();v631:AddLabel("Boxes Settings");v631:AddDropdown("BoxStyle",{Values={"Corner Box","Full Box"},Default="Full Box",Text="Style",Callback=function(v795) v5.Box.Style=v795;end});v631:AddLabel("Color"):AddColorPicker("BoxColor",{Default=v5.Box.Color,Callback=function(v797) v5.Box.Color=v797;v172();end});v631:AddSlider("BoxSize",{Text="Size",Default=0.6 + 0 ,Min=0.3,Max=2.2 -1 ,Rounding=1 + 0 ,Callback=function(v799) v5.Box.WidthScale=v799;end});v631:AddSlider("BoxThick",{Text="Thickness",Default=1 -0 ,Min=1 -0 ,Max=612 -(295 + 314) ,Rounding=1,Callback=function(v801) v5.Box.Thickness=math.clamp(v801,2 -1 ,3);v172();end});v631:AddSlider("BoxTrans",{Text="Transparency",Default=1,Min=1962 -(1300 + 662) ,Max=3 -2 ,Rounding=1,Callback=function(v803) local v804=1755 -(1178 + 577) ;while true do if (v804==(0 + 0)) then v5.Box.Transparency=v803;v172();break;end end end});v631:AddDivider();v631:AddLabel("Skeleton Settings");v631:AddLabel("Color"):AddColorPicker("SkelColor",{Default=v83,Callback=function(v805) v83=v805;v172();end});v631:AddSlider("SkelThick",{Text="Thickness",Default=1,Min=2 -1 ,Max=1407.5 -(851 + 554) ,Rounding=1,Callback=function(v806) v85=v806;v172();end});v631:AddSlider("SkelTrans",{Text="Transparency",Default=0,Min=0 + 0 ,Max=2 -1 ,Rounding=1,Callback=function(v807) v84=v807;v172();end});v631:AddDivider();v631:AddLabel("OOV Arrows Settings");v631:AddLabel("Color"):AddColorPicker("OOVColor",{Default=v5.OOV.Color,Callback=function(v808) v5.OOV.Color=v808;end});v631:AddSlider("OOVRadius",{Text="Radius",Default=45,Min=10,Max=434 -234 ,Rounding=303 -(115 + 187) ,Callback=function(v810) v5.OOV.Radius=v810;end});v631:AddSlider("OOVSize",{Text="Arrow Size",Default=16 + 4 ,Min=5 + 0 ,Max=137 -102 ,Rounding=1162 -(160 + 1001) ,Callback=function(v812) v5.OOV.Size=v812;end});v631:AddSlider("OOVTrans",{Text="Transparency",Default=1 + 0 ,Min=0 + 0 ,Max=1 -0 ,Rounding=1,Callback=function(v814) v5.OOV.Transparency=v814;end});v631:AddToggle("OOVPulse",{Text="Pulse Effect",Default=false,Callback=function(v816) v5.OOV.PulseEnabled=v816;end});v631:AddSlider("OOVPulseSpeed",{Text="Pulse Speed",Default=361.5 -(237 + 121) ,Min=1,Max=902 -(525 + 372) ,Rounding=1 -0 ,Callback=function(v818) v5.OOV.PulseSpeed=v818;end});local v632=v54.Visuals:AddLeftTabbox();local v633=v632:AddTab("World");v633:AddToggle("ClockTimeEn",{Text="Enable Clock Time",Default=false,Callback=function(v820) v26=v820;end});v633:AddSlider("ClockTimeVal",{Text="Clock Time",Default=14.5,Min=0 -0 ,Max=24,Rounding=143 -(96 + 46) ,Callback=function(v821) v27=v821;end});v633:AddDivider();v633:AddToggle("FullBrightEn",{Text="FullBright",Default=false,Callback=function(v822) v28=v822;end});v633:AddSlider("FullBrightVal",{Text="Brightness",Default=779 -(643 + 134) ,Min=1 + 0 ,Max=7,Rounding=2 -1 ,Callback=function(v823) v29=v823;end});v633:AddToggle("NoShadowsEn",{Text="Disable Shadows",Default=false,Callback=function(v824) v30=v824;end});local v634=v632:AddTab("Advanced");v634:AddLabel("Skybox Changer");v634:AddToggle("SkyboxChangerEnabled",{Text="Enable Skybox Changer",Default=false,Callback=function(v825) local v826=0 -0 ;while true do if (v826==0) then v31=v825;setSkybox(v32);break;end end end});v634:AddDropdown("SkyboxPreset",{Values={"Sunset","Sun set 2","Deep Space","Nebula","Blue Sky"},Default="Sunset",Text="Skybox",Callback=function(v827) local v828=0;while true do if (v828==(0 -0)) then v32=v827;setSkybox(v32);break;end end end});v634:AddDivider();v634:AddToggle("FogEnabled",{Text="Enable Fog",Default=false,Callback=function(v829) v20=v829;end});v634:AddLabel("Fog Color"):AddColorPicker("FogColor",{Default=v23,Callback=function(v830) v23=v830;end});v634:AddSlider("FogStart",{Text="Fog Start",Default=719 -(316 + 403) ,Min=0 + 0 ,Max=5498 -3498 ,Rounding=1,Callback=function(v831) v21=v831;end});v634:AddSlider("FogEnd",{Text="Fog End",Default=362 + 638 ,Min=100,Max=5036 -3036 ,Rounding=1 + 0 ,Callback=function(v832) v22=v832;end});v634:AddDivider();v634:AddToggle("AmbientColorEnabled",{Text="Enable Ambient Color",Default=false,Callback=function(v833) v25=v833;end});v634:AddLabel("Ambient Color"):AddColorPicker("AmbientColor",{Default=v24,Callback=function(v834) v24=v834;end});local v635=v54.Visuals:AddRightTabbox();local v636=v635:AddTab("Bullet Tracers");local v637=v635:AddTab("Settings");v636:AddToggle("BTrEn",{Text="Enable Bullet Tracers",Default=false,Callback=function(v835) v5.BulletTracer.Enabled=v835;end});v636:AddLabel("Laser Color"):AddColorPicker("BTCol",{Default=v5.BulletTracer.Color,Callback=function(v837) v5.BulletTracer.Color=v837;end});v636:AddSlider("BTThick",{Text="Laser Thickness",Default=1 + 0 ,Min=3 -2 ,Max=5,Rounding=4 -3 ,Callback=function(v839) v5.BulletTracer.Thickness=v839;end});v636:AddSlider("BTLife",{Text="Laser Lifetime",Default=3 -1 ,Min=0.1 + 0 ,Max=15 -7 ,Rounding=1 + 0 ,Callback=function(v841) v5.BulletTracer.Lifetime=v841;end});v637:AddDropdown("BTMat",{Values={"Neon","ForceField","Plastic","SmoothPlastic","Glass"},Default="Neon",Text="Material",Callback=function(v843) v5.BulletTracer.Material=Enum.Material[v843];end});v637:AddSlider("BTOfs",{Text="Spawn Offset",Default=7 -5 ,Min=0 -0 ,Max=21 -11 ,Rounding=1,Callback=function(v846) v5.BulletTracer.SpawnOffset=v846;end});v637:AddToggle("BTFade",{Text="Fade Effect",Default=true,Callback=function(v848) v5.BulletTracer.Fade=v848;end});local v638=v54.Visuals:AddRightTabbox();local v639=v638:AddTab("Damage Logs");local v640=v638:AddTab("Settings");v639:AddToggle("HLEn",{Text="Enable Hit Logs",Default=false,Callback=function(v850) v5.HitLogs.Enabled=v850;end});v639:AddLabel("Log Color"):AddColorPicker("LogCol",{Default=v5.HitLogs.Color,Callback=function(v852) v5.HitLogs.Color=v852;end});v639:AddSlider("LogLife",{Text="Log Lifetime",Default=3,Min=2 -1 ,Max=3 + 7 ,Rounding=1,Callback=function(v854) v5.HitLogs.Lifetime=v854;end});v640:AddToggle("DLPart",{Text="Show Hit Part",Default=true,Callback=function(v856) v5.HitLogs.ShowPart=v856;end});v640:AddToggle("DLHP",{Text="Show Remaining HP",Default=true,Callback=function(v858) v5.HitLogs.ShowHP=v858;end});local v641=v54.Visuals:AddRightGroupbox("Hitmarker");v641:AddToggle("HMEn",{Text="Enable Hitmarker",Default=false,Callback=function(v860) v5.Hitmarker.Enabled=v860;end});v641:AddLabel("Color"):AddColorPicker("HMCol",{Default=v5.Hitmarker.Color,Callback=function(v862) v5.Hitmarker.Color=v862;end});v641:AddSlider("HMThick",{Text="Thickness",Default=1974.5 -(1656 + 317) ,Min=1 + 0 ,Max=5 + 0 ,Rounding=1,Callback=function(v864) v5.Hitmarker.Thickness=v864;end});v641:AddSlider("HMSize",{Text="Size",Default=26 -16 ,Min=9 -7 ,Max=394 -(5 + 349) ,Rounding=1,Callback=function(v866) v5.Hitmarker.Size=v866;end});v641:AddSlider("HMGap",{Text="Center Gap",Default=5,Min=0 -0 ,Max=1291 -(266 + 1005) ,Rounding=1 + 0 ,Callback=function(v868) v5.Hitmarker.Gap=v868;end});v641:AddSlider("HMLife",{Text="Lifetime (sec)",Default=0.2,Min=0.1 -0 ,Max=1 -0 ,Rounding=1697 -(561 + 1135) ,Callback=function(v870) v5.Hitmarker.Lifetime=v870;end});local v642=v54.Visuals:AddRightGroupbox("Hitsound");v642:AddToggle("HSEn",{Text="Enable Hitsound",Default=false,Callback=function(v872) onHitsoundEnabledChanged(v872);end});v642:AddDropdown("HSPreset",{Values={"Neverlose","Primordial","Call Of Duty","Metallic","ENB","Fatality","Trident Pierce","CS:GO"},Default="Neverlose",Text="Sound Preset",Callback=function(v873) v5.Hitsound.SoundId=v64[v873] or v64.Neverlose ;end});v642:AddSlider("HSVol",{Text="Volume",Default=907 -(250 + 655) ,Min=0.1 -0 ,Max=17 -7 ,Rounding=1,Callback=function(v875) v5.Hitsound.Volume=v875;end});v642:AddSlider("HSPitch",{Text="Pitch",Default=1,Min=0.1 -0 ,Max=2,Rounding=1,Callback=function(v877) v5.Hitsound.Pitch=v877;end});v642:AddButton("Test Hitsound",function() v65(true);end);end function buildCombatTab() local v643=v54.Combat:AddLeftGroupbox("Aimbot","crosshair");local v644=v54.Combat:AddRightGroupbox("Aimbot Settings","settings");local v645=v54.Combat:AddLeftGroupbox("Trigger Bot","zap");local v646=v54.Combat:AddLeftGroupbox("Instant Kill","zap");v643:AddToggle("AEn",{Text="Enable Aimbot",Default=false,Callback=function(v879) v113=v879;end});v643:AddLabel("Lock Key"):AddKeyPicker("ALock",{Default="None",Mode="Toggle",Text="Lock"});v643:AddDropdown("APart",{Values={"Head","HumanoidRootPart","UpperTorso","LowerTorso"},Default="Head",Text="Target Part",Callback=function(v880) v122=v880;end});v644:AddSlider("ASmooth",{Text="Smoothing",Default=0,Min=0 -0 ,Max=773.9 -(48 + 725) ,Rounding=1 -0 ,Callback=function(v881) v119=v881;end});v644:AddSlider("AFov",{Text="FOV Radius",Default=200,Min=134 -84 ,Max=800,Rounding=1 + 0 ,Callback=function(v882) v117=v882;v142.Radius=v882;end});v644:AddToggle("AWCheck",{Text="Wall Check",Default=false,Callback=function(v884) v116=v884;end});v644:AddDivider();v644:AddToggle("SFOV",{Text="Show FOV Circle",Default=true,Callback=function(v885) v150=v885;end});v644:AddLabel("FOV Color"):AddColorPicker("FCol",{Default=v151,Callback=function(v886) v151=v886;end});v644:AddLabel("Locked Color"):AddColorPicker("LCol",{Default=v152,Callback=function(v887) v152=v887;end});v645:AddToggle("TEn",{Text="Enable Trigger Bot",Default=false,Callback=function(v888) v129=v888;notifyElysium("Trigger Bot",v888);end});v645:AddSlider("TDelay",{Text="Shot Delay (ms)",Default=4 -2 ,Min=0 + 0 ,Max=30 + 70 ,Rounding=854 -(152 + 701) ,Callback=function(v889) v130=v889/(2311 -(430 + 881)) ;end});v646:AddToggle("KEn",{Text="Enable Kill Aura",Default=false,Callback=function(v890) v125=v890;notifyElysium("Kill Aura",v890);end});v646:AddSlider("KDist",{Text="Distance",Default=4,Min=1,Max=6 + 9 ,Rounding=896 -(557 + 338) ,Callback=function(v891) v127=v891;end});end function buildMiscTab() local v647=v54.Misc:AddLeftGroupbox("Crosshair","crosshair");local v648=v54.Misc:AddLeftGroupbox("Game Settings","gamepad-2");v647:AddToggle("CrEn",{Text="Enable Crosshair",Default=false,Callback=function(v892) setCrosshairEnabled(v892);end});v647:AddDropdown("CrStyle",{Values={"Cross","Plus","T","X","Corners","Dot","Circle"},Default="Cross",Text="Style",Callback=function(v893) v5.Crosshair.Style=v893;end});v647:AddDivider();v647:AddToggle("HitEn",{Text="Enable Hitmarker",Default=false,Callback=function(v895) v5.Hitmarker.Enabled=v895;end});local v649=v54.Misc:AddRightGroupbox("Crosshair Settings","settings");v649:AddLabel("Color"):AddColorPicker("CrCol",{Default=v5.Crosshair.Color,Callback=function(v897) v5.Crosshair.Color=v897;end});v649:AddSlider("CrTrans",{Text="Transparency",Default=0,Min=0,Max=2 -1 ,Rounding=1,Callback=function(v899) v5.Crosshair.Transparency=v899;end});v649:AddSlider("CrSize",{Text="Size",Default=21 -11 ,Min=803 -(499 + 302) ,Max=100,Rounding=867 -(39 + 827) ,Callback=function(v901) v5.Crosshair.Size=v901;end});v649:AddSlider("CrThick",{Text="Thickness",Default=2 -1 ,Min=2 -1 ,Max=23 -17 ,Rounding=1 -0 ,Callback=function(v903) v5.Crosshair.Thickness=v903;end});v649:AddSlider("CrGap",{Text="Gap",Default=1 + 3 ,Min=0,Max=146 -96 ,Rounding=1 + 0 ,Callback=function(v905) v5.Crosshair.Gap=v905;end});v649:AddDivider();v649:AddToggle("CrPulse",{Text="Pulse Effect",Default=false,Callback=function(v907) v5.Crosshair.Pulse=v907;end});v649:AddSlider("CrPulseAm",{Text="Pulse Amount",Default=0.25 -0 ,Min=104.05 -(103 + 1) ,Max=1,Rounding=555 -(475 + 79) ,Callback=function(v909) v5.Crosshair.PulseAmount=v909;end});v649:AddSlider("CrPulseSpd",{Text="Pulse Speed",Default=3,Min=2 -1 ,Max=10,Rounding=3 -2 ,Callback=function(v911) v5.Crosshair.PulseSpeed=v911;end});v649:AddDivider();v649:AddToggle("CrRot",{Text="Rotation",Default=false,Callback=function(v913) v5.Crosshair.Rotation=v913;end});v649:AddSlider("CrRotSpd",{Text="Rotation Speed",Default=1 + 1 ,Min=1 + 0 ,Max=10,Rounding=1504 -(1395 + 108) ,Callback=function(v915) v5.Crosshair.RotSpeed=v915;end});v649:AddDivider();v649:AddToggle("CrDot",{Text="Center Dot",Default=false,Callback=function(v917) v5.Crosshair.ShowCenterDot=v917;end});v649:AddSlider("CrDotRad",{Text="Dot Radius",Default=5 -3 ,Min=1205 -(7 + 1197) ,Max=5 + 5 ,Rounding=1,Callback=function(v919) v5.Crosshair.CenterDotRadius=v919;end});v649:AddToggle("HideGameCrosshair",{Text="Hide Game Crosshair",Default=v5.Crosshair.HideGameCrosshair,Callback=function(v921) v5.Crosshair.HideGameCrosshair=v921;end});local v650=v54.Misc:AddRightGroupbox("Hitmarker Settings","target");v650:AddLabel("Color"):AddColorPicker("HitCol",{Default=v5.Hitmarker.Color,Callback=function(v923) v5.Hitmarker.Color=v923;end});v650:AddSlider("HitThick",{Text="Thickness",Default=1.5,Min=1,Max=2 + 3 ,Rounding=320 -(27 + 292) ,Callback=function(v925) v5.Hitmarker.Thickness=v925;end});v650:AddSlider("HitSize",{Text="Line Length",Default=29 -19 ,Min=2 -0 ,Max=167 -127 ,Rounding=1 -0 ,Callback=function(v927) v5.Hitmarker.Size=v927;end});v650:AddSlider("HitGap",{Text="Center Gap",Default=9 -4 ,Min=0,Max=20,Rounding=140 -(43 + 96) ,Callback=function(v929) v5.Hitmarker.Gap=v929;end});v650:AddSlider("HitLife",{Text="Lifetime",Default=0.2 -0 ,Min=0.1,Max=1 -0 ,Rounding=1 + 0 ,Callback=function(v931) v5.Hitmarker.Lifetime=v931;end});v648:AddToggle("DScope",{Text="Disable Scope",Default=false,Callback=function(v933) v86=v933;if v933 then enableDisableScope();else disableDisableScope();end end});v648:AddToggle("LEff",{Text="Low Effects (FPS Boost)",Default=false,Callback=function(v934) local v935=0 + 0 ;while true do if (v935==0) then v91=v934;if v934 then enableLowEffects();else disableLowEffects();end break;end end end});v648:AddToggle("AAfk",{Text="Anti-AFK",Default=false,Callback=function(v936) v94=v936;if v936 then startAntiAfk();else stopAntiAfk();end end});v648:AddDivider();v648:AddToggle("SCust",{Text="Enable Sniper Custom",Default=false,Callback=function(v937) v96=v937;if v937 then applySniperCustomization();else restoreSniperCustomization();end end});v648:AddLabel("Sniper Color"):AddColorPicker("SCol",{Default=Color3.fromRGB(504 -249 ,98 + 157 ,477 -222 ),Callback=function(v938) v97=v938;applySniperCustomization();end});v648:AddSlider("STrans",{Text="Sniper Transparency",Default=0 + 0 ,Min=0,Max=1,Rounding=1 + 0 ,Callback=function(v939) local v940=0;while true do if ((1751 -(1414 + 337))==v940) then v99=v939;applySniperCustomization();break;end end end});end function buildMoveTab() local v651=v54.Movement:AddLeftGroupbox("Movement","user");local v652=v54.Movement:AddRightGroupbox("Jump","chevrons-up");v651:AddToggle("WSEn",{Text="Enable Walk Speed",Default=false,Callback=function(v941) v101=v941;end});v651:AddSlider("WSVal",{Text="Speed Value",Default=1956 -(1642 + 298) ,Min=41 -25 ,Max=200,Rounding=2 -1 ,Callback=function(v942) v102=v942;end});v651:AddToggle("BHop",{Text="Bunny Hop",Default=false,Callback=function(v943) v109=v943;end});v652:AddToggle("JPEn",{Text="Enable Jump Power",Default=false,Callback=function(v944) v103=v944;end});v652:AddSlider("JPVal",{Text="Power Value",Default=148 -98 ,Min=17 + 33 ,Max=234 + 66 ,Rounding=1,Callback=function(v945) v104=v945;end});v652:AddToggle("InfJ",{Text="Infinite Jump",Default=false,Callback=function(v946) v105=v946;end});end function buildSettingsTab() local v653=972 -(357 + 615) ;local v654;while true do if (v653==(0 + 0)) then v654=v54.UISettings:AddLeftGroupbox("Menu","wrench");v654:AddToggle("KeyMenu",{Text="Open Keybind Menu",Default=true,Callback=function(v1286) v1.KeybindFrame.Visible=v1286;end});v654:AddToggle("ShowCustomCursor",{Text="Custom Cursor",Default=true,Callback=function(v1288) v1.ShowCustomCursor=v1288;end});v654:AddDropdown("NotifySide",{Values={"Left","Right"},Default="Right",Text="Notification Side",Callback=function(v1290) v1:SetNotifySide(v1290);end});v653=2 -1 ;end if (v653==(3 + 0)) then v3:IgnoreThemeSettings();v3:SetIgnoreIndexes({"MenuKey"});v2:ApplyToTab(v54.UISettings);v3:BuildConfigSection(v54.UISettings);break;end if (v653==(1 + 0)) then v654:AddDropdown("DPIScale",{Values={"50%","75%","100%","125%","150%","175%","200%"},Default="100%",Text="DPI Scale",Callback=function(v1291) v1:SetScale(tonumber(v1291:sub(1, -(1545 -(1407 + 136))))/(1987 -(687 + 1200)) );end});v654:AddSlider("Corner",{Text="Corner Radius",Default=1712 -(556 + 1154) ,Min=0 -0 ,Max=115 -(9 + 86) ,Rounding=422 -(275 + 146) ,Callback=function(v1292) v50:SetCornerRadius(v1292);end});v654:AddDivider();v654:AddLabel("Menu Bind"):AddKeyPicker("MenuKey",{Default="RightShift",NoUI=true,Text="Menu"});v653=2;end if (v653==(1 + 1)) then v654:AddButton("Unload",function() v1:Unload();end);v1.ToggleKeybind=v4.MenuKey;v2:SetLibrary(v1);v3:SetLibrary(v1);v653=3;end end end v2:ApplyTheme("Quant");v2:SetFolder("ElysiumWin");v3:SetFolder("ElysiumWin/FPSOneTap");buildHomeTab();buildVisualsTab();buildCombatTab();buildMiscTab();buildMoveTab();buildSettingsTab();v3:LoadAutoloadConfig();local function v183(v655) if (v655:IsA("GuiObject") and v655.Name:lower():find("scope")) then local function v1004() local v1144=0;while true do if (v1144==0) then v19.IsScopeVisible=v655.Visible;if (v86 and v655.Visible) then v655.Visible=false;end break;end end end v655:GetPropertyChangedSignal("Visible"):Connect(v1004);v1004();end end game.DescendantAdded:Connect(function(v656) if v656:IsA("Sound") then pcall(v71,v656);elseif v656:IsA("GuiObject") then v183(v656);end end);for v657,v658 in ipairs(v7.PlayerGui:GetDescendants()) do v183(v658);end v8.RenderStepped:Connect(function() local v659=v7:FindFirstChild("PlayerGui");local v660=v659 and v659:FindFirstChild("Crosshair") ;if  not v660 then return;end local v661=v5.Crosshair.Enabled and v5.Crosshair.HideGameCrosshair ;for v947,v948 in ipairs(v660:GetChildren()) do if v948:IsA("GuiObject") then local v1145=v948.Name:lower();if  not v1145:find("scope") then if v661 then if v948.Visible then v948.Visible=false;end elseif  not v948.Visible then v948.Visible=true;end end end end end);v8.RenderStepped:Connect(function() if ( not v129 or v1.Opened or  not isLocalAlive()) then return;end local v662=v174();if ((v662-v131)<(v130 or (64 -(29 + 35)))) then return;end local v663=v7.Character;local v664=v663:FindFirstChildOfClass("Tool");if  not v664 then return;end local v665=v14.ViewportSize;local v666=Vector2.new(v665.X/(8 -6) ,v665.Y/2 );local v667=v14:ViewportPointToRay(v666.X,v666.Y);local v668=RaycastParams.new();v668.FilterType=Enum.RaycastFilterType.Exclude;v668.FilterDescendantsInstances={v663,v14,v12:FindFirstChild("Effects")};local v672=v12:Raycast(v667.Origin,v667.Direction * (4414 -3414) ,v668);if (v672 and v672.Instance) then local v1005=0;local v1006;while true do if (v1005==0) then v1006=v672.Instance:FindFirstAncestorOfClass("Model");if (v1006 and v1006:FindFirstChildOfClass("Humanoid")) then local v1525=0 + 0 ;local v1526;while true do if ((1012 -(53 + 959))==v1525) then v1526=v1006:FindFirstChildOfClass("Humanoid");if ((v1526.Health>(408 -(312 + 96))) and (v1006~=v663)) then local v1711=0;local v1712;while true do if (0==v1711) then v1712=v6:GetPlayerFromCharacter(v1006);v131=v662;v1711=1 -0 ;end if (v1711==(286 -(147 + 138))) then v664:Activate();if (mouse1press and mouse1release) then local v1732=899 -(813 + 86) ;while true do if (v1732==(0 + 0)) then mouse1press();task.wait(0.01 -0 );v1732=1;end if (1==v1732) then mouse1release();break;end end end break;end end end break;end end end break;end end end end);for v673,v674 in ipairs(v6:GetPlayers()) do setupPlayer(v674);end v6.PlayerAdded:Connect(setupPlayer);v8:BindToRenderStep("SpinBotUpdate",Enum.RenderPriority.Camera.Value + (493 -(18 + 474)) ,updateSpinBot);task.spawn(function() while true do local v949=0 + 0 ;while true do if ((0 -0)==v949) then v61();task.wait(1087 -(860 + 226) );break;end end end end);task.spawn(function() while true do local v950=0;local v951=v174();while (v174() -v951)<1  do v8.RenderStepped:Wait();v950+=1 end v52=v950;end end);task.spawn(function() while true do local v952=0;local v953;local v954;local v955;local v956;local v957;while true do if (v952==(305 -(121 + 182))) then v956=getFPSColor(v52);v957=getPingColor(v53);v952=3;end if ((1 + 0)==v952) then v53=math.floor(v954:GetValue());v955=os.date("%H:%M:%S");v952=2;end if (v952==3) then v51:SetText(string.format('%s | FPS: <font color="%s">%d</font> | Ping: <font color="%s">%d ms</font> | Time: %s',v7.Name,v956,v52,v957,v53,v955));task.wait(1241 -(988 + 252) );break;end if (0==v952) then v953=game:GetService("Stats");v954=v953.Network.ServerStatsItem["Data Ping"];v952=1 + 0 ;end end end end);onHitsoundEnabledChanged(v5.Hitsound.Enabled);v1.KeybindFrame.Visible=true;v1:Notify({Title="Elysium.win",Description="Script loaded successfully. All World features are now functional!",Time=5});
+if not success or not Library then
+    warn("Library failed to load")
+    return
+end
+
+local ThemeManager = Library.ThemeManager
+local SaveManager  = Library.SaveManager
+local Options      = Library.Options
+local CheatConfig
+
+-- // [ Section: Services ] // ---------------------------------------------------
+local Players     = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService  = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local GuiService       = game:GetService("GuiService")
+local Lighting         = game:GetService("Lighting")
+local Workspace        = game:GetService("Workspace")
+local VirtualUser      = game:GetService("VirtualUser")
+
+local Camera = Workspace.CurrentCamera
+if not Camera then
+    repeat task.wait() Camera = Workspace.CurrentCamera until Camera
+end
+
+-- // [ Section: Utilities - General ] // ---------------------------------------
+local function getGreeting()
+    local hour = tonumber(os.date("%H"))
+    if hour >= 5 and hour < 12 then return "Good Morning"
+    elseif hour >= 12 and hour < 18 then return "Good Afternoon"
+    elseif hour >= 18 and hour < 22 then return "Good Evening"
+    else return "Good Night" end
+end
+
+local function normalizeKey(key)
+    if typeof(key) == "string" then
+        return Enum.KeyCode[key] or Enum.UserInputType[key]
+    end
+    return key
+end
+
+function isAimbotLockKeyDown()
+    local rawKey = Options.ALock and Options.ALock.Value
+    if not rawKey or rawKey == "None" then return false end
+    local key = normalizeKey(rawKey)
+    if not key then return false end
+    if key.EnumType == Enum.KeyCode then
+        return UserInputService:IsKeyDown(key)
+    end
+    if key.EnumType == Enum.UserInputType then
+        return UserInputService:IsMouseButtonPressed(key)
+    end
+    return false
+end
+
+function setESPEnabled(enabled, updateToggle)
+    CheatConfig.ESP.Enabled = enabled
+    if updateToggle and Options.MasterESPEn and Options.MasterESPEn.SetValue then
+        pcall(function()
+            Options.MasterESPEn:SetValue(enabled)
+        end)
+    end
+end
+
+local function inputMatchesESPKey(input)
+    local rawKey = Options.ESPKey and Options.ESPKey.Value
+    if not rawKey or rawKey == "None" then return false end
+
+    local key = normalizeKey(rawKey)
+    if typeof(rawKey) == "table" then
+        key = normalizeKey(rawKey.Key or rawKey.Value or rawKey[1])
+    end
+    if not key then return false end
+
+    if key.EnumType == Enum.KeyCode then
+        return input.KeyCode == key
+    end
+    if key.EnumType == Enum.UserInputType then
+        return input.UserInputType == key
+    end
+    return false
+end
+
+-- // [ Section: State & Configuration ] // --------------------------------------
+local math_floor = math.floor
+
+CheatConfig = {
+    ESP = {
+        Enabled = false,
+        Chams = false,
+        Tracers = false,
+        Skeleton = false,
+        Text = false,
+        MaxDistance = 500,
+    },
+    Box = {
+        Enabled = false,
+        Style = "Full Box",
+        Color = Color3.fromRGB(190, 170, 255),
+        Thickness = 1,
+        Transparency = 1,
+        WidthScale = 1, -- Изменено дефолтное значение
+        CornerScale = 0.25,
+        MaxDistance = 500,
+    },
+    ChamsSettings = {
+        FillColor = Color3.fromRGB(125, 85, 255),
+        OutlineColor = Color3.fromRGB(255, 255, 255),
+        FillTransparency = 0.5,
+        OutlineTransparency = 0.5,
+    },
+    TracersSettings = {
+        Color = Color3.fromRGB(125, 85, 255),
+        Transparency = 0.85,
+        Thickness = 1,
+        Origin = "Center",
+    },
+    TextSettings = {
+        ShowDisplayName = false,
+        NameColor = Color3.fromRGB(190, 170, 255),
+        DistColor = Color3.fromRGB(190, 170, 255),
+        NameSize = 12,
+        DistSize = 11,
+        NameTransparency = 0,
+        DistTransparency = 0,
+        OffsetY = 21,
+        Font = 3,
+        Outline = true,
+        Centered = true,
+        ShowDistance = true,
+    },
+    OOV = {
+        Enabled = false,
+        Color = Color3.fromRGB(125, 85, 255),
+        Size = 20,
+        Transparency = 1,
+        Radius = 45,
+        PulseEnabled = false,
+        PulseSpeed = 3.5,
+        PulseAmount = 0.5,
+        Filled = true,
+    },
+    Crosshair = {
+        Enabled = false,
+        Style = "Cross",
+        Position = "Center",
+        Color = Color3.fromRGB(255, 255, 255),
+        Transparency = 0,
+        Size = 10,
+        Thickness = 1,
+        Gap = 4,
+        CircleRadius = 12,
+        DotRadius = 3,
+        ShowCenterDot = false,
+        CenterDotRadius = 2,
+        Rotation = false,
+        RotSpeed = 2,
+        Outline = false,
+        OutlineColor = Color3.fromRGB(0, 0, 0),
+        OutlineThickness = 1,
+        HideGameCrosshair = true,
+        Pulse = false,
+        PulseSpeed = 3,
+        PulseAmount = 0.25,
+        Rainbow = false,
+        RainbowSpeed = 1,
+        OffsetX = 0,
+        OffsetY = 0,
+    },
+    Trail = {
+        Enabled = false,
+        Color = Color3.fromRGB(125, 85, 255),
+        Transparency = 0,
+        Lifetime = 3,
+        Thickness = 0.1,
+        MaxPoints = 100,
+        ShowOnSelf = false,
+        AlwaysOnTop = true,
+        MaxDistance = 500,
+        MinDistance = 0.5,
+    },
+    Hitmarker = {
+        Enabled = false,
+        Color = Color3.fromRGB(255, 0, 0),
+        Thickness = 1.5,
+        Size = 10,
+        Gap = 5,
+        Lifetime = 0.2,
+        HitDetectionRadius = 60,
+    },
+    Hitsound = {
+        Enabled = false,
+        SoundId = "rbxassetid://139452805868562",
+        Volume = 2,
+        Pitch = 1,
+    },
+    BulletTracer = {
+        Enabled = false,
+        Color = Color3.fromRGB(190, 170, 255),
+        Thickness = 1,
+        Lifetime = 2,
+        Material = Enum.Material.Neon,
+        SpawnOffset = 2,
+        Fade = true,
+    },
+    HitLogs = {
+        Enabled = false,
+        Color = Color3.fromRGB(190, 170, 255),
+        Lifetime = 3,
+        ShowPart = true,
+        ShowHP = true,
+    },
+}
+
+local CheatState = {
+    ESPObjects = {},
+    ESP = {},
+    OOVObjects = {},
+    OOVPulseTick = 0,
+    TrailData = {},
+    EnemyHealth = {},
+    NPCHealth = {},
+    LastAttackTime = 0,
+    ActiveEntities = {},
+    PrevHealth = {},
+    LastDamageTime = {},
+    OriginalSoundVolumes = {},
+    LastShotTarget = nil,
+    LastShotTime = 0,
+    IsScopeVisible = false,
+    ActiveLogs = {},
+}
+
+-- // [ Section: World Variables ] // -------------------------------------------
+local FogEnabled = false
+local FogStart = 0
+local FogEnd = 1000
+local FogColor = Color3.fromRGB(227, 219, 255)
+local AmbientColor = Color3.fromRGB(227, 219, 255)
+local AmbientColorEnabled = false
+
+local ClockTimeEnabled = false
+local ClockTimeValue = 14.5
+local FullBrightEnabled = false
+local FullBrightValue = 2
+local NoShadowsEnabled = false
+local SkyboxChangerEnabled = false
+local SelectedSkybox = "Sunset"
+
+-- // [ Section: Default Lighting Values ] // -----------------------------------
+local DefaultClockTime = Lighting.ClockTime
+local DefaultBrightness = Lighting.Brightness
+local DefaultAmbient = Lighting.Ambient
+local DefaultOutdoorAmbient = Lighting.OutdoorAmbient
+local DefaultGlobalShadows = Lighting.GlobalShadows
+local DefaultFogStart = Lighting.FogStart
+local DefaultFogEnd = Lighting.FogEnd
+local DefaultFogColor = Lighting.FogColor
+local DefaultColorShiftTop = Lighting.ColorShift_Top
+local DefaultColorShiftBottom = Lighting.ColorShift_Bottom
+local DefaultExposureCompensation = Lighting.ExposureCompensation
+
+-- // [ Section: World Visuals ] // ---------------------------------------------
+local function cleanLighting()
+    for _, obj in ipairs(Lighting:GetChildren()) do
+        if obj:IsA("Atmosphere") or obj:IsA("Clouds") or obj:IsA("PostEffect") or (obj:IsA("Sky") and not SkyboxChangerEnabled) then
+            obj:Destroy()
+        end
+    end
+end
+
+function applyCustomWorldVisuals()
+    if NoShadowsEnabled or FullBrightEnabled then
+        Lighting.GlobalShadows = false
+    else
+        Lighting.GlobalShadows = DefaultGlobalShadows
+    end
+
+    if FullBrightEnabled then
+        local fullBrightAmbient = AmbientColorEnabled and Color3.new(AmbientColor.R * 0.75, AmbientColor.G * 0.75, AmbientColor.B * 0.75) or Color3.fromRGB(180, 180, 180)
+        Lighting.Brightness = FullBrightValue
+        Lighting.Ambient = fullBrightAmbient
+        Lighting.OutdoorAmbient = fullBrightAmbient
+        Lighting.ColorShift_Top = fullBrightAmbient
+        Lighting.ColorShift_Bottom = fullBrightAmbient
+        Lighting.ExposureCompensation = 0
+    elseif AmbientColorEnabled then
+        Lighting.Brightness = DefaultBrightness
+        Lighting.Ambient = AmbientColor
+        Lighting.OutdoorAmbient = AmbientColor
+        Lighting.ColorShift_Top = AmbientColor
+        Lighting.ColorShift_Bottom = AmbientColor
+        Lighting.ExposureCompensation = DefaultExposureCompensation
+    else
+        Lighting.Brightness = DefaultBrightness
+        Lighting.Ambient = DefaultAmbient
+        Lighting.OutdoorAmbient = DefaultOutdoorAmbient
+        Lighting.ColorShift_Top = DefaultColorShiftTop
+        Lighting.ColorShift_Bottom = DefaultColorShiftBottom
+        Lighting.ExposureCompensation = DefaultExposureCompensation
+    end
+
+    if ClockTimeEnabled then
+        Lighting.ClockTime = ClockTimeValue
+    else
+        Lighting.ClockTime = DefaultClockTime
+    end
+
+    if FogEnabled then
+        Lighting.FogStart = FogStart
+        Lighting.FogEnd = FogEnd
+        Lighting.FogColor = FogColor
+    else
+        Lighting.FogStart = DefaultFogStart
+        Lighting.FogEnd = DefaultFogEnd
+        Lighting.FogColor = DefaultFogColor
+    end
+end
+
+-- // [ Section: Skybox System ] // --------------------------------------------
+local SkyboxPresets = {
+    Sunset = {
+        Bk = "rbxassetid://151165214",
+        Dn = "rbxassetid://151165197",
+        Ft = "rbxassetid://151165224",
+        Lf = "rbxassetid://151165191",
+        Rt = "rbxassetid://151165206",
+        Up = "rbxassetid://151165227",
+    },
+    ["Sun set 2"] = {
+        Bk = "rbxassetid://151165214",
+        Dn = "rbxassetid://151165197",
+        Ft = "rbxassetid://151165224",
+        Lf = "rbxassetid://151165191",
+        Rt = "rbxassetid://151165206",
+        Up = "rbxassetid://151165227",
+    },
+    ["Deep Space"] = {
+        Bk = "rbxassetid://159454299",
+        Dn = "rbxassetid://159454296",
+        Ft = "rbxassetid://159454293",
+        Lf = "rbxassetid://159454286",
+        Rt = "rbxassetid://159454300",
+        Up = "rbxassetid://159454288",
+    },
+    ["Nebula"] = {
+        Bk = "rbxassetid://159454299",
+        Dn = "rbxassetid://159454296",
+        Ft = "rbxassetid://159454293",
+        Lf = "rbxassetid://159454286",
+        Rt = "rbxassetid://159454300",
+        Up = "rbxassetid://159454288",
+    },
+    ["Blue Sky"] = {
+        Bk = "rbxassetid://1012890",
+        Dn = "rbxassetid://1012891",
+        Ft = "rbxassetid://1012887",
+        Lf = "rbxassetid://1012889",
+        Rt = "rbxassetid://1012888",
+        Up = "rbxassetid://1014449",
+    },
+}
+
+function setSkybox(preset)
+    local sky = Lighting:FindFirstChildOfClass("Sky")
+    if not SkyboxChangerEnabled then
+        if sky then sky:Destroy() end
+        return
+    end
+    local cfg = SkyboxPresets[preset] or SkyboxPresets.Sunset
+    if not sky then
+        sky = Instance.new("Sky")
+        sky.Parent = Lighting
+    end
+    sky.SkyboxBk = cfg.Bk
+    sky.SkyboxDn = cfg.Dn
+    sky.SkyboxFt = cfg.Ft
+    sky.SkyboxLf = cfg.Lf
+    sky.SkyboxRt = cfg.Rt
+    sky.SkyboxUp = cfg.Up
+end
+
+-- // [ Section: Highlight Cleaner ] // ----------------------------------------
+local function cleanHighlight(obj)
+    if obj:IsA("Highlight") and obj.Name ~= "ElysiumHighlight" then
+        task.defer(function()
+            if obj and obj.Parent then obj:Destroy() end
+        end)
+    end
+end
+
+Workspace.DescendantAdded:Connect(cleanHighlight)
+for _, desc in ipairs(Workspace:GetDescendants()) do
+    cleanHighlight(desc)
+end
+
+-- // [ Section: Utilities - Drawing API ] // ------------------------------------
+local DrawingAvailable = typeof(Drawing) == "table" and typeof(Drawing.new) == "function"
+if not DrawingAvailable then warn("Drawing API not available") end
+
+function newDrawing(className)
+    if not DrawingAvailable then return { Visible = false, Remove = function() end } end
+    local ok, obj = pcall(function() return Drawing.new(className) end)
+    if ok and obj then return obj end
+    return { Visible = false, Remove = function() end }
+end
+
+local function setLine(line, from, to)
+    if line then
+        line.From = from
+        line.To = to
+        line.Visible = true
+    end
+end
+
+local function setBoxLine(lines, index, from, to, thickness)
+    local base = lines[index]
+    setLine(base, from, to)
+    if base then base.Thickness = 1 end
+
+    local extraA = lines[index + 8]
+    local extraB = lines[index + 16]
+    if extraA then extraA.Visible = false end
+    if extraB then extraB.Visible = false end
+
+    local t = math.clamp(thickness or 1, 1, 3)
+    if t <= 1 then return end
+
+    local delta = to - from
+    local length = delta.Magnitude
+    if length <= 0 then return end
+    local normal = Vector2.new(-delta.Y / length, delta.X / length)
+
+    if t == 2 then
+        local offset = normal * 0.75
+        setLine(extraA, from + offset, to + offset)
+        if extraA then extraA.Thickness = 1 end
+    else
+        local offset = normal
+        setLine(extraA, from + offset, to + offset)
+        setLine(extraB, from - offset, to - offset)
+        if extraA then extraA.Thickness = 1 end
+        if extraB then extraB.Thickness = 1 end
+    end
+end
+
+-- // [ Section: Utilities - UI Helpers ] // -------------------------------------
+function isMouseOverCheatUI()
+    if UserInputService:GetFocusedTextBox() then return true end
+    local mouse = UserInputService:GetMouseLocation()
+    local playerGui = LocalPlayer:FindFirstChild("PlayerGui")
+    if not playerGui then return false end
+    local gunOverlay = playerGui:FindFirstChild("GunOverlay")
+    for _, gui in ipairs(playerGui:GetGuiObjectsAtPosition(mouse.X, mouse.Y)) do
+        if not gui.Visible then continue end
+        local screenGui = gui:FindFirstAncestorWhichIsA("ScreenGui")
+        if not screenGui or not screenGui.Enabled then continue end
+        if gunOverlay and gui:IsDescendantOf(gunOverlay) then continue end
+        if Library.ScreenGui and gui:IsDescendantOf(Library.ScreenGui) then
+            return true
+        end
+    end
+    return false
+end
+
+-- // [ Section: Window & Watermark ] // ----------------------------------------
+local Window = Library:CreateWindow({
+    Title = "Elysium.win",
+    Footer = "Game: [FPS] One Tap | Build: 07.06.2026 | v1.0.1 | © 2026. All Rights Reserved",
+    ShowCustomCursor = true,
+    NotifySide = "Right",
+})
+
+local Watermark = Library:AddDraggableLabel("Installing components...")
+
+local FPS = 0
+local Ping = 0
+
+function getFPSColor(fps)
+    if fps < 60 then return "#d16d6d"
+    elseif fps < 90 then return "#d1b36d"
+    else return "#6dd18a" end
+end
+
+function getPingColor(ms)
+    if ms > 100 then return "#d16d6d"
+    elseif ms > 50 then return "#d1b36d"
+    else return "#6dd18a" end
+end
+
+-- // [ Section: Tabs ] // ------------------------------------------------------
+local Tabs = {}
+Tabs.Home       = Window:AddTab("Home", "house")
+Tabs.Visuals    = Window:AddTab("Visuals", "eye")
+Tabs.Combat     = Window:AddTab("Combat", "crosshair")
+Tabs.Movement   = Window:AddTab("Movement", "footprints")
+Tabs.Misc       = Window:AddTab("Miscellaneous", "layers")
+Tabs.UISettings = Window:AddTab("Settings", "settings")
+
+-- // [ Section: Technical Functions - Entity Caching ] // -----------------------
+local function updateEntityCache()
+    local newCache = {}
+    local function checkModel(obj)
+        if obj and obj:IsA("Model") then
+            local hum = obj:FindFirstChildOfClass("Humanoid")
+            if hum and hum.Health > 0 then
+                newCache[obj] = true
+                if CheatState.PrevHealth[obj] == nil then
+                    CheatState.PrevHealth[obj] = hum.Health
+                    CheatState.LastDamageTime[obj] = 0
+                end
+            end
+        end
+    end
+
+    for _, p in ipairs(Players:GetPlayers()) do
+        if p ~= LocalPlayer and p.Character then checkModel(p.Character) end
+    end
+
+    local function scanFolder(folder)
+        for _, child in ipairs(folder:GetChildren()) do
+            if child:IsA("Model") then checkModel(child)
+            elseif child:IsA("Folder") then scanFolder(child)
+            end
+        end
+    end
+    for _, child in ipairs(Workspace:GetChildren()) do
+        if child:IsA("Model") then checkModel(child)
+        elseif child:IsA("Folder") then scanFolder(child)
+        end
+    end
+    CheatState.ActiveEntities = newCache
+end
+
+local HealthConnections = {}
+local addHitLog
+
+local HitsoundPresets = {
+    Neverlose = "rbxassetid://139452805868562",
+    Primordial = "rbxassetid://97511223764004",
+    ["Call Of Duty"] = "rbxassetid://77082587278347",
+    Metallic = "rbxassetid://78469882347907",
+    ENB = "rbxassetid://113548957163072",
+    Fatality = "rbxassetid://75978460596545",
+    ["Trident Pierce"] = "rbxassetid://136159923155431",
+    ["CS:GO"] = "rbxassetid://80803263857916",
+}
+
+local function playElysiumSound(forcePlay)
+    local hs = CheatConfig.Hitsound
+    if not hs.Enabled and not forcePlay then return end
+    
+    local sound = Instance.new("Sound")
+    sound.Name = "Elysium_Hitsound"
+    sound.SoundId = hs.SoundId
+    sound.Volume = hs.Volume
+    sound.PlaybackSpeed = hs.Pitch
+    sound.Parent = Workspace.CurrentCamera
+    
+    sound:Play()
+    game:GetService("Debris"):AddItem(sound, 3)
+end
+
+function triggerHitmarker()
+    playElysiumSound()
+    local cfg = CheatConfig.Hitmarker
+    if not cfg.Enabled then return end
+
+    local cx, cy = Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2
+    local g, s = cfg.Gap, cfg.Size
+    local lines = {}
+
+    local function createLine(p1, p2)
+        local l = newDrawing("Line")
+        l.Visible, l.Color, l.Thickness, l.Transparency, l.ZIndex = true, cfg.Color, cfg.Thickness, 1, 100
+        l.From, l.To = p1, p2
+        table.insert(lines, l)
+    end
+
+    createLine(Vector2.new(cx - g, cy - g), Vector2.new(cx - g - s, cy - g - s))
+    createLine(Vector2.new(cx + g, cy - g), Vector2.new(cx + g + s, cy - g - s))
+    createLine(Vector2.new(cx - g, cy + g), Vector2.new(cx - g - s, cy + g + s))
+    createLine(Vector2.new(cx + g, cy + g), Vector2.new(cx + g + s, cy + g + s))
+
+    task.spawn(function()
+        local start = tick()
+        while tick() - start < cfg.Lifetime do
+            local ratio = 1 - ((tick() - start) / cfg.Lifetime)
+            for _, l in ipairs(lines) do l.Transparency = ratio end
+            RunService.RenderStepped:Wait()
+        end
+        for _, l in ipairs(lines) do l:Remove() end
+    end)
+end
+
+local function monitorTargetHealth(target)
+    if not target or HealthConnections[target] then return end
+    local hum = target:FindFirstChildOfClass("Humanoid")
+    if not hum then return end
+
+    local lastH = hum.Health
+    local hitPart = CheatState.LastShotPart or "Unknown"
+
+    HealthConnections[target] = hum:GetPropertyChangedSignal("Health"):Connect(function()
+        if not hum or not hum.Parent then 
+            if HealthConnections[target] then HealthConnections[target]:Disconnect() end
+            HealthConnections[target] = nil
+            return 
+        end
+
+        local curH = hum.Health
+        if curH < lastH and (tick() - CheatState.LastShotTime) < 0.5 then
+            local damage = math_floor(lastH - curH)
+            triggerHitmarker()
+            if CheatConfig.HitLogs.Enabled then
+                addHitLog(target.Name, hitPart, damage, math.max(0, math_floor(curH)))
+            end
+            if HealthConnections[target] then HealthConnections[target]:Disconnect() end
+            HealthConnections[target] = nil
+        end
+        lastH = curH
+    end)
+
+    task.delay(0.6, function()
+        if HealthConnections[target] then
+            HealthConnections[target]:Disconnect()
+            HealthConnections[target] = nil
+        end
+    end)
+end
+
+local function processHitDetection()
+    local target = CheatState.LastShotTarget
+    if target and target.Parent then
+        monitorTargetHealth(target)
+        CheatState.LastShotTarget = nil
+    end
+
+    for model in pairs(CheatState.ActiveEntities) do
+        if model and model.Parent then
+            local h = model:FindFirstChildOfClass("Humanoid")
+            if h then 
+                local cur = h.Health
+                local prev = CheatState.PrevHealth[model] or cur
+                if cur < prev and (tick() - CheatState.LastAttackTime) < 0.2 then
+                    triggerHitmarker()
+                end
+                CheatState.PrevHealth[model] = cur 
+            end
+        end
+    end
+end
+
+-- // [ Section: Technical Functions - Bullet Tracers ] // -----------------------
+local function getLocalMuzzle()
+    local vm = Camera:FindFirstChild("Viewmodel") or Camera:FindFirstChildOfClass("Model")
+    if vm then
+        local muzzle = vm:FindFirstChild("muzzle", true) or vm:FindFirstChild("Muzzle", true) or vm:FindFirstChild("Tip", true)
+        if muzzle then return muzzle:IsA("Attachment") and muzzle.WorldPosition or muzzle.Position end
+    end
+    return Camera.CFrame.Position
+end
+
+local function spawnElysiumTracer(targetPos, ignoreObject)
+    local cfg = CheatConfig.BulletTracer
+    if not cfg.Enabled then return end
+
+    local origin = getLocalMuzzle()
+    local rayDir = targetPos - origin
+    local rayDist = rayDir.Magnitude
+    if rayDist <= 0 then return end
+
+    local params = RaycastParams.new()
+    params.FilterType = Enum.RaycastFilterType.Exclude
+    params.FilterDescendantsInstances = {LocalPlayer.Character, Camera, ignoreObject}
+    local wallHit = Workspace:Raycast(origin, rayDir, params)
+    if wallHit then
+        targetPos = wallHit.Position
+        rayDir = targetPos - origin
+        rayDist = rayDir.Magnitude
+    end
+
+local direction = rayDir.Unit
+    local dist = (origin - targetPos).Magnitude
+    local spawnOffset = cfg.SpawnOffset or 2
+    if dist <= spawnOffset then return end
+
+    local adjustedOrigin = origin + (direction * spawnOffset)
+    local adjustedDist = dist - spawnOffset
+
+    local BASE_THICK = 0.2
+    local finalThick = BASE_THICK * cfg.Thickness
+
+    local laser = Instance.new("Part")
+    laser.Name = "Elysium_Laser"
+    laser.Color = cfg.Color
+    laser.Material = cfg.Material or Enum.Material.Neon
+    laser.Anchored = true
+    laser.CanCollide = false
+    laser.CanTouch = false
+    laser.CastShadow = false
+
+    laser.Size = Vector3.new(finalThick, finalThick, adjustedDist)
+    laser.CFrame = CFrame.lookAt(adjustedOrigin, targetPos) * CFrame.new(0, 0, -adjustedDist/2)
+    laser.Parent = Workspace
+
+    task.spawn(function()
+        local duration = cfg.Lifetime
+        local start = tick()
+        while tick() - start < duration do
+            local r = (tick() - start) / duration
+            if cfg.Fade then
+                laser.Transparency = r
+                local currentThick = finalThick * (1 - r)
+                laser.Size = Vector3.new(currentThick, currentThick, adjustedDist)
+            else
+                laser.Transparency = 0
+            end
+            RunService.RenderStepped:Wait()
+        end
+        laser:Destroy()
+    end)
+end
+
+task.spawn(function()
+    local effects = Workspace:WaitForChild("Effects", 10)
+    if not effects then return end
+
+    effects.ChildAdded:Connect(function(obj)
+        if obj.Name == "Bullet" and CheatConfig.BulletTracer.Enabled then
+            local distToCam = (obj.Position - Camera.CFrame.Position).Magnitude
+            if distToCam < 7 then 
+                task.wait()
+                if not obj or not obj.Parent then return end
+                local beam = obj:FindFirstChildOfClass("Beam")
+                local hitPos = beam and beam.Attachment1 and beam.Attachment1.WorldPosition 
+                    or (obj.Position + obj.CFrame.LookVector * 1000)
+                spawnElysiumTracer(hitPos, obj)
+                if obj:IsA("BasePart") then obj.Transparency = 1 end
+                for _, v in ipairs(obj:GetDescendants()) do
+                    if v:IsA("Beam") or v:IsA("Trail") then v.Enabled = false end
+                end
+            end
+        end
+    end)
+end)
+
+-- // [ Section: Technical Functions - Mute Logic ] // ---------------------------
+local blackList = {
+    ["128825426756691"] = true, -- Подтвержденный звук попадания по телу
+    ["128829912119543"] = true, -- Брат-близнец (почти 100% звук хедшота!)
+}
+
+
+local function applyMuteLogic(sound)
+    if not sound:IsA("Sound") or sound.Name == "Elysium_Hitsound" then return end
+    
+    local id = sound.SoundId:match("%d+")
+    
+    -- 1. СНАЧАЛА жестко проверяем блэклист!
+    if id and blackList[id] then
+        if CheatState.OriginalSoundVolumes[sound] == nil then
+            CheatState.OriginalSoundVolumes[sound] = sound.Volume
+        end
+        
+        -- Функция удержания громкости на нуле
+        local function forceMute()
+            if CheatConfig.Hitsound.Enabled then
+                sound.Volume = 0
+            else
+                sound.Volume = CheatState.OriginalSoundVolumes[sound] or 0.5
+            end
+        end
+        
+        forceMute()
+        -- Не даем самой игре вернуть громкость звуку
+        sound:GetPropertyChangedSignal("Volume"):Connect(forceMute)
+        return
+    end
+
+    -- 2. Остальные звуки выстрелов и окружения в камере не трогаем
+    if sound:IsDescendantOf(Workspace.CurrentCamera) or sound:IsDescendantOf(LocalPlayer.Character) then
+        return
+    end
+end
+
+function onHitsoundEnabledChanged(enabled)
+    CheatConfig.Hitsound.Enabled = enabled
+    task.spawn(function()
+        local areas = {game:GetService("SoundService"), Workspace, LocalPlayer:FindFirstChild("PlayerGui")}
+        for _, area in ipairs(areas) do
+            if area then
+                local items = area:GetDescendants()
+                for i, v in ipairs(items) do
+                    if v:IsA("Sound") then pcall(applyMuteLogic, v) end
+                    if i % 250 == 0 then task.wait() end
+                end
+            end
+        end
+    end)
+end
+
+-- // [ Section: Technical Functions - Weapon Tracking ] // ----------------------
+local function setupWeaponTracking(character)
+    if not character then return end
+    local function onToolActivated(tool)
+        if tool and tool:IsA("Tool") and tool.Parent == character then
+            CheatState.LastAttackTime = tick()
+        end
+    end
+    for _, tool in ipairs(character:GetChildren()) do
+        if tool:IsA("Tool") then
+            tool.Activated:Connect(function() onToolActivated(tool) end)
+        end
+    end
+    character.ChildAdded:Connect(function(child)
+        if child:IsA("Tool") then
+            child.Activated:Connect(function() onToolActivated(child) end)
+        end
+    end)
+end
+
+-- // [ Section: Technical Functions - Lobby Detection ] // ----------------------
+local function isOtherPlayerInLobby(player)
+    if not player or not player.Character then return true end
+    if not player.Character:FindFirstChild("Primary") then return true end
+    return false
+end
+
+-- // [ Section: Technical Functions - ESP Helpers ] // --------------------------
+local function shouldShowESPForPlayer(player)
+    if not player or not player.Parent then return false end
+    if player == LocalPlayer then
+        return CheatConfig.Trail.Enabled and CheatConfig.Trail.ShowOnSelf
+    end
+    local char = player.Character
+    if not char or not char.Parent then return false end
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    local root = char:FindFirstChild("HumanoidRootPart")
+    if not root or not hum or hum.Health <= 0 then return false end
+    if not char:FindFirstChild("Primary") then return false end
+    local dist = (Camera.CFrame.Position - root.Position).Magnitude
+    return dist <= (CheatConfig.ESP.MaxDistance or 500)
+end
+
+-- // [ Section: Technical Functions - Hit Logs ] // ----------------------------
+local function color3ToHex(color)
+    local r = math.clamp(math.floor(color.R * 255 + 0.5), 0, 255)
+    local g = math.clamp(math.floor(color.G * 255 + 0.5), 0, 255)
+    local b = math.clamp(math.floor(color.B * 255 + 0.5), 0, 255)
+    return string.format("#%02x%02x%02x", r, g, b)
+end
+
+addHitLog = function(name, part, damage, remaining)
+    local cfg = CheatConfig.HitLogs
+    if not cfg.Enabled then return end
+
+    local logText = string.format('<font color="%s">Hit %s</font>', color3ToHex(cfg.Color), name)
+    if cfg.ShowPart then logText = logText .. string.format(" in %s", part) end
+    logText = logText .. string.format(" | Damage: %d", damage)
+    if cfg.ShowHP then logText = logText .. string.format(" | Left: %d HP", remaining) end
+    
+    Library:Notify({Title = "Elysium.win", Description = logText, Time = cfg.Lifetime})
+end
+
+-- // [ Section: Crosshair State & Drawing ] // --------------------------------
+local CrosshairState = {
+    Lines = {},
+    OutlineLines = {},
+    Circles = {},
+    OutlineCircles = {},
+    Angle = 0,
+    PulseTick = 0,
+}
+
+local MAX_CROSSHAIR_LINES = 12
+
+function newCrosshairLine(zIndex)
+    local line = newDrawing("Line")
+    line.Visible = false
+    line.ZIndex = zIndex or 10
+    return line
+end
+
+function newCrosshairCircle(zIndex)
+    local circle = newDrawing("Circle")
+    circle.Visible = false
+    circle.ZIndex = zIndex or 10
+    circle.NumSides = 24
+    circle.Filled = true
+    return circle
+end
+
+for i = 1, MAX_CROSSHAIR_LINES do
+    CrosshairState.Lines[i] = newCrosshairLine(10)
+    CrosshairState.OutlineLines[i] = newCrosshairLine(9)
+end
+CrosshairState.Circles[1] = newCrosshairCircle(10)
+CrosshairState.OutlineCircles[1] = newCrosshairCircle(9)
+CrosshairState.Circles[2] = newCrosshairCircle(10)
+CrosshairState.OutlineCircles[2] = newCrosshairCircle(9)
+
+function hideAllCrosshairDrawings()
+    for _, line in ipairs(CrosshairState.Lines) do line.Visible = false end
+    for _, line in ipairs(CrosshairState.OutlineLines) do line.Visible = false end
+    for _, circle in ipairs(CrosshairState.Circles) do circle.Visible = false end
+    for _, circle in ipairs(CrosshairState.OutlineCircles) do circle.Visible = false end
+end
+
+function getCrosshairCenter(ch)
+    if ch.Position == "Mouse" and UserInputService.MouseBehavior ~= Enum.MouseBehavior.LockCenter then
+        local m = UserInputService:GetMouseLocation()
+        return m.X, m.Y
+    end
+    local vp = Camera.ViewportSize
+    return vp.X / 2, vp.Y / 2
+end
+
+function getCrosshairColor(ch)
+    if ch.Rainbow then
+        local h = (tick() * ch.RainbowSpeed) % 1
+        return Color3.fromHSV(h, 1, 1)
+    end
+    return ch.Color
+end
+
+function getCrosshairAlpha(ch)
+    local alpha = 1 - ch.Transparency
+    if ch.Pulse then
+        alpha = alpha * (1 - ch.PulseAmount * 0.5 * (1 + math.sin(CrosshairState.PulseTick)))
+    end
+    return math.clamp(alpha, 0, 1)
+end
+
+function getCrosshairSize(ch)
+    local size = ch.Size
+    if ch.Pulse then
+        size = size * (1 + ch.PulseAmount * 0.5 * math.sin(CrosshairState.PulseTick))
+    end
+    return size
+end
+
+function applyCrosshairLine(idx, fromPos, toPos, color, thickness, alpha, useOutline, ch)
+    local line = CrosshairState.Lines[idx]
+    local ol = CrosshairState.OutlineLines[idx]
+    if not line then return end
+    if useOutline and ch.Outline and ol then
+        ol.From = fromPos
+        ol.To = toPos
+        ol.Color = ch.OutlineColor
+        ol.Thickness = thickness + ch.OutlineThickness * 2
+        ol.Transparency = alpha
+        ol.Visible = true
+    elseif ol then
+        ol.Visible = false
+    end
+    line.From = fromPos
+    line.To = toPos
+    line.Color = color
+    line.Thickness = thickness
+    line.Transparency = alpha
+    line.Visible = true
+end
+
+function applyCrosshairCircle(idx, pos, radius, filled, color, thickness, alpha, useOutline, ch)
+    local circle = CrosshairState.Circles[idx]
+    local ol = CrosshairState.OutlineCircles[idx]
+    if not circle then return end
+    if useOutline and ch.Outline and ol then
+        ol.Position = pos
+        ol.Radius = radius + ch.OutlineThickness
+        ol.Filled = filled
+        ol.Color = ch.OutlineColor
+        ol.Thickness = thickness + ch.OutlineThickness
+        ol.Transparency = alpha
+        ol.Visible = true
+    elseif ol then
+        ol.Visible = false
+    end
+    circle.Position = pos
+    circle.Radius = radius
+    circle.Filled = filled
+    circle.Color = color
+    circle.Thickness = thickness
+    circle.Transparency = alpha
+    circle.Visible = true
+end
+
+function rotateOffset(dx, dy, angleDeg)
+    local rad = math.rad(angleDeg)
+    local cos_a = math.cos(rad)
+    local sin_a = math.sin(rad)
+    return dx * cos_a - dy * sin_a, dx * sin_a + dy * cos_a
+end
+
+function drawCrosshairStyle(ch)
+    local cx, cy = getCrosshairCenter(ch)
+    local color = getCrosshairColor(ch)
+    local alpha = getCrosshairAlpha(ch)
+    local pulseMod = 1
+    if ch.Pulse then
+        pulseMod = 1 + (math.sin(CrosshairState.PulseTick) * ch.PulseAmount)
+    end
+    local size = ch.Size * pulseMod
+    local gap = ch.Gap * pulseMod
+    local thick = ch.Thickness
+    local angle = ch.Rotation and CrosshairState.Angle or 0
+    local lineIdx = 0
+
+    local function drawLine(f, t)
+        lineIdx = lineIdx + 1
+        applyCrosshairLine(lineIdx, f, t, color, thick, alpha, true, ch)
+    end
+
+    if ch.Style == "Cross" or ch.Style == "Plus" then
+        local function arm(dx, dy)
+            local rdx, rdy = rotateOffset(dx, dy, angle)
+            local base = Vector2.new(cx + rdx * gap, cy + rdy * gap)
+            drawLine(base, base + Vector2.new(rdx * size, rdy * size))
+        end
+        arm(0, -1); arm(0, 1); arm(-1, 0); arm(1, 0)
+    elseif ch.Style == "Corners" then
+        local dirs = {{-1,-1}, {1,-1}, {-1,1}, {1,1}}
+        for _, d in ipairs(dirs) do
+            local bx, by = rotateOffset(d[1] * gap, d[2] * gap, angle)
+            local start = Vector2.new(cx + bx, cy + by)
+            local hx, hy = rotateOffset(d[1] * size, 0, angle)
+            drawLine(start, start + Vector2.new(hx, hy))
+            local vx, vy = rotateOffset(0, d[2] * size, angle)
+            drawLine(start, start + Vector2.new(vx, vy))
+        end
+    elseif ch.Style == "X" then
+        local d = 0.707
+        local function arm(dx, dy)
+            local rdx, rdy = rotateOffset(dx, dy, angle)
+            local base = Vector2.new(cx + rdx * gap, cy + rdy * gap)
+            drawLine(base, base + Vector2.new(rdx * size, rdy * size))
+        end
+        arm(-d, -d); arm(d, -d); arm(-d, d); arm(d, d)
+    elseif ch.Style == "Dot" then
+        applyCrosshairCircle(1, Vector2.new(cx, cy), size, true, color, 1, alpha, true, ch)
+    elseif ch.Style == "Circle" then
+        applyCrosshairCircle(1, Vector2.new(cx, cy), size, false, color, thick, alpha, true, ch)
+    end
+
+    if ch.ShowCenterDot and ch.Style ~= "Dot" then
+        applyCrosshairCircle(2, Vector2.new(cx, cy), ch.CenterDotRadius, true, color, 1, alpha, true, ch)
+    end
+
+    for i = lineIdx + 1, MAX_CROSSHAIR_LINES do
+        if CrosshairState.Lines[i] then CrosshairState.Lines[i].Visible = false end
+        if CrosshairState.OutlineLines[i] then CrosshairState.OutlineLines[i].Visible = false end
+    end
+end
+
+function setCrosshairEnabled(enabled)
+    CheatConfig.Crosshair.Enabled = enabled
+    if not enabled then
+        hideAllCrosshairDrawings()
+    end
+end
+
+-- // [ Section: Visuals State ] // ---------------------------------------------
+local OOVTextObjects = {}
+local SkeletonColor = Color3.fromRGB(190, 170, 255)
+local SkeletonTransparency = 0
+local SkeletonThickness = 1
+
+-- // [ Section: Game Features (Misc) - Scope & Effects ] // ------------------
+local DisableScopeEnabled = false
+local DisableScopeConnection = nil
+local DisableScopeLoop = nil
+local HandledScopeInstances = setmetatable({}, {__mode = "kv"})
+
+local function ApplyDisableScope()
+    if not DisableScopeEnabled then return end
+    local playerGui = LocalPlayer:FindFirstChild("PlayerGui")
+    if not playerGui then return end
+
+    local function processDescendant(desc)
+        if not desc:IsA("GuiObject") then return end
+        if HandledScopeInstances[desc] then return end
+        local nameLower = string.lower(desc.Name)
+        if nameLower == "scope" then
+            HandledScopeInstances[desc] = true
+            desc.Visible = false
+        end
+    end
+
+    local queue = {playerGui}
+    while #queue > 0 do
+        local current = table.remove(queue, 1)
+        for _, child in ipairs(current:GetChildren()) do
+            processDescendant(child)
+            if child:IsA("GuiObject") then
+                table.insert(queue, child)
+            end
+        end
+    end
+
+    if not DisableScopeConnection then
+        DisableScopeConnection = playerGui.DescendantAdded:Connect(processDescendant)
+    end
+end
+
+function enableDisableScope()
+    if DisableScopeLoop then task.cancel(DisableScopeLoop) end
+    ApplyDisableScope()
+    DisableScopeLoop = task.spawn(function()
+        while DisableScopeEnabled do
+            task.wait(30)
+            for k in pairs(HandledScopeInstances) do
+                HandledScopeInstances[k] = nil
+            end
+            ApplyDisableScope()
+        end
+    end)
+end
+
+function disableDisableScope()
+    if DisableScopeConnection then
+        DisableScopeConnection:Disconnect()
+        DisableScopeConnection = nil
+    end
+    if DisableScopeLoop then
+        task.cancel(DisableScopeLoop)
+        DisableScopeLoop = nil
+    end
+    for k in pairs(HandledScopeInstances) do
+        HandledScopeInstances[k] = nil
+    end
+end
+
+function isScoped()
+    if DisableScopeEnabled then return false end
+    local playerGui = LocalPlayer:FindFirstChild("PlayerGui")
+    if not playerGui then return false end
+    for _, child in ipairs(playerGui:GetDescendants()) do
+        if child:IsA("GuiObject") and string.lower(child.Name) == "scope" and child.Visible then
+            return true
+        end
+    end
+    return false
+end
+
+local LowEffectsEnabled = false
+local LowEffectsConn = nil
+local LOW_EFFECT_KEYWORDS = {
+    "bullet", "impact", "muzzle", "shell", "casing", "spark", "smoke",
+    "tracer", "hole", "decal", "flash", "explosion", "debris", "particle", "beam", "trail"
+}
+
+function nameMatchesLowEffectKeyword(name)
+    local lower = string.lower(name)
+    for _, kw in ipairs(LOW_EFFECT_KEYWORDS) do
+        if lower:find(kw, 1, true) then return true end
+    end
+    return false
+end
+
+function processLowEffectInstance(inst)
+    if not LowEffectsEnabled or not inst then return end
+    local localChar = LocalPlayer.Character
+    if localChar and inst:IsDescendantOf(localChar) then return end
+    if inst:IsA("ParticleEmitter") or inst:IsA("Trail") or inst:IsA("Beam") then
+        inst.Enabled = false
+    elseif inst:IsA("Fire") or inst:IsA("Smoke") or inst:IsA("Sparkles") then
+        inst.Enabled = false
+    elseif inst:IsA("Decal") or inst:IsA("Texture") then
+        local parentName = inst.Parent and inst.Parent.Name or ""
+        if nameMatchesLowEffectKeyword(inst.Name) or nameMatchesLowEffectKeyword(parentName) then
+            inst.Transparency = 1
+        end
+    end
+end
+
+function enableLowEffects()
+    for _, desc in ipairs(Workspace:GetDescendants()) do
+        processLowEffectInstance(desc)
+    end
+    if LowEffectsConn then LowEffectsConn:Disconnect() end
+    LowEffectsConn = Workspace.DescendantAdded:Connect(processLowEffectInstance)
+end
+
+function disableLowEffects()
+    if LowEffectsConn then
+        LowEffectsConn:Disconnect()
+        LowEffectsConn = nil
+    end
+end
+
+local AntiAfkEnabled = false
+local AntiAfkThread = nil
+
+function startAntiAfk()
+    if AntiAfkThread then return end
+    AntiAfkThread = task.spawn(function()
+        while AntiAfkEnabled do
+            task.wait(60)
+            if not AntiAfkEnabled then break end
+            pcall(function()
+                local char = LocalPlayer.Character
+                local hum = char and char:FindFirstChildOfClass("Humanoid")
+                if not hum or hum.Health <= 0 then return end
+                VirtualUser:CaptureController()
+                VirtualUser:ClickButton2(Vector2.new(0,0))
+            end)
+        end
+        AntiAfkThread = nil
+    end)
+end
+
+function stopAntiAfk()
+    AntiAfkEnabled = false
+    AntiAfkThread = nil
+end
+
+local SniperCustomizationEnabled = false
+local SniperCustomColor = Color3.fromRGB(255, 255, 255)
+local SniperCustomMaterial = Enum.Material.Plastic
+local SniperCustomTransparency = 0
+local SniperOriginalProps = {}
+
+function getSniperModels()
+    local models = {}
+    local character = LocalPlayer.Character
+    local backpack = LocalPlayer:FindFirstChild("Backpack")
+    local function addFrom(container)
+        if not container then return end
+        local tool = container:FindFirstChild("Sniper")
+        local model = tool and tool:FindFirstChild("Model")
+        if model then table.insert(models, model) end
+    end
+    addFrom(character)
+    addFrom(backpack)
+    return models
+end
+
+function shouldCustomizeSniperPart(part)
+    if not part:IsA("BasePart") then return false end
+    if part.Name == "Left Arm" or part.Name == "Right Arm" then return false end
+    return true
+end
+
+function cacheSniperPart(part)
+    if SniperOriginalProps[part] then return end
+    local props = { Color = part.Color, Material = part.Material, Transparency = part.Transparency }
+    if part:IsA("UnionOperation") then props.UsePartColor = part.UsePartColor end
+    SniperOriginalProps[part] = props
+end
+
+function applySniperCustomization()
+    for _, model in ipairs(getSniperModels()) do
+        for _, obj in ipairs(model:GetDescendants()) do
+            if shouldCustomizeSniperPart(obj) then
+                cacheSniperPart(obj)
+                if obj:IsA("UnionOperation") then obj.UsePartColor = true end
+                obj.Color = SniperCustomColor
+                obj.Material = SniperCustomMaterial
+                obj.Transparency = SniperCustomTransparency
+            end
+        end
+    end
+end
+
+function restoreSniperCustomization()
+    for part, props in pairs(SniperOriginalProps) do
+        if part and part.Parent then
+            part.Color = props.Color
+            part.Material = props.Material
+            part.Transparency = props.Transparency
+            if part:IsA("UnionOperation") and props.UsePartColor ~= nil then
+                part.UsePartColor = props.UsePartColor
+            end
+        end
+    end
+    table.clear(SniperOriginalProps)
+end
+
+-- // [ Section: Player Variables (Movement) ] // ------------------------------
+local WalkSpeedEnabled = false
+local WalkSpeedValue = 16
+local JumpPowerEnabled = false
+local JumpPowerValue = 50
+local InfiniteJumpEnabled = false
+local InfiniteJumpConnection = nil
+local OriginalJumpPower = nil
+local OriginalUseJumpPower = nil
+local BunnyHopEnabled = false
+local BunnyHopLastJump = 0
+local AntiSlipEnabled = false
+local AntiSlipConnection = nil
+
+-- // [ Section: Combat State ] // ---------------------------------------------
+local AimbotEnabled = false
+local AimbotLocked = false
+local AimbotKey = nil
+local AimbotWallCheck = false
+local AimbotFOV = 200
+local ShowFOV = true
+local AimbotSmoothing = 0
+local AimMethod = "Toggle"
+local CurrentTarget = nil
+local AimPart = "Head"
+local LockKeyWasDown = false
+local AutoShotMode = "WithAimbot"
+
+local KillAuraEnabled = false
+local KillAuraTarget = nil
+local KillAuraDistance = 4
+local KillAuraConnection = nil
+
+local TriggerBotEnabled = false
+local TriggerBotDelay = 0
+local TriggerBotLastShot = 0
+local SavedCustomCursor = nil
+
+local SkipSpawnShield = true
+local SpawnShieldDuration = 2.25
+local PlayerSpawnTimes = {}
+
+local SpinBotEnabled = false
+local SpinBotSpeed = 25
+local SpinBotBodyGyro = nil
+
+function enableSpinBot()
+    if not SpinBotEnabled then return end
+    local char = LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+    if not SpinBotBodyGyro then
+        SpinBotBodyGyro = Instance.new("BodyGyro")
+        SpinBotBodyGyro.MaxTorque = Vector3.new(0, math.huge, 0)
+        SpinBotBodyGyro.P = 10000
+        SpinBotBodyGyro.D = 100
+    end
+    SpinBotBodyGyro.Parent = hrp
+    SpinBotBodyGyro.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(SpinBotSpeed), 0)
+end
+
+function disableSpinBot()
+    if SpinBotBodyGyro then
+        SpinBotBodyGyro:Destroy()
+        SpinBotBodyGyro = nil
+    end
+end
+
+function updateSpinBot()
+    if not SpinBotEnabled then return end
+    if not isLocalAlive() or isSpectatorCamera() then
+        disableSpinBot()
+        return
+    end
+    local char = LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if hrp and SpinBotBodyGyro then
+        SpinBotBodyGyro.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(SpinBotSpeed), 0)
+    else
+        enableSpinBot()
+    end
+end
+
+-- // [ Section: Kill Aura Logic ] // ------------------------------------------
+local function getKillAuraTargets()
+    local targets = {}
+    for _, p in ipairs(Players:GetPlayers()) do
+        if p ~= LocalPlayer and p.Character and isTargetAlive(p) and not isOtherPlayerInLobby(p) then
+            table.insert(targets, p.Character)
+        end
+    end
+    for _, obj in ipairs(Workspace:GetChildren()) do
+        if obj:IsA("Model") and obj:FindFirstChild("Humanoid") and obj:FindFirstChild("HumanoidRootPart") then
+            if not Players:GetPlayerFromCharacter(obj) then
+                local name = obj.Name:lower()
+                if name:find("astration") or name:find("bot") or name:find("dummy") or name:find("npc") then
+                    if obj.Humanoid.Health > 0 then
+                        table.insert(targets, obj)
+                    end
+                end
+            end
+        end
+    end
+    return targets
+end
+
+local function stopKillAura()
+    if KillAuraConnection then KillAuraConnection:Disconnect(); KillAuraConnection = nil end
+    KillAuraTarget = nil
+    Camera.CameraType = Enum.CameraType.Custom
+    local myChar = LocalPlayer.Character
+    if myChar then
+        for _, part in ipairs(myChar:GetDescendants()) do
+            if part:IsA("BasePart") then part.CanCollide = true end
+        end
+    end
+end
+
+local function startKillAuraMove(targetModel)
+    if KillAuraConnection then KillAuraConnection:Disconnect() end
+    KillAuraTarget = targetModel
+    Camera.CameraType = Enum.CameraType.Scriptable
+    KillAuraConnection = RunService.Heartbeat:Connect(function()
+        if not KillAuraEnabled or not targetModel or not targetModel.Parent then
+            stopKillAura()
+            return
+        end
+        local hum = targetModel:FindFirstChildOfClass("Humanoid")
+        if not hum or hum.Health <= 0 then
+            stopKillAura()
+            return
+        end
+        local myChar = LocalPlayer.Character
+        local myHRP = myChar and myChar:FindFirstChild("HumanoidRootPart")
+        local targetHRP = targetModel:FindFirstChild("HumanoidRootPart")
+        local targetHead = targetModel:FindFirstChild("Head")
+        local myHead = myChar and myChar:FindFirstChild("Head")
+        if myHRP and targetHRP then
+            for _, part in ipairs(myChar:GetDescendants()) do
+                if part:IsA("BasePart") then part.CanCollide = false end
+            end
+            local behindPos = targetHRP.Position - (targetHRP.CFrame.LookVector * KillAuraDistance)
+            myHRP.CFrame = CFrame.new(behindPos, targetHRP.Position)
+            local myEyePos = myHead and myHead.Position or (myHRP.Position + Vector3.new(0, 2, 0))
+            local targetLookPos = targetHead and targetHead.Position or (targetHRP.Position + Vector3.new(0, 1.5, 0))
+            Camera.CFrame = CFrame.lookAt(myEyePos, targetLookPos)
+        end
+    end)
+end
+
+-- // [ Section: FOV Circles ] // ----------------------------------------------
+local FOVCircle = newDrawing("Circle")
+FOVCircle.Thickness = 1
+FOVCircle.NumSides = 64
+FOVCircle.Radius = 200
+FOVCircle.Filled = false
+FOVCircle.Visible = false
+FOVCircle.Color = Color3.fromRGB(255, 255, 255)
+FOVCircle.Transparency = 1
+
+local ShowFOVCircle = true
+local FOVCircleColor = Color3.fromRGB(255, 255, 255)
+local FOVCircleLockedColor = Color3.fromRGB(255, 50, 50)
+local FOVCircleThickness = 1
+local FOVCircleTransparency = 0.5
+
+-- // [ Section: ESP Core - Box ] // -------------------------------------------
+ESP = {}
+ESP.Box = {}
+ESP.Trail = {}
+
+local CachedPlayerList = {}
+for _, p in ipairs(Players:GetPlayers()) do
+    CachedPlayerList[#CachedPlayerList + 1] = p
+end
+Players.PlayerAdded:Connect(function(p)
+    CachedPlayerList[#CachedPlayerList + 1] = p
+end)
+
+function ESP.Box.Create(player)
+    if player == LocalPlayer then return end
+    if not CheatState.ESPObjects[player] then CheatState.ESPObjects[player] = {} end
+    local obj = CheatState.ESPObjects[player]
+    if obj.Box then
+        for _, line in ipairs(obj.Box.AllLines) do pcall(function() line:Remove() end) end
+    end
+    local box = { AllLines = {} }
+    for i = 1, 24 do
+        local l = newDrawing("Line")
+        l.Visible = false
+        l.Thickness = 1
+        l.ZIndex = 10
+        table.insert(box.AllLines, l)
+    end
+    obj.Box = box
+end
+
+function ESP.Box.Hide(player)
+    local obj = CheatState.ESPObjects[player]
+    if obj and obj.Box and obj.Box.AllLines then
+        for _, line in ipairs(obj.Box.AllLines) do line.Visible = false end
+    end
+end
+
+function ESP.Box.Remove(player)
+    local obj = CheatState.ESPObjects[player]
+    if obj and obj.Box then
+        for _, line in ipairs(obj.Box.AllLines) do pcall(function() line:Remove() end) end
+        obj.Box = nil
+    end
+end
+
+function ESP.Box.Update(player)
+    if not CheatConfig.Box.Enabled or not shouldShowESPForPlayer(player) then
+        ESP.Box.Hide(player)
+        return
+    end
+    if not CheatState.ESPObjects[player] or not CheatState.ESPObjects[player].Box then
+        ESP.Box.Create(player)
+    end
+    local objData = CheatState.ESPObjects[player]
+    if not objData or not objData.Box then return end
+    local char = player.Character
+    local root = char:FindFirstChild("HumanoidRootPart")
+    local head = char:FindFirstChild("Head") or root
+    if not root then return end
+    local pos, onScreen = Camera:WorldToViewportPoint(root.Position)
+    if not onScreen or pos.Z < 2 then
+        ESP.Box.Hide(player)
+        return
+    end
+    local headPos = Camera:WorldToViewportPoint(head.Position + Vector3.new(0, 0.5, 0))
+    local legPos = Camera:WorldToViewportPoint(root.Position - Vector3.new(0, 3, 0))
+    local height = math.abs(headPos.Y - legPos.Y)
+    local width = (height / 2) * (CheatConfig.Box.WidthScale or 1)
+    local x, y = pos.X - width / 2, headPos.Y
+    local lines = objData.Box.AllLines
+    for i = 1, 24 do if lines[i] then lines[i].Visible = false end end
+    local boxThickness = math.clamp(CheatConfig.Box.Thickness or 1, 1, 3)
+    if CheatConfig.Box.Style == "Full Box" then
+        setBoxLine(lines, 1, Vector2.new(x, y), Vector2.new(x + width, y), boxThickness)
+        setBoxLine(lines, 2, Vector2.new(x + width, y), Vector2.new(x + width, y + height), boxThickness)
+        setBoxLine(lines, 3, Vector2.new(x + width, y + height), Vector2.new(x, y + height), boxThickness)
+        setBoxLine(lines, 4, Vector2.new(x, y + height), Vector2.new(x, y), boxThickness)
+    else
+        local l = width * 0.25
+        setBoxLine(lines, 1, Vector2.new(x, y), Vector2.new(x + l, y), boxThickness)
+        setBoxLine(lines, 2, Vector2.new(x, y), Vector2.new(x, y + l), boxThickness)
+        setBoxLine(lines, 3, Vector2.new(x + width, y), Vector2.new(x + width - l, y), boxThickness)
+        setBoxLine(lines, 4, Vector2.new(x + width, y), Vector2.new(x + width, y + l), boxThickness)
+        setBoxLine(lines, 5, Vector2.new(x, y + height), Vector2.new(x + l, y + height), boxThickness)
+        setBoxLine(lines, 6, Vector2.new(x, y + height), Vector2.new(x, y + height - l), boxThickness)
+        setBoxLine(lines, 7, Vector2.new(x + width, y + height), Vector2.new(x + width - l, y + height), boxThickness)
+        setBoxLine(lines, 8, Vector2.new(x + width, y + height), Vector2.new(x + width, y + height - l), boxThickness)
+    end
+    for i = 1, 24 do
+        local line = lines[i]
+        if line and line.Visible then
+            line.Color = CheatConfig.Box.Color
+            line.Thickness = 1
+            line.Transparency = CheatConfig.Box.Transparency
+        end
+    end
+end
+
+-- // [ Section: ESP Core - Trail (Physical) ] // -----------------------------
+local function updateTrailProperties(trail)
+    if not trail or not trail:IsA("Trail") then return end
+    local cfg = CheatConfig.Trail
+    trail.Color = ColorSequence.new(cfg.Color)
+    trail.Transparency = NumberSequence.new(cfg.Transparency)
+    trail.Lifetime = cfg.Lifetime
+    trail.WidthScale = NumberSequence.new(cfg.Thickness)
+    trail.Enabled = cfg.Enabled
+end
+
+local function applyPhysicalTrail(player)
+    local char = player.Character
+    if not char then return end
+    local hrp = char:WaitForChild("HumanoidRootPart", 5)
+    if not hrp then return end
+    if hrp:FindFirstChild("ElysiumTrail") then
+        updateTrailProperties(hrp.ElysiumTrail)
+        return
+    end
+    local a0 = Instance.new("Attachment")
+    a0.Name = "TrailA0"
+    a0.Position = Vector3.new(0, 0.8, 0)
+    a0.Parent = hrp
+    local a1 = Instance.new("Attachment")
+    a1.Name = "TrailA1"
+    a1.Position = Vector3.new(0, -0.8, 0)
+    a1.Parent = hrp
+    local trail = Instance.new("Trail")
+    trail.Name = "ElysiumTrail"
+    trail.Attachment0 = a0
+    trail.Attachment1 = a1
+    trail.FaceCamera = true
+    trail.LightEmission = 1
+    trail.Parent = hrp
+    updateTrailProperties(trail)
+end
+
+local function clearPhysicalTrail(player)
+    local char = player.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if hrp then
+        if hrp:FindFirstChild("ElysiumTrail") then hrp.ElysiumTrail:Destroy() end
+        if hrp:FindFirstChild("TrailA0") then hrp.TrailA0:Destroy() end
+        if hrp:FindFirstChild("TrailA1") then hrp.TrailA1:Destroy() end
+    end
+end
+
+-- // [ Section: ESP Core - Skeleton ] // --------------------------------------
+local BonesR6 = {
+    {"Head","Torso"}, {"Torso","HumanoidRootPart"},
+    {"HumanoidRootPart","Left Arm"}, {"HumanoidRootPart","Right Arm"},
+    {"HumanoidRootPart","Left Leg"}, {"HumanoidRootPart","Right Leg"},
+}
+local BonesR15 = {
+    {"Head","UpperTorso"}, {"UpperTorso","LowerTorso"},
+    {"UpperTorso","LeftUpperArm"}, {"LeftUpperArm","LeftLowerArm"}, {"LeftLowerArm","LeftHand"},
+    {"UpperTorso","RightUpperArm"}, {"RightUpperArm","RightLowerArm"}, {"RightLowerArm","RightHand"},
+    {"LowerTorso","LeftUpperLeg"}, {"LeftUpperLeg","LeftLowerLeg"}, {"LeftLowerLeg","LeftFoot"},
+    {"LowerTorso","RightUpperLeg"}, {"RightUpperLeg","RightLowerLeg"}, {"RightLowerLeg","RightFoot"},
+}
+
+function getBonesForCharacter(character)
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if humanoid and humanoid.RigType == Enum.HumanoidRigType.R15 then return BonesR15 end
+    return BonesR6
+end
+
+function removeSkeleton(player)
+    local espData = CheatState.ESP[player]
+    if espData and espData.SkeletonObject then
+        local skel = espData.SkeletonObject
+        for _, line in pairs(skel.lines) do pcall(function() line:Remove() end) end
+        espData.SkeletonObject = nil
+    end
+end
+
+function applySkeleton(player)
+    if player == LocalPlayer then return end
+    CheatState.ESP[player] = CheatState.ESP[player] or {}
+    if not shouldShowESPForPlayer(player) then
+        removeSkeleton(player)
+        return
+    end
+    local character = player.Character
+    if not character then return end
+    removeSkeleton(player)
+    local bones = getBonesForCharacter(character)
+    local linesList = {}
+    for i = 1, #bones do
+        local line = newDrawing("Line")
+        line.Visible = false
+        line.Color = SkeletonColor
+        line.Thickness = SkeletonThickness
+        line.Transparency = 1 - SkeletonTransparency
+        linesList[i] = line
+    end
+    CheatState.ESP[player].SkeletonObject = { lines = linesList, bones = bones }
+end
+
+-- // [ Section: ESP Core - Text ] // ------------------------------------------
+function removeTextESP(player)
+    local espData = CheatState.ESP[player]
+    if espData and espData.TextObjects then
+        local txtObj = espData.TextObjects
+        pcall(function()
+            if txtObj.nameText then txtObj.nameText:Remove() end
+        end)
+        espData.TextObjects = nil
+    end
+end
+
+function applyTextESP(player)
+    if player == LocalPlayer then return end
+    CheatState.ESP[player] = CheatState.ESP[player] or {}
+    if not shouldShowESPForPlayer(player) then
+        removeTextESP(player)
+        return
+    end
+    local character = player.Character
+    if not character then return end
+    removeTextESP(player)
+    local ts = CheatConfig.TextSettings
+    local nameText = newDrawing("Text")
+    nameText.Visible = false
+    nameText.Center = true
+    nameText.Outline = ts.Outline
+    nameText.Font = ts.Font
+    nameText.Size = ts.NameSize
+    nameText.Color = ts.NameColor
+    nameText.Transparency = 1 - ts.NameTransparency
+    CheatState.ESP[player].TextObjects = { nameText = nameText }
+end
+
+-- // [ Section: ESP Core - Chams ] // -----------------------------------------
+function removeChams(player)
+    local espData = CheatState.ESP[player]
+    if espData and espData.ChamsObject then
+        pcall(function() espData.ChamsObject:Destroy() end)
+        espData.ChamsObject = nil
+    end
+end
+
+function applyChams(player)
+    if player == LocalPlayer then return end
+    CheatState.ESP[player] = CheatState.ESP[player] or {}
+    if not shouldShowESPForPlayer(player) then
+        removeChams(player)
+        return
+    end
+    local character = player.Character
+    if not character then return end
+    removeChams(player)
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ElysiumHighlight"
+    highlight.FillColor = CheatConfig.ChamsSettings.FillColor
+    highlight.OutlineColor = CheatConfig.ChamsSettings.OutlineColor
+    highlight.FillTransparency = CheatConfig.ChamsSettings.FillTransparency
+    highlight.OutlineTransparency = CheatConfig.ChamsSettings.OutlineTransparency
+    highlight.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+    highlight.Adornee = character
+    highlight.Parent = character
+    CheatState.ESP[player].ChamsObject = highlight
+end
+
+-- // [ Section: ESP Core - Tracer ] // ----------------------------------------
+function removeTracer(player)
+    local espData = CheatState.ESP[player]
+    if espData and espData.TracerObject then
+        pcall(function() espData.TracerObject:Remove() end)
+        espData.TracerObject = nil
+    end
+end
+
+function applyTracer(player)
+    if player == LocalPlayer then return end
+    CheatState.ESP[player] = CheatState.ESP[player] or {}
+    if not shouldShowESPForPlayer(player) then
+        removeTracer(player)
+        return
+    end
+    removeTracer(player)
+    local line = newDrawing("Line")
+    line.Visible = false
+    line.Color = CheatConfig.TracersSettings.Color
+    line.Transparency = CheatConfig.TracersSettings.Transparency
+    line.Thickness = CheatConfig.TracersSettings.Thickness
+    CheatState.ESP[player].TracerObject = line
+end
+
+-- // [ Section: ESP Core - OOV ] // -------------------------------------------
+function removeOOV(player)
+    local data = CheatState.OOVObjects[player]
+    if data then
+        if data.lines then for _, line in ipairs(data.lines) do pcall(function() line:Remove() end) end end
+        if data.text then pcall(function() data.text:Remove() end) end
+        CheatState.OOVObjects[player] = nil
+    end
+end
+
+function applyOOV(player)
+    if player == LocalPlayer or not DrawingAvailable then return end
+    removeOOV(player)
+    local data = { lines = {}, text = newDrawing("Text") }
+    for i = 1, 3 do
+        local line = newDrawing("Line")
+        line.Visible = false
+        line.Thickness = 1
+        data.lines[i] = line
+    end
+    data.text.Visible = false
+    data.text.Center = true
+    data.text.Outline = true
+    data.text.Font = 2
+    data.text.Size = 13
+    CheatState.OOVObjects[player] = data
+end
+
+-- // [ Section: ESP Core - Trail (Drawing) ] // -------------------------------
+ESP.Trail = {}
+
+function ESP.Trail.Create(player)
+    local cfg = CheatConfig.Trail
+    if player == LocalPlayer and not cfg.ShowOnSelf then return end
+    if CheatState.TrailData[player] then ESP.Trail.Remove(player) end
+    CheatState.TrailData[player] = {
+        points = {},
+        segments = {},
+        lastPos = nil,
+        lastUpdate = tick(),
+        folder = Instance.new("Folder", Workspace)
+    }
+    CheatState.TrailData[player].folder.Name = "ElysiumTrail_" .. player.Name
+end
+
+function ESP.Trail.Remove(player)
+    local data = CheatState.TrailData[player]
+    if data then
+        if data.folder then data.folder:Destroy() end
+        CheatState.TrailData[player] = nil
+    end
+end
+
+function ESP.Trail.Update(player)
+    local cfg = CheatConfig.Trail
+    if not cfg.Enabled then
+        ESP.Trail.Remove(player)
+        return
+    end
+
+    local isSelf = (player == LocalPlayer)
+    if isSelf and not cfg.ShowOnSelf then
+        ESP.Trail.Remove(player)
+        return
+    end
+
+    local char = player.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum or hum.Health <= 0 then
+        ESP.Trail.Remove(player)
+        return
+    end
+
+    local root = char and char:FindFirstChild("HumanoidRootPart")
+    if not root then
+        ESP.Trail.Remove(player)
+        return
+    end
+
+    if not isSelf then
+        local dist = (Camera.CFrame.Position - root.Position).Magnitude
+        if dist > (cfg.MaxDistance or 500) then
+            ESP.Trail.Remove(player)
+            return
+        end
+    end
+
+    local data = CheatState.TrailData[player]
+    if not data then
+        ESP.Trail.Create(player)
+        data = CheatState.TrailData[player]
+        if not data then return end
+    end
+
+    local now = tick()
+    local currentPos = root.Position
+    local lastPos = data.lastPos
+
+    local minDist = cfg.MinDistance or 0.5
+    if not lastPos or (currentPos - lastPos).Magnitude > minDist then
+        table.insert(data.points, { pos = currentPos, time = now })
+        data.lastPos = currentPos
+    end
+
+    while #data.points > 0 and (now - data.points[1].time) > cfg.Lifetime do
+        table.remove(data.points, 1)
+    end
+
+    if #data.points > cfg.MaxPoints then
+        local excess = #data.points - cfg.MaxPoints
+        for i = 1, excess do table.remove(data.points, 1) end
+    end
+
+    local neededSegments = math.max(0, #data.points - 1)
+    if neededSegments < 1 then
+        for _, seg in ipairs(data.segments) do seg.Visible = false end
+        return
+    end
+
+    while #data.segments < neededSegments do
+        local segment = Instance.new("CylinderHandleAdornment")
+        segment.Adornee = Workspace.Terrain
+        segment.ZIndex = 10
+        segment.Parent = data.folder
+        table.insert(data.segments, segment)
+    end
+
+    for i = 1, neededSegments do
+        local seg = data.segments[i]
+        local p1 = data.points[i].pos
+        local p2 = data.points[i+1].pos
+        local mag = (p1 - p2).Magnitude
+        if mag < 0.1 then
+            seg.Visible = false
+        else
+            seg.Height = mag
+            local age1 = (now - data.points[i].time) / cfg.Lifetime
+            local age2 = (now - data.points[i+1].time) / cfg.Lifetime
+            local mixAge = (age1 + age2) / 2
+            local alpha = math.clamp(1 - mixAge * (1 - cfg.Transparency), 0, 1)
+            local width = cfg.Thickness * (1 - mixAge * 0.5)
+            seg.Radius = width
+            seg.Color3 = cfg.Color
+            seg.Transparency = alpha
+            seg.CFrame = CFrame.lookAt(p1:Lerp(p2, 0.5), p2)
+            seg.AlwaysOnTop = cfg.AlwaysOnTop
+            seg.Visible = true
+        end
+    end
+
+    for i = neededSegments + 1, #data.segments do
+        data.segments[i].Visible = false
+    end
+end
+
+-- // [ Section: Combat Helpers ] // -------------------------------------------
+function getOriginPoint()
+    local vp = Camera.ViewportSize
+    local origin = CheatConfig.TracersSettings.Origin
+    if origin == "Bottom" then return Vector2.new(vp.X / 2, vp.Y)
+    elseif origin == "Top" then return Vector2.new(vp.X / 2, 0)
+    else return Vector2.new(vp.X / 2, vp.Y / 2) end
+end
+
+function getTargetPart(character)
+    if not character then return nil end
+    return character:FindFirstChild(AimPart) or character:FindFirstChild("Head") or character:FindFirstChild("HumanoidRootPart")
+end
+
+function isTargetVisible(targetPart)
+    if not targetPart or not targetPart.Parent then return false end
+    local char = targetPart.Parent
+    local origin = Camera.CFrame.Position
+    local dir = targetPart.Position - origin
+    if dir.Magnitude < 0.01 then return true end
+    local rayParams = RaycastParams.new()
+    rayParams.FilterType = Enum.RaycastFilterType.Exclude
+    rayParams.FilterDescendantsInstances = { LocalPlayer.Character, Camera }
+    rayParams.IgnoreWater = true
+    local result = Workspace:Raycast(origin, dir, rayParams)
+    if not result then return true end
+    return result.Instance:IsDescendantOf(char)
+end
+
+function getClosestPlayerToCursor(maxFov)
+    local mouse = UserInputService:GetMouseLocation()
+    local closestPlayer = nil
+    local shortest = maxFov or AimbotFOV
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player == LocalPlayer or not player.Character then continue end
+        local hum = player.Character:FindFirstChildOfClass("Humanoid")
+        if not hum or hum.Health <= 0 then continue end
+        local targetPart = player.Character:FindFirstChild(AimPart) or player.Character:FindFirstChild("Head")
+        if not targetPart then continue end
+        local screenPoint, onScreen = Camera:WorldToViewportPoint(targetPart.Position)
+        if not onScreen or screenPoint.Z <= 0 then continue end
+        local dist = (Vector2.new(screenPoint.X, screenPoint.Y) - mouse).Magnitude
+        if dist < shortest then
+            shortest = dist
+            closestPlayer = player
+        end
+    end
+    return closestPlayer
+end
+
+function isTargetAlive(player)
+    if not player or not player.Character then return false end
+    local humanoid = player.Character:FindFirstChildOfClass("Humanoid")
+    if not humanoid or humanoid.Health <= 0 then return false end
+    return getTargetPart(player.Character) ~= nil
+end
+
+function aimAt(player)
+    if not player or not player.Character then return end
+    local targetPart = player.Character:FindFirstChild(AimPart) or player.Character:FindFirstChild("Head")
+    if not targetPart then return end
+    local targetPos = targetPart.Position
+    local lerpFactor = math.clamp(1 - AimbotSmoothing, 0.01, 1)
+    Camera.CFrame = Camera.CFrame:Lerp(CFrame.new(Camera.CFrame.Position, targetPos), lerpFactor)
+end
+
+function isLocalAlive()
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    return hum and hum.Health > 0
+end
+
+function isSpectatorCamera()
+    if isLocalAlive() then return false end
+    local subject = Camera.CameraSubject
+    if not subject then return true end
+    if subject:IsA("Humanoid") then
+        local owner = Players:GetPlayerFromCharacter(subject.Parent)
+        return owner ~= LocalPlayer
+    end
+    return true
+end
+
+function canRunCombat()
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if not hum or hum.Health <= 0 then return false end
+    return true
+end
+
+function updateCombatCursor()
+    if not Library or not Options.ShowCustomCursor then return end
+    Library.ShowCustomCursor = Options.ShowCustomCursor.Value
+end
+
+-- // [ Section: Player Stats & Character Setup ] // ---------------------------
+function applyPlayerStats(character)
+    local humanoid = character:WaitForChild("Humanoid", 5)
+    if humanoid then
+        OriginalUseJumpPower = humanoid.UseJumpPower
+        OriginalJumpPower = humanoid.JumpPower
+        if WalkSpeedEnabled then humanoid.WalkSpeed = WalkSpeedValue end
+        if JumpPowerEnabled then humanoid.UseJumpPower = true; humanoid.JumpPower = JumpPowerValue end
+    end
+end
+
+function onCharacterAdded(player, character)
+    if player ~= LocalPlayer then
+        ESP.Box.Remove(player)
+        ESP.Trail.Remove(player)
+        removeTextESP(player)
+        removeChams(player)
+        removeTracer(player)
+        removeSkeleton(player)
+        removeOOV(player)
+        CheatState.ESP[player] = nil
+    else
+        CurrentTarget = nil
+        AimbotLocked = false
+        ESP.Trail.Remove(LocalPlayer)
+        setupWeaponTracking(character)
+    end
+    character:WaitForChild("HumanoidRootPart", 10)
+    if player == LocalPlayer then
+        applyPlayerStats(character)
+        if SniperCustomizationEnabled then restoreSniperCustomization(); applySniperCustomization() end
+    end
+end
+
+function setupPlayer(player)
+    if player == LocalPlayer then
+        player.CharacterAdded:Connect(function(c) onCharacterAdded(player, c) end)
+        if player.Character then applyPlayerStats(player.Character) end
+        return
+    end
+    player.CharacterAdded:Connect(function(c) onCharacterAdded(player, c) end)
+    if player.Character then onCharacterAdded(player, player.Character) end
+end
+
+local Backpack = LocalPlayer:WaitForChild("Backpack")
+Backpack.ChildAdded:Connect(function(tool)
+    if tool.Name == "Sniper" and SniperCustomizationEnabled then
+        task.wait()
+        table.clear(SniperOriginalProps)
+        applySniperCustomization()
+    end
+end)
+
+Players.PlayerRemoving:Connect(function(player)
+    for i = #CachedPlayerList, 1, -1 do
+        if CachedPlayerList[i] == player then
+            table.remove(CachedPlayerList, i)
+            break
+        end
+    end
+    PlayerSpawnTimes[player] = nil
+    pcall(function()
+        ESP.Box.Remove(player)
+        ESP.Trail.Remove(player)
+        removeChams(player)
+        removeTracer(player)
+        removeSkeleton(player)
+        removeOOV(player)
+        removeTextESP(player)
+    end)
+    CheatState.ESPObjects[player] = nil
+    CheatState.ESP[player] = nil
+end)
+
+-- // [ Section: Render Functions - OOV, Text, Tracers, Skeleton ] // ---------
+function renderOOV()
+    local cfg = CheatConfig.OOV
+    if not cfg.Enabled or not CheatConfig.ESP.Enabled then
+        for player, data in pairs(CheatState.OOVObjects) do
+            if data.lines then
+                for _, l in ipairs(data.lines) do pcall(function() l:Remove() end) end
+            end
+            if data.text then pcall(function() data.text:Remove() end) end
+            CheatState.OOVObjects[player] = nil
+        end
+        return
+    end
+    local vp = Camera.ViewportSize
+    local cx, cy = vp.X / 2, vp.Y / 2
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player == LocalPlayer then continue end
+        if not CheatState.OOVObjects[player] and shouldShowESPForPlayer(player) then
+            applyOOV(player)
+        end
+        local data = CheatState.OOVObjects[player]
+        if not data then continue end
+        if not shouldShowESPForPlayer(player) then
+            for _, l in ipairs(data.lines) do l.Visible = false end
+            data.text.Visible = false
+            continue
+        end
+        local char = player.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if root then
+            local _, onScreen = Camera:WorldToViewportPoint(root.Position)
+            if not onScreen then
+                local dir     = (root.Position - Camera.CFrame.Position)
+                local flat    = Vector3.new(dir.X, 0, dir.Z)
+                local camFlat = Vector3.new(Camera.CFrame.LookVector.X, 0, Camera.CFrame.LookVector.Z)
+                local angle   = math.atan2(camFlat.X * flat.Z - camFlat.Z * flat.X, camFlat.X * flat.X + camFlat.Z * flat.Z)
+                local px = cx + cfg.Radius * math.sin(angle)
+                local py = cy - cfg.Radius * math.cos(angle)
+                px = math.clamp(px, cfg.Size + 10, vp.X - cfg.Size - 10)
+                py = math.clamp(py, cfg.Size + 10, vp.Y - cfg.Size - 10)
+                local alpha = cfg.Transparency
+                if cfg.PulseEnabled then
+                    alpha = alpha * (0.6 + 0.4 * math.sin(tick() * ((cfg.PulseSpeed or 3.5) * 2)))
+                end
+                local tip   = Vector2.new(px + cfg.Size * math.sin(angle), py - cfg.Size * math.cos(angle))
+                local left  = Vector2.new(px + cfg.Size * 0.5 * math.cos(angle), py + cfg.Size * 0.5 * math.sin(angle))
+                local right = Vector2.new(px - cfg.Size * 0.5 * math.cos(angle), py - cfg.Size * 0.5 * math.sin(angle))
+                for _, l in ipairs(data.lines) do
+                    l.Color = cfg.Color
+                    l.Transparency = alpha
+                    l.Visible = true
+                end
+                data.lines[1].From = tip   data.lines[1].To = left
+                data.lines[2].From = left  data.lines[2].To = right
+                data.lines[3].From = right data.lines[3].To = tip
+                data.text.Visible = false
+            else
+                for _, l in ipairs(data.lines) do l.Visible = false end
+                data.text.Visible = false
+            end
+        else
+            for _, l in ipairs(data.lines) do l.Visible = false end
+            data.text.Visible = false
+        end
+    end
+end
+
+function renderTextESP()
+    if not CheatConfig.ESP.Enabled or not CheatConfig.ESP.Text then return end
+    for player, esp in pairs(CheatState.ESP) do
+        if not shouldShowESPForPlayer(player) then
+            if esp.TextObjects and esp.TextObjects.nameText then
+                esp.TextObjects.nameText.Visible = false
+            end
+            continue
+        end
+        local data = esp.TextObjects
+        if not data or not data.nameText then
+            applyTextESP(player)
+            data = CheatState.ESP[player] and CheatState.ESP[player].TextObjects
+            if not data then continue end
+        end
+        local char = player.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if not root then
+            data.nameText.Visible = false
+            continue
+        end
+        local distance = math.floor((Camera.CFrame.Position - root.Position).Magnitude)
+        local head = char:FindFirstChild("Head")
+        local topPos = head and (head.Position + Vector3.new(0, 0.7, 0)) or (root.Position + Vector3.new(0, 3, 0))
+        local pos, visible = Camera:WorldToViewportPoint(topPos)
+        if visible then
+            local ts = CheatConfig.TextSettings
+            local displayName = ts.ShowDisplayName and player.DisplayName or player.Name
+            local line = displayName
+            if ts.ShowDistance then line = line .. "  [" .. distance .. "m]" end
+            data.nameText.Position = Vector2.new(pos.X, pos.Y - ts.OffsetY)
+            data.nameText.Text = line
+            data.nameText.Visible = true
+        else
+            data.nameText.Visible = false
+        end
+    end
+end
+
+function renderTracers()
+    if not CheatConfig.ESP.Enabled or not CheatConfig.ESP.Tracers then return end
+    for player, esp in pairs(CheatState.ESP) do
+        if not shouldShowESPForPlayer(player) then
+            if esp.TracerObject then esp.TracerObject.Visible = false end
+            continue
+        end
+        local line = esp.TracerObject
+        if not line then
+            applyTracer(player)
+            line = CheatState.ESP[player] and CheatState.ESP[player].TracerObject
+            if not line then continue end
+        end
+        local char = player.Character
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+        if not root then
+            line.Visible = false
+            continue
+        end
+        local pos, onScreen = Camera:WorldToViewportPoint(root.Position)
+        if onScreen then
+            line.From = getOriginPoint()
+            line.To = Vector2.new(pos.X, pos.Y)
+            line.Visible = true
+        else
+            line.Visible = false
+        end
+    end
+end
+
+function renderSkeleton()
+    if not CheatConfig.ESP.Skeleton or not CheatConfig.ESP.Enabled then
+        for _, esp in pairs(CheatState.ESP) do
+            if esp.SkeletonObject and esp.SkeletonObject.lines then
+                for _, line in ipairs(esp.SkeletonObject.lines) do line.Visible = false end
+            end
+        end
+        return
+    end
+    for player, esp in pairs(CheatState.ESP) do
+        if not shouldShowESPForPlayer(player) then
+            if esp.SkeletonObject and esp.SkeletonObject.lines then
+                for _, line in ipairs(esp.SkeletonObject.lines) do line.Visible = false end
+            end
+            continue
+        end
+        local data = esp.SkeletonObject
+        if not data or not data.lines then
+            applySkeleton(player)
+            data = CheatState.ESP[player] and CheatState.ESP[player].SkeletonObject
+            if not data then continue end
+        end
+        local char = player.Character
+        if not char then
+            for _, line in ipairs(data.lines) do line.Visible = false end
+            continue
+        end
+        for i, bone in ipairs(data.bones) do
+            local p1 = char:FindFirstChild(bone[1])
+            local p2 = char:FindFirstChild(bone[2])
+            local line = data.lines[i]
+            if p1 and p2 and line then
+                local a, aOn = Camera:WorldToViewportPoint(p1.Position)
+                local b, bOn = Camera:WorldToViewportPoint(p2.Position)
+                if aOn and bOn then
+                    line.From = Vector2.new(a.X, a.Y)
+                    line.To = Vector2.new(b.X, b.Y)
+                    line.Visible = true
+                else
+                    line.Visible = false
+                end
+            elseif line then
+                line.Visible = false
+            end
+        end
+    end
+end
+
+function renderCrosshair()
+    local ch = CheatConfig.Crosshair
+    local char = LocalPlayer.Character
+    local isSpawned = char and char:FindFirstChild("Primary")
+    local isAlive = char and char:FindFirstChildOfClass("Humanoid") and char:FindFirstChildOfClass("Humanoid").Health > 0
+    local isScopedIn = CheatState.IsScopeVisible
+    if not ch.Enabled or Library.Opened or not isSpawned or not isAlive or isScopedIn then
+        hideAllCrosshairDrawings()
+        return
+    end
+    CrosshairState.PulseTick = CrosshairState.PulseTick + (1 / 60) * ch.PulseSpeed
+    if ch.Rotation then
+        CrosshairState.Angle = (CrosshairState.Angle + ch.RotSpeed) % 360
+    end
+    hideAllCrosshairDrawings()
+    drawCrosshairStyle(ch)
+end
+
+function renderBunnyhop()
+    if not BunnyHopEnabled then return end
+    local char = LocalPlayer.Character
+    local hum = char and char:FindFirstChildOfClass("Humanoid")
+    if hum then
+        local state = hum:GetState()
+        local now = tick()
+        if (now - BunnyHopLastJump) > 0.1 then
+            if state == Enum.HumanoidStateType.Landed or state == Enum.HumanoidStateType.Running or state == Enum.HumanoidStateType.RunningNoPhysics then
+                hum:ChangeState(Enum.HumanoidStateType.Jumping)
+                BunnyHopLastJump = now
+            end
+        end
+    end
+end
+
+function updateChamsDistance()
+    if not CheatConfig.ESP.Enabled or not CheatConfig.ESP.Chams then
+        for _, p in ipairs(Players:GetPlayers()) do removeChams(p) end
+        return
+    end
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player == LocalPlayer then continue end
+        if not shouldShowESPForPlayer(player) then
+            removeChams(player)
+            continue
+        end
+        local char = player.Character
+        if char and char:FindFirstChild("HumanoidRootPart") then
+            local espData = CheatState.ESP[player]
+            local highlight = espData and espData.ChamsObject
+            if highlight then
+                highlight.FillColor = CheatConfig.ChamsSettings.FillColor
+                highlight.FillTransparency = CheatConfig.ChamsSettings.FillTransparency
+                highlight.OutlineColor = CheatConfig.ChamsSettings.OutlineColor
+                highlight.OutlineTransparency = CheatConfig.ChamsSettings.OutlineTransparency
+            else
+                applyChams(player)
+            end
+        else
+            removeChams(player)
+        end
+    end
+end
+
+local function hideAllVisuals()
+    for _, esp in pairs(CheatState.ESP) do
+        if esp.TracerObject then esp.TracerObject.Visible = false end
+        if esp.SkeletonObject then for _, l in ipairs(esp.SkeletonObject.lines) do l.Visible = false end end
+        if esp.TextObjects and esp.TextObjects.nameText then esp.TextObjects.nameText.Visible = false end
+    end
+    for _, data in pairs(CheatState.ESPObjects) do
+        if data.Box and data.Box.AllLines then
+            for _, l in ipairs(data.Box.AllLines) do l.Visible = false end
+        end
+    end
+    for _, data in pairs(CheatState.TrailData) do
+        if data.lines then for _, l in ipairs(data.lines) do l.Visible = false end end
+    end
+end
+
+local function syncVisuals()
+    for player, obj in pairs(CheatState.ESP) do
+        if obj.TracerObject then
+            obj.TracerObject.Color = CheatConfig.TracersSettings.Color
+            obj.TracerObject.Thickness = CheatConfig.TracersSettings.Thickness
+            obj.TracerObject.Transparency = CheatConfig.TracersSettings.Transparency
+        end
+        if obj.SkeletonObject then
+            for _, line in ipairs(obj.SkeletonObject.lines) do
+                line.Color = SkeletonColor
+                line.Thickness = SkeletonThickness
+                line.Transparency = 1 - SkeletonTransparency
+            end
+        end
+        if obj.ChamsObject then
+            local cs = CheatConfig.ChamsSettings
+            obj.ChamsObject.FillColor = cs.FillColor
+            obj.ChamsObject.OutlineColor = cs.OutlineColor
+            obj.ChamsObject.FillTransparency = cs.FillTransparency
+            obj.ChamsObject.OutlineTransparency = cs.OutlineTransparency
+        end
+        if obj.TextObjects and obj.TextObjects.nameText then
+            local ts = CheatConfig.TextSettings
+            obj.TextObjects.nameText.Color = ts.NameColor
+            obj.TextObjects.nameText.Size = ts.NameSize
+            obj.TextObjects.nameText.Outline = ts.Outline
+            obj.TextObjects.nameText.Font = ts.Font
+        end
+    end
+    for player, data in pairs(CheatState.ESPObjects) do
+        if data.Box then
+            for _, line in ipairs(data.Box.AllLines) do
+                line.Color = CheatConfig.Box.Color
+                line.Thickness = 1
+                line.Transparency = CheatConfig.Box.Transparency
+            end
+        end
+    end
+end
+
+-- // [ Section: Optimized Render Loop ] // ------------------------------------
+local Vec2new = Vector2.new
+local tick = tick
+
+local lastRayTime = 0
+local rayInterval = 0.12
+local logicFrame = 0
+local PlayerLogicCache = {} 
+local LastKeyStatus = false 
+local AimbotToggleState = false
+local LmbWasDown = false
+local lastTracerSpawn = 0
+
+RunService.RenderStepped:Connect(function()
+    logicFrame = (logicFrame + 1) % 60
+    local now = tick()
+
+    -- Clean lighting periodically and force world visuals every frame
+    if logicFrame == 0 then
+        if ClockTimeEnabled or FogEnabled or FullBrightEnabled then
+            cleanLighting() 
+        end
+    end
+
+    -- Force apply world settings every frame
+    applyCustomWorldVisuals()
+    
+    local every2 = (logicFrame % 2 == 0)
+    local every5 = (logicFrame % 5 == 0)
+    
+    -- Cursor management
+    if Library.Opened then 
+        updateCombatCursor() 
+    end
+
+    -- Hit Detection
+    if UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) and not Library.Opened then
+        if (now - lastRayTime) > 0.05 then
+            lastRayTime = now
+            local viewportSize = Camera.ViewportSize
+            local screenCenter = viewportSize / 2
+            local ray = Camera:ViewportPointToRay(screenCenter.X, screenCenter.Y)
+            local params = RaycastParams.new()
+            params.FilterType = Enum.RaycastFilterType.Exclude
+            params.FilterDescendantsInstances = {LocalPlayer.Character, Camera}
+            local res = Workspace:Raycast(ray.Origin, ray.Direction * 1000, params)
+            if res then
+                local target = res.Instance:FindFirstAncestorOfClass("Model")
+                if target and CheatState.ActiveEntities[target] then
+                    CheatState.LastShotTarget = target
+                    CheatState.LastShotTime = now
+                    CheatState.LastShotPart = res.Instance.Name
+                end
+            end
+        end
+    end
+    
+    if CheatConfig.Hitmarker.Enabled or CheatConfig.Hitsound.Enabled or CheatConfig.HitLogs.Enabled then
+        processHitDetection()
+    end
+
+    -- Aimbot & FOV Circle
+    local currentKeyIsDown = isAimbotLockKeyDown()
+    if AimMethod:find("Toggle") then
+        if currentKeyIsDown and not LastKeyStatus then
+            AimbotToggleState = not AimbotToggleState
+        end
+    else
+        AimbotToggleState = currentKeyIsDown
+    end
+    LastKeyStatus = currentKeyIsDown
+
+    if AimbotEnabled then
+        FOVCircle.Position = UserInputService:GetMouseLocation()
+        FOVCircle.Visible = ShowFOVCircle
+        if every5 then
+            FOVCircle.Radius = AimbotFOV
+            FOVCircle.Color = AimbotLocked and FOVCircleLockedColor or FOVCircleColor
+        end
+        if AimbotToggleState and canRunCombat() then
+            if not CurrentTarget or not isTargetAlive(CurrentTarget) then
+                CurrentTarget = getClosestPlayerToCursor()
+            end
+            if CurrentTarget then aimAt(CurrentTarget) AimbotLocked = true else AimbotLocked = false end
+        else
+            CurrentTarget = nil
+            AimbotLocked = false
+        end
+    else
+        FOVCircle.Visible = false
+    end
+
+    -- High Performance ESP Loop
+    local espEnabled = CheatConfig.ESP.Enabled
+    local maxDist = CheatConfig.ESP.MaxDistance or 500
+    local camPos = Camera.CFrame.Position
+
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player == LocalPlayer then 
+            continue 
+        end
+
+        local char = player.Character
+        local hum = char and char:FindFirstChildOfClass("Humanoid")
+        local root = char and char:FindFirstChild("HumanoidRootPart")
+
+        if not char or not root or not hum or hum.Health <= 0 then 
+            ESP.Box.Hide(player)
+            removeTracer(player)
+            removeTextESP(player)
+            removeSkeleton(player)
+            continue 
+        end
+
+        local sPos, onScreen = Camera:WorldToViewportPoint(root.Position)
+        
+        if not onScreen or not espEnabled then
+            ESP.Box.Hide(player)
+            removeTracer(player)
+            removeTextESP(player)
+            removeSkeleton(player)
+            continue
+        end
+
+        if not PlayerLogicCache[player] then PlayerLogicCache[player] = { dist = 0, screenPos = Vec2new(0,0) } end
+        local pCache = PlayerLogicCache[player]
+        pCache.screenPos = Vec2new(sPos.X, sPos.Y)
+
+        if every5 then pCache.dist = (camPos - root.Position).Magnitude end
+        if pCache.dist > maxDist then
+            ESP.Box.Hide(player)
+            removeTracer(player)
+            removeTextESP(player)
+            removeSkeleton(player)
+            continue
+        end
+
+        if CheatConfig.Box.Enabled then ESP.Box.Update(player) else ESP.Box.Hide(player) end
+
+        if CheatConfig.ESP.Tracers then
+            local espData = CheatState.ESP[player]
+            if not espData or not espData.TracerObject then applyTracer(player) espData = CheatState.ESP[player] end
+            if espData.TracerObject then
+                espData.TracerObject.From = getOriginPoint()
+                espData.TracerObject.To = pCache.screenPos
+                espData.TracerObject.Visible = true
+            end
+        else removeTracer(player) end
+
+        if CheatConfig.ESP.Text then
+            local espData = CheatState.ESP[player]
+            if not espData or not espData.TextObjects then applyTextESP(player) espData = CheatState.ESP[player] end
+            if espData.TextObjects then
+                local head = char:FindFirstChild("Head") or root
+                local hPos, hOn = Camera:WorldToViewportPoint(head.Position)
+                if hOn then
+                    if every2 then
+                        local name = (CheatConfig.TextSettings.ShowDisplayName and player.DisplayName or player.Name)
+                        if CheatConfig.TextSettings.ShowDistance then
+                            name = name .. " [" .. math_floor(pCache.dist) .. "m]"
+                        end
+                        espData.TextObjects.nameText.Text = name
+                    end
+                    espData.TextObjects.nameText.Position = Vec2new(hPos.X, hPos.Y - CheatConfig.TextSettings.OffsetY)
+                    espData.TextObjects.nameText.Visible = true
+                else espData.TextObjects.nameText.Visible = false end
+            end
+        else removeTextESP(player) end
+
+        if CheatConfig.ESP.Skeleton and pCache.dist < 180 then
+            local espData = CheatState.ESP[player]
+            if not espData or not espData.SkeletonObject then applySkeleton(player) espData = CheatState.ESP[player] end
+            if espData and espData.SkeletonObject then
+                local data = espData.SkeletonObject
+                for i, bone in ipairs(data.bones) do
+                    local b1, b2 = char:FindFirstChild(bone[1]), char:FindFirstChild(bone[2])
+                    local line = data.lines[i]
+                    if b1 and b2 and line then
+                        local v1, v1On = Camera:WorldToViewportPoint(b1.Position)
+                        local v2, v2On = Camera:WorldToViewportPoint(b2.Position)
+                        if v1On and v2On then
+                            line.From = Vec2new(v1.X, v1.Y); line.To = Vec2new(v2.X, v2.Y); line.Visible = true
+                        else line.Visible = false end
+                    elseif line then line.Visible = false end
+                end
+            end
+        else removeSkeleton(player) end
+    end
+
+    -- Update trails (throttled)
+    if CheatConfig.Trail.Enabled and (logicFrame % 2 == 0) then
+        for _, player in ipairs(Players:GetPlayers()) do
+            if player == LocalPlayer then
+                if CheatConfig.Trail.ShowOnSelf then
+                    ESP.Trail.Update(player)
+                else
+                    ESP.Trail.Remove(player)
+                end
+            else
+                ESP.Trail.Update(player)
+            end
+        end
+    end
+
+    -- Post-process
+    if CheatConfig.OOV.Enabled and espEnabled then 
+        renderOOV() 
+    else
+        for _, p in ipairs(Players:GetPlayers()) do removeOOV(p) end
+    end
+    
+    if every2 then updateChamsDistance() end
+    renderCrosshair()
+    if BunnyHopEnabled then renderBunnyhop() end
+    if (logicFrame % 15 == 0) and SniperCustomizationEnabled then applySniperCustomization() end
+end)
+
+-- // [ Section: UI Building Functions ] // ------------------------------------
+-- Notify
+function notifyElysium(feat, state)
+    Library:Notify({Title = "Elysium.win", Description = state and ('<font color="#6dd18a">'..feat..'</font> enabled') or ('<font color="#d16d6d">'..feat..'</font> disabled'), Time = 3})
+end
+
+-- // [ Section: UI Building Functions - Home Tab] // ------------------------------------
+function buildHomeTab()
+    local WelcomeGroup = Tabs.Home:AddLeftGroupbox("Welcome", "home")
+    WelcomeGroup:AddLabel(string.format('<font color="#6dd18a">%s, %s!</font>', getGreeting(), LocalPlayer.Name))
+    WelcomeGroup:AddDivider()
+    WelcomeGroup:AddLabel("Current Game: [FPS] One Tap")
+    WelcomeGroup:AddLabel("Build Date: 10.06.2026")
+    WelcomeGroup:AddLabel("Version: v1.0.1")
+
+    local ChangelogGroup = Tabs.Home:AddLeftGroupbox("Changelog", "code-xml")
+    ChangelogGroup:AddLabel("[+] Fixed crosshair & OOV issues")
+    ChangelogGroup:AddLabel("[*] Improved hitmarker reliability")
+
+    local SocialsGroup = Tabs.Home:AddRightGroupbox("Socials & Info", "share-2")
+    SocialsGroup:AddButton("Copy Discord Link", function()
+        if setclipboard then
+            setclipboard("https://discord.gg/elysium")
+            Library:Notify("Discord link copied to clipboard!")
+        else
+            Library:Notify("Your executor does not support setclipboard.")
+        end
+    end)
+    SocialsGroup:AddLabel("Developed by: Elysium Team")
+    SocialsGroup:AddLabel("Supported Executors: Wave, Solara, Celery, Synapse Z")
+end
+
+-- // [ Section: UI Building Functions - Visuals Tab ] // ------------------------------------
+function buildVisualsTab()
+    local ESPTabbox = Tabs.Visuals:AddLeftTabbox()
+    
+    local EnableTab = ESPTabbox:AddTab("ESP")
+    EnableTab:AddToggle("MasterESPEn", {Text="Enable ESP", Default=false, Callback=function(v)CheatConfig.ESP.Enabled=v end})
+    :AddKeyPicker("ESPKey", {Default="None", Mode="Toggle", SyncToggleState=true, Text="ESP Key", Callback=function(v) CheatConfig.ESP.Enabled = v end})
+    EnableTab:AddDivider()
+    EnableTab:AddToggle("ChEn", {Text = "Enable Chams", Default = false, Callback = function(v) CheatConfig.ESP.Chams = v end})
+    EnableTab:AddToggle("TxEn", {Text = "Enable Text", Default = false, Callback = function(v) CheatConfig.ESP.Text = v end})
+    EnableTab:AddToggle("TrEn", {Text = "Enable Tracers", Default = false, Callback = function(v) CheatConfig.ESP.Tracers = v end})
+    EnableTab:AddToggle("BoxEn", {Text = "Enable Boxes", Default = false, Callback = function(v) CheatConfig.Box.Enabled = v end})
+    EnableTab:AddToggle("SkEn", {Text = "Enable Skeleton", Default = false, Callback = function(v) CheatConfig.ESP.Skeleton = v end})
+    EnableTab:AddToggle("OVEn", {Text = "Enable OOV", Default = false, Callback = function(v) CheatConfig.OOV.Enabled = v end})
+
+    local SettingsTab = ESPTabbox:AddTab("ESP Settings")
+    
+    SettingsTab:AddLabel("Chams Settings")
+    SettingsTab:AddLabel("Fill Color"):AddColorPicker("ChamsFill", {Default = CheatConfig.ChamsSettings.FillColor, Callback = function(v) CheatConfig.ChamsSettings.FillColor = v; syncVisuals() end})
+    SettingsTab:AddLabel("Outline Color"):AddColorPicker("ChamsOutline", {Default = CheatConfig.ChamsSettings.OutlineColor, Callback = function(v) CheatConfig.ChamsSettings.OutlineColor = v; syncVisuals() end})
+    SettingsTab:AddSlider("FillTrans", {Text = "Fill Transparency", Default = 0.5, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.ChamsSettings.FillTransparency = v; syncVisuals() end})
+    SettingsTab:AddSlider("OutTrans", {Text = "Outline Transparency", Default = 0.5, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.ChamsSettings.OutlineTransparency = v; syncVisuals() end})
+    SettingsTab:AddDivider()
+
+    SettingsTab:AddLabel("Text Settings")
+    SettingsTab:AddToggle("TSDN", {Text = "Use Display Name", Default = false, Callback = function(v) CheatConfig.TextSettings.ShowDisplayName = v end})
+    SettingsTab:AddToggle("TSD", {Text = "Show Distance", Default = true, Callback = function(v) CheatConfig.TextSettings.ShowDistance = v end})
+    SettingsTab:AddDropdown("TextFont", {Values={"UI","Plex","Monospace"}, Default="Monospace", Text="Text Font", Callback=function(v) CheatConfig.TextSettings.Font = ({UI=0,Plex=2,Monospace=3})[v] or 3 syncVisuals() end})
+    SettingsTab:AddSlider("TextSize", {Text = "Font Size", Default = 12, Min = 8, Max = 14, Rounding = 1, Callback = function(v) CheatConfig.TextSettings.NameSize = v; syncVisuals() end})
+    SettingsTab:AddLabel("Text Color"):AddColorPicker("TextColor", {Default = CheatConfig.TextSettings.NameColor, Callback = function(v) CheatConfig.TextSettings.NameColor = v; syncVisuals() end})
+    SettingsTab:AddDivider()
+
+    SettingsTab:AddLabel("Tracers Settings")
+    SettingsTab:AddDropdown("TracerOrigin", {Values = {"Bottom", "Center", "Top"}, Default = "Center", Text = "Origin", Callback = function(v) CheatConfig.TracersSettings.Origin = v end})
+    SettingsTab:AddLabel("Color"):AddColorPicker("TracerColor", {Default = CheatConfig.TracersSettings.Color, Callback = function(v) CheatConfig.TracersSettings.Color = v; syncVisuals() end})
+    SettingsTab:AddSlider("TracerThick", {Text = "Thickness", Default = 1, Min = 1, Max = 2.5, Rounding = 1, Callback = function(v) CheatConfig.TracersSettings.Thickness = math.clamp(v, 1, 2.5); syncVisuals() end})
+    SettingsTab:AddSlider("TracerTrans", {Text = "Transparency", Default = 0.85, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.TracersSettings.Transparency = v; syncVisuals() end})
+    SettingsTab:AddDivider()
+
+    SettingsTab:AddLabel("Boxes Settings")
+    SettingsTab:AddDropdown("BoxStyle", {Values = {"Corner Box", "Full Box"}, Default = "Full Box", Text = "Style", Callback = function(v) CheatConfig.Box.Style = v end})
+    SettingsTab:AddLabel("Color"):AddColorPicker("BoxColor", {Default = CheatConfig.Box.Color, Callback = function(v) CheatConfig.Box.Color = v; syncVisuals() end})
+    SettingsTab:AddSlider("BoxSize", {Text = "Size", Default = 0.6, Min = 0.3, Max = 1.2, Rounding = 1, Callback = function(v) CheatConfig.Box.WidthScale = v end})
+    SettingsTab:AddSlider("BoxThick", {Text = "Thickness", Default = 1, Min = 1, Max = 3, Rounding = 1, Callback = function(v) CheatConfig.Box.Thickness = math.clamp(v, 1, 3); syncVisuals() end})
+    SettingsTab:AddSlider("BoxTrans", {Text = "Transparency", Default = 1, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.Box.Transparency = v; syncVisuals() end})
+    SettingsTab:AddDivider()
+
+    SettingsTab:AddLabel("Skeleton Settings")
+    SettingsTab:AddLabel("Color"):AddColorPicker("SkelColor", {Default = SkeletonColor, Callback = function(v) SkeletonColor = v; syncVisuals() end})
+    SettingsTab:AddSlider("SkelThick", {Text = "Thickness", Default = 1, Min = 1, Max = 2.5, Rounding = 1, Callback = function(v) SkeletonThickness = v; syncVisuals() end})
+    SettingsTab:AddSlider("SkelTrans", {Text = "Transparency", Default = 0, Min = 0, Max = 1, Rounding = 1, Callback = function(v) SkeletonTransparency = v; syncVisuals() end})
+    SettingsTab:AddDivider()
+
+    SettingsTab:AddLabel("OOV Arrows Settings")
+    SettingsTab:AddLabel("Color"):AddColorPicker("OOVColor", {Default = CheatConfig.OOV.Color, Callback = function(v) CheatConfig.OOV.Color = v end})
+    SettingsTab:AddSlider("OOVRadius", {Text = "Radius", Default = 45, Min = 10, Max = 200, Rounding = 1, Callback = function(v) CheatConfig.OOV.Radius = v end})
+    SettingsTab:AddSlider("OOVSize", {Text = "Arrow Size", Default = 20, Min = 5, Max = 35, Rounding = 1, Callback = function(v) CheatConfig.OOV.Size = v end})
+    SettingsTab:AddSlider("OOVTrans", {Text = "Transparency", Default = 1, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.OOV.Transparency = v end})
+    SettingsTab:AddToggle("OOVPulse", {Text = "Pulse Effect", Default = false, Callback = function(v) CheatConfig.OOV.PulseEnabled = v end})
+    SettingsTab:AddSlider("OOVPulseSpeed", {Text = "Pulse Speed", Default = 3.5, Min = 1, Max = 5, Rounding = 1, Callback = function(v) CheatConfig.OOV.PulseSpeed = v end})
+
+    local WorldTabbox = Tabs.Visuals:AddLeftTabbox()
+
+    local BasicTab = WorldTabbox:AddTab("World")
+    BasicTab:AddToggle("ClockTimeEn", {Text = "Enable Clock Time", Default = false, Callback = function(v) ClockTimeEnabled = v end})
+    BasicTab:AddSlider("ClockTimeVal", {Text = "Clock Time", Default = 14.5, Min = 0, Max = 24, Rounding = 1, Callback = function(v) ClockTimeValue = v end})
+    BasicTab:AddDivider()
+    BasicTab:AddToggle("FullBrightEn", {Text = "FullBright", Default = false, Callback = function(v) FullBrightEnabled = v end})
+    BasicTab:AddSlider("FullBrightVal", {Text = "Brightness", Default = 2, Min = 1, Max = 7, Rounding = 1, Callback = function(v) FullBrightValue = v end})
+    BasicTab:AddToggle("NoShadowsEn", {Text = "Disable Shadows", Default = false, Callback = function(v) NoShadowsEnabled = v end})
+
+    local AdvancedTab = WorldTabbox:AddTab("Advanced")
+    
+    AdvancedTab:AddLabel("Skybox Changer")
+    AdvancedTab:AddToggle("SkyboxChangerEnabled", {Text="Enable Skybox Changer", Default=false, Callback=function(v)SkyboxChangerEnabled=v;setSkybox(SelectedSkybox)end})
+    AdvancedTab:AddDropdown("SkyboxPreset", {Values={"Sunset","Sun set 2","Deep Space","Nebula","Blue Sky"}, Default="Sunset", Text="Skybox", Callback=function(v)SelectedSkybox=v;setSkybox(SelectedSkybox)end})
+    AdvancedTab:AddDivider()
+    AdvancedTab:AddToggle("FogEnabled", {Text="Enable Fog", Default=false, Callback=function(v)FogEnabled=v end})
+    AdvancedTab:AddLabel("Fog Color"):AddColorPicker("FogColor", {Default=FogColor, Callback=function(v)FogColor=v end})
+    AdvancedTab:AddSlider("FogStart", {Text="Fog Start", Default=0, Min=0, Max=2000, Rounding=1, Callback=function(v)FogStart=v end})
+    AdvancedTab:AddSlider("FogEnd", {Text="Fog End", Default=1000, Min=100, Max=2000, Rounding=1, Callback=function(v)FogEnd=v end})
+    AdvancedTab:AddDivider()
+    AdvancedTab:AddToggle("AmbientColorEnabled", {Text="Enable Ambient Color", Default=false, Callback=function(v)AmbientColorEnabled=v end})
+    AdvancedTab:AddLabel("Ambient Color"):AddColorPicker("AmbientColor", {Default=AmbientColor, Callback=function(v)AmbientColor=v end})
+
+    local BulletTabbox = Tabs.Visuals:AddRightTabbox()
+    local BMainTab = BulletTabbox:AddTab("Bullet Tracers")
+    local BSetTab = BulletTabbox:AddTab("Settings")
+
+    BMainTab:AddToggle("BTrEn", {Text = "Enable Bullet Tracers", Default = false, Callback = function(v) CheatConfig.BulletTracer.Enabled = v end})
+    BMainTab:AddLabel("Laser Color"):AddColorPicker("BTCol", {Default = CheatConfig.BulletTracer.Color, Callback = function(v) CheatConfig.BulletTracer.Color = v end})
+    BMainTab:AddSlider("BTThick", {Text = "Laser Thickness", Default = 1, Min = 1, Max = 5, Rounding = 1, Callback = function(v) CheatConfig.BulletTracer.Thickness = v end})
+    BMainTab:AddSlider("BTLife", {Text = "Laser Lifetime", Default = 2, Min = 0.1, Max = 8, Rounding = 1, Callback = function(v) CheatConfig.BulletTracer.Lifetime = v end})
+
+    BSetTab:AddDropdown("BTMat", {Values={"Neon","ForceField","Plastic","SmoothPlastic","Glass"}, Default="Neon", Text="Material", Callback=function(v) CheatConfig.BulletTracer.Material = Enum.Material[v] end})
+    BSetTab:AddSlider("BTOfs", {Text="Spawn Offset", Default=2, Min=0, Max=10, Rounding=1, Callback=function(v) CheatConfig.BulletTracer.SpawnOffset = v end})
+    BSetTab:AddToggle("BTFade", {Text="Fade Effect", Default=true, Callback=function(v) CheatConfig.BulletTracer.Fade = v end})
+
+    local DamageTabbox = Tabs.Visuals:AddRightTabbox()
+    local DMainTab = DamageTabbox:AddTab("Damage Logs")
+    local DSetTab = DamageTabbox:AddTab("Settings")
+
+    DMainTab:AddToggle("HLEn", {Text = "Enable Hit Logs", Default = false, Callback = function(v) CheatConfig.HitLogs.Enabled = v end})
+    DMainTab:AddLabel("Log Color"):AddColorPicker("LogCol", {Default = CheatConfig.HitLogs.Color, Callback = function(v) CheatConfig.HitLogs.Color = v end})
+    DMainTab:AddSlider("LogLife", {Text = "Log Lifetime", Default = 3, Min = 1, Max = 10, Rounding = 1, Callback = function(v) CheatConfig.HitLogs.Lifetime = v end})
+
+    DSetTab:AddToggle("DLPart", {Text="Show Hit Part", Default=true, Callback=function(v) CheatConfig.HitLogs.ShowPart = v end})
+    DSetTab:AddToggle("DLHP", {Text="Show Remaining HP", Default=true, Callback=function(v) CheatConfig.HitLogs.ShowHP = v end})
+
+    local HitGroup = Tabs.Visuals:AddRightGroupbox("Hitmarker")
+    HitGroup:AddToggle("HMEn", {Text = "Enable Hitmarker", Default = false, Callback = function(v) CheatConfig.Hitmarker.Enabled = v end})
+    HitGroup:AddLabel("Color"):AddColorPicker("HMCol", {Default = CheatConfig.Hitmarker.Color, Callback = function(v) CheatConfig.Hitmarker.Color = v end})
+    HitGroup:AddSlider("HMThick", {Text = "Thickness", Default = 1.5, Min = 1, Max = 5, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Thickness = v end})
+    HitGroup:AddSlider("HMSize", {Text = "Size", Default = 10, Min = 2, Max = 40, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Size = v end})
+    HitGroup:AddSlider("HMGap", {Text = "Center Gap", Default = 5, Min = 0, Max = 20, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Gap = v end})
+    HitGroup:AddSlider("HMLife", {Text = "Lifetime (sec)", Default = 0.2, Min = 0.1, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Lifetime = v end})
+
+    local AudioGroup = Tabs.Visuals:AddRightGroupbox("Hitsound")
+    AudioGroup:AddToggle("HSEn", {Text = "Enable Hitsound", Default = false, Callback = function(v) onHitsoundEnabledChanged(v) end})
+    AudioGroup:AddDropdown("HSPreset", {Values = {"Neverlose", "Primordial", "Call Of Duty", "Metallic", "ENB", "Fatality", "Trident Pierce", "CS:GO"}, Default = "Neverlose", Text = "Sound Preset", Callback = function(v)
+        CheatConfig.Hitsound.SoundId = HitsoundPresets[v] or HitsoundPresets.Neverlose
+    end})
+    AudioGroup:AddSlider("HSVol", {Text = "Volume", Default = 2, Min = 0.1, Max = 10, Rounding = 1, Callback = function(v) CheatConfig.Hitsound.Volume = v end})
+    AudioGroup:AddSlider("HSPitch", {Text = "Pitch", Default = 1, Min = 0.1, Max = 2, Rounding = 1, Callback = function(v) CheatConfig.Hitsound.Pitch = v end})
+    AudioGroup:AddButton("Test Hitsound", function()
+        playElysiumSound(true)
+    end)
+end
+
+-- // [ Section: UI Building Functions - Combat Tab ] // ------------------------------------
+function buildCombatTab()
+    local AimG = Tabs.Combat:AddLeftGroupbox("Aimbot", "crosshair")
+    local AimS = Tabs.Combat:AddRightGroupbox("Aimbot Settings", "settings")
+    local Trig = Tabs.Combat:AddLeftGroupbox("Trigger Bot", "zap")
+    local Aura = Tabs.Combat:AddLeftGroupbox("Instant Kill", "zap")
+
+    AimG:AddToggle("AEn", {Text = "Enable Aimbot", Default = false, Callback = function(v) AimbotEnabled = v end})
+    AimG:AddLabel("Lock Key"):AddKeyPicker("ALock", {Default = "None", Mode = "Toggle", Text = "Lock"})
+    AimG:AddDropdown("APart", {Values = {"Head", "HumanoidRootPart", "UpperTorso", "LowerTorso"}, Default = "Head", Text = "Target Part", Callback = function(v) AimPart = v end})
+
+    AimS:AddSlider("ASmooth", {Text = "Smoothing", Default = 0, Min = 0, Max = 0.9, Rounding = 1, Callback = function(v) AimbotSmoothing = v end})
+    AimS:AddSlider("AFov", {Text = "FOV Radius", Default = 200, Min = 50, Max = 800, Rounding = 1, Callback = function(v) AimbotFOV = v; FOVCircle.Radius = v end})
+    AimS:AddToggle("AWCheck", {Text = "Wall Check", Default = false, Callback = function(v) AimbotWallCheck = v end})
+    AimS:AddDivider()
+    AimS:AddToggle("SFOV", {Text = "Show FOV Circle", Default = true, Callback = function(v) ShowFOVCircle = v end})
+    AimS:AddLabel("FOV Color"):AddColorPicker("FCol", {Default = FOVCircleColor, Callback = function(v) FOVCircleColor = v end})
+    AimS:AddLabel("Locked Color"):AddColorPicker("LCol", {Default = FOVCircleLockedColor, Callback = function(v) FOVCircleLockedColor = v end})
+
+    Trig:AddToggle("TEn", {Text = "Enable Trigger Bot", Default = false, Callback = function(v) TriggerBotEnabled = v; notifyElysium("Trigger Bot", v) end})
+    Trig:AddSlider("TDelay", {Text = "Shot Delay (ms)", Default = 2, Min = 0, Max = 100, Rounding = 1, Callback = function(v) TriggerBotDelay = v / 1000 end})
+
+    Aura:AddToggle("KEn", {Text = "Enable Kill Aura", Default = false, Callback = function(v) KillAuraEnabled = v; notifyElysium("Kill Aura", v) end})
+    Aura:AddSlider("KDist", {Text = "Distance", Default = 4, Min = 1, Max = 15, Rounding = 1, Callback = function(v) KillAuraDistance = v end})
+end
+
+-- // [ Section: UI Building Functions - Misc Tab ] // ------------------------------------
+function buildMiscTab()
+    local CrossMain = Tabs.Misc:AddLeftGroupbox("Crosshair", "crosshair")
+    local Game = Tabs.Misc:AddLeftGroupbox("Game Settings", "gamepad-2")
+
+    CrossMain:AddToggle("CrEn", {Text = "Enable Crosshair", Default = false, Callback = function(v) setCrosshairEnabled(v) end})
+    CrossMain:AddDropdown("CrStyle", {Values = {"Cross","Plus","T","X","Corners","Dot","Circle"}, Default = "Cross", Text = "Style", Callback = function(v) CheatConfig.Crosshair.Style = v end})
+    CrossMain:AddDivider()
+    CrossMain:AddToggle("HitEn", {Text = "Enable Hitmarker", Default = false, Callback = function(v) CheatConfig.Hitmarker.Enabled = v end})
+
+    local CrossSettings = Tabs.Misc:AddRightGroupbox("Crosshair Settings", "settings")
+    CrossSettings:AddLabel("Color"):AddColorPicker("CrCol", {Default = CheatConfig.Crosshair.Color, Callback = function(v) CheatConfig.Crosshair.Color = v end})
+    CrossSettings:AddSlider("CrTrans", {Text = "Transparency", Default = 0, Min = 0, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.Transparency = v end})
+    CrossSettings:AddSlider("CrSize", {Text = "Size", Default = 10, Min = 2, Max = 100, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.Size = v end})
+    CrossSettings:AddSlider("CrThick", {Text = "Thickness", Default = 1, Min = 1, Max = 6, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.Thickness = v end})
+    CrossSettings:AddSlider("CrGap", {Text = "Gap", Default = 4, Min = 0, Max = 50, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.Gap = v end})
+    CrossSettings:AddDivider()
+    CrossSettings:AddToggle("CrPulse", {Text = "Pulse Effect", Default = false, Callback = function(v) CheatConfig.Crosshair.Pulse = v end})
+    CrossSettings:AddSlider("CrPulseAm", {Text = "Pulse Amount", Default = 0.25, Min = 0.05, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.PulseAmount = v end})
+    CrossSettings:AddSlider("CrPulseSpd", {Text = "Pulse Speed", Default = 3, Min = 1, Max = 10, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.PulseSpeed = v end})
+    CrossSettings:AddDivider()
+    CrossSettings:AddToggle("CrRot", {Text = "Rotation", Default = false, Callback = function(v) CheatConfig.Crosshair.Rotation = v end})
+    CrossSettings:AddSlider("CrRotSpd", {Text = "Rotation Speed", Default = 2, Min = 1, Max = 10, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.RotSpeed = v end})
+    CrossSettings:AddDivider()
+    CrossSettings:AddToggle("CrDot", {Text = "Center Dot", Default = false, Callback = function(v) CheatConfig.Crosshair.ShowCenterDot = v end})
+    CrossSettings:AddSlider("CrDotRad", {Text = "Dot Radius", Default = 2, Min = 1, Max = 10, Rounding = 1, Callback = function(v) CheatConfig.Crosshair.CenterDotRadius = v end})
+    CrossSettings:AddToggle("HideGameCrosshair", {Text = "Hide Game Crosshair", Default = CheatConfig.Crosshair.HideGameCrosshair, Callback = function(v) CheatConfig.Crosshair.HideGameCrosshair = v end})
+
+    local HitSettings = Tabs.Misc:AddRightGroupbox("Hitmarker Settings", "target")
+    HitSettings:AddLabel("Color"):AddColorPicker("HitCol", {Default = CheatConfig.Hitmarker.Color, Callback = function(v) CheatConfig.Hitmarker.Color = v end})
+    HitSettings:AddSlider("HitThick", {Text = "Thickness", Default = 1.5, Min = 1, Max = 5, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Thickness = v end})
+    HitSettings:AddSlider("HitSize", {Text = "Line Length", Default = 10, Min = 2, Max = 40, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Size = v end})
+    HitSettings:AddSlider("HitGap", {Text = "Center Gap", Default = 5, Min = 0, Max = 20, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Gap = v end})
+    HitSettings:AddSlider("HitLife", {Text = "Lifetime", Default = 0.2, Min = 0.1, Max = 1, Rounding = 1, Callback = function(v) CheatConfig.Hitmarker.Lifetime = v end})
+
+    Game:AddToggle("DScope", {Text = "Disable Scope", Default = false, Callback = function(v) 
+        DisableScopeEnabled = v
+        if v then enableDisableScope() else disableDisableScope() end
+    end})
+    Game:AddToggle("LEff", {Text = "Low Effects (FPS Boost)", Default = false, Callback = function(v) 
+        LowEffectsEnabled = v
+        if v then enableLowEffects() else disableLowEffects() end
+    end})
+    Game:AddToggle("AAfk", {Text = "Anti-AFK", Default = false, Callback = function(v) 
+        AntiAfkEnabled = v
+        if v then startAntiAfk() else stopAntiAfk() end
+    end})
+    Game:AddDivider()
+    Game:AddToggle("SCust", {Text = "Enable Sniper Custom", Default = false, Callback = function(v) 
+        SniperCustomizationEnabled = v
+        if v then applySniperCustomization() else restoreSniperCustomization() end
+    end})
+    Game:AddLabel("Sniper Color"):AddColorPicker("SCol", {Default = Color3.fromRGB(255,255,255), Callback = function(v) 
+        SniperCustomColor = v
+        applySniperCustomization()
+    end})
+    Game:AddSlider("STrans", {Text = "Sniper Transparency", Default = 0, Min = 0, Max = 1, Rounding = 1, Callback = function(v) 
+        SniperCustomTransparency = v
+        applySniperCustomization()
+    end})
+end
+
+-- // [ Section: UI Building Functions - Movement Tab ] // ------------------------------------
+function buildMoveTab()
+    local Move = Tabs.Movement:AddLeftGroupbox("Movement", "user")
+    local Jump = Tabs.Movement:AddRightGroupbox("Jump", "chevrons-up")
+    Move:AddToggle("WSEn", {Text = "Enable Walk Speed", Default = false, Callback = function(v) WalkSpeedEnabled = v end})
+    Move:AddSlider("WSVal", {Text = "Speed Value", Default = 16, Min = 16, Max = 200, Rounding = 1, Callback = function(v) WalkSpeedValue = v end})
+    Move:AddToggle("BHop", {Text = "Bunny Hop", Default = false, Callback = function(v) BunnyHopEnabled = v end})
+    Jump:AddToggle("JPEn", {Text = "Enable Jump Power", Default = false, Callback = function(v) JumpPowerEnabled = v end})
+    Jump:AddSlider("JPVal", {Text = "Power Value", Default = 50, Min = 50, Max = 300, Rounding = 1, Callback = function(v) JumpPowerValue = v end})
+    Jump:AddToggle("InfJ", {Text = "Infinite Jump", Default = false, Callback = function(v) InfiniteJumpEnabled = v end})
+end
+
+-- // [ Section: UI Building Functions - Settings Tab ] // ------------------------------------
+function buildSettingsTab()
+    local Menu = Tabs.UISettings:AddLeftGroupbox("Menu", "wrench")
+    Menu:AddToggle("KeyMenu", {Text = "Open Keybind Menu", Default = true, Callback = function(v) Library.KeybindFrame.Visible = v end})
+    Menu:AddToggle("ShowCustomCursor", {Text = "Custom Cursor", Default = true, Callback = function(v) Library.ShowCustomCursor = v end})
+    Menu:AddDropdown("NotifySide", {Values = {"Left", "Right"}, Default = "Right", Text = "Notification Side", Callback = function(v) Library:SetNotifySide(v) end})
+    Menu:AddDropdown("DPIScale", {Values = {"50%","75%","100%","125%","150%","175%","200%"}, Default = "100%", Text = "DPI Scale", Callback = function(v) Library:SetScale(tonumber(v:sub(1,-2))/100) end})
+    Menu:AddSlider("Corner", {Text = "Corner Radius", Default = 2, Min = 0, Max = 20, Rounding = 1, Callback = function(v) Window:SetCornerRadius(v) end})
+    Menu:AddDivider()
+    Menu:AddLabel("Menu Bind"):AddKeyPicker("MenuKey", {Default = "RightShift", NoUI = true, Text = "Menu"})
+    Menu:AddButton("Unload", function() Library:Unload() end)
+
+    Library.ToggleKeybind = Options.MenuKey
+    ThemeManager:SetLibrary(Library); SaveManager:SetLibrary(Library)
+    SaveManager:IgnoreThemeSettings(); SaveManager:SetIgnoreIndexes({"MenuKey"})
+    ThemeManager:ApplyToTab(Tabs.UISettings); SaveManager:BuildConfigSection(Tabs.UISettings)
+end
+
+-- // [ Section: Final Startup & Persistent Loops ] // -------------------------
+ThemeManager:ApplyTheme("Quant")
+ThemeManager:SetFolder("ElysiumWin")
+SaveManager:SetFolder("ElysiumWin/FPSOneTap")
+
+buildHomeTab()
+buildVisualsTab()
+buildCombatTab()
+buildMiscTab()
+buildMoveTab()
+buildSettingsTab()
+
+SaveManager:LoadAutoloadConfig()
+
+local function lockScope(obj)
+    if obj:IsA("GuiObject") and obj.Name:lower():find("scope") then
+        local function updateState()
+            CheatState.IsScopeVisible = obj.Visible
+            if DisableScopeEnabled and obj.Visible then
+                obj.Visible = false
+            end
+        end
+        obj:GetPropertyChangedSignal("Visible"):Connect(updateState)
+        updateState()
+    end
+end
+
+game.DescendantAdded:Connect(function(obj)
+    if obj:IsA("Sound") then
+        pcall(applyMuteLogic, obj)
+    elseif obj:IsA("GuiObject") then
+        lockScope(obj)
+    end
+end)
+
+for _, v in ipairs(LocalPlayer.PlayerGui:GetDescendants()) do
+    lockScope(v)
+end
+
+RunService.RenderStepped:Connect(function()
+    local pg = LocalPlayer:FindFirstChild("PlayerGui")
+    local crossGui = pg and pg:FindFirstChild("Crosshair")
+    if not crossGui then return end
+
+    local shouldHideGameCross = CheatConfig.Crosshair.Enabled and CheatConfig.Crosshair.HideGameCrosshair
+
+    for _, obj in ipairs(crossGui:GetChildren()) do
+        if obj:IsA("GuiObject") then
+            local name = obj.Name:lower()
+            if not name:find("scope") then
+                if shouldHideGameCross then
+                    if obj.Visible then obj.Visible = false end
+                else
+                    if not obj.Visible then obj.Visible = true end
+                end
+            end
+        end
+    end
+end)
+
+-- // [ Section: МОЩНЫЙ TRIGGER BOT (Engine Level) ] // -------------------------
+RunService.RenderStepped:Connect(function()
+    -- Если триггер выключен, меню открыто или ты мертв — ничего не делаем
+    if not TriggerBotEnabled or Library.Opened or not isLocalAlive() then return end
+    
+    local now = tick()
+    -- Проверка задержки выстрела
+    if now - TriggerBotLastShot < (TriggerBotDelay or 0) then return end
+
+    -- Находим наше оружие (Тул в руках)
+    local character = LocalPlayer.Character
+    local tool = character:FindFirstChildOfClass("Tool")
+    if not tool then return end
+
+    -- Raycast: проверяем, что прицел на враге
+    local vpSize = Camera.ViewportSize
+    local center = Vector2.new(vpSize.X / 2, vpSize.Y / 2)
+    local ray = Camera:ViewportPointToRay(center.X, center.Y)
+    
+    local params = RaycastParams.new()
+    -- Игнорируем себя, камеру и спецэффекты, чтобы не стрелять в "невидимки"
+    params.FilterType = Enum.RaycastFilterType.Exclude
+    params.FilterDescendantsInstances = {character, Camera, Workspace:FindFirstChild("Effects")}
+    
+    local result = Workspace:Raycast(ray.Origin, ray.Direction * 1000, params)
+    
+    if result and result.Instance then
+        -- Ищем модель игрока или NPC
+        local hitModel = result.Instance:FindFirstAncestorOfClass("Model")
+        if hitModel and hitModel:FindFirstChildOfClass("Humanoid") then
+            -- Проверяем, что это не мы сами и цель жива
+            local hum = hitModel:FindFirstChildOfClass("Humanoid")
+            if hum.Health > 0 and hitModel ~= character then
+                
+                -- Проверка на команду (если нужно)
+                local targetPlayer = Players:GetPlayerFromCharacter(hitModel)
+                -- В [FPS] One Tap обычно Free For All, поэтому стреляем во всех
+                
+                TriggerBotLastShot = now
+                
+                -- СПОСОБ 1: Прямая активация Тулзы (самый надежный)
+                tool:Activate()
+                
+                -- СПОСОБ 2: Если в игре кастомная система, имитируем клик через инжектор
+                if mouse1press and mouse1release then
+                    mouse1press()
+                    task.wait(0.01)
+                    mouse1release()
+                end
+            end
+        end
+    end
+end)
+
+for _, p in ipairs(Players:GetPlayers()) do setupPlayer(p) end
+Players.PlayerAdded:Connect(setupPlayer)
+RunService:BindToRenderStep("SpinBotUpdate", Enum.RenderPriority.Camera.Value + 1, updateSpinBot)
+
+task.spawn(function()
+    while true do
+        updateEntityCache()
+        task.wait(1)
+    end
+end)
+
+task.spawn(function()
+    while true do
+        local frames = 0
+        local start = tick()
+        while tick() - start < 1 do
+            RunService.RenderStepped:Wait()
+            frames += 1
+        end
+        FPS = frames
+    end
+end)
+
+task.spawn(function()
+    while true do
+        local stats = game:GetService("Stats")
+        local network = stats.Network.ServerStatsItem["Data Ping"]
+        Ping = math.floor(network:GetValue())
+        local timeStr = os.date("%H:%M:%S")
+        local fpsColor = getFPSColor(FPS)
+        local pingColor = getPingColor(Ping)
+        Watermark:SetText(string.format(
+            '%s | FPS: <font color="%s">%d</font> | Ping: <font color="%s">%d ms</font> | Time: %s',
+            LocalPlayer.Name, fpsColor, FPS, pingColor, Ping, timeStr
+        ))
+        task.wait(1)
+    end
+end)
+
+onHitsoundEnabledChanged(CheatConfig.Hitsound.Enabled)
+
+Library.KeybindFrame.Visible = true
+Library:Notify({Title = "Elysium.win", Description = "Script loaded successfully. All World features are now functional!", Time = 5})
